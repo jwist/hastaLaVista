@@ -20,7 +20,6 @@ Imports:
   servr (>= 0.10),
   base64enc,
   methods,
-  MetaboMate,
   car
 Suggests:
     testthat,

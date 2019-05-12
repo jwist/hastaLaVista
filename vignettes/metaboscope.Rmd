@@ -25,7 +25,7 @@ Let's create a simple dataset. But first, we shall load a few libraries.
 ```{r}
 #install.packages("MetaboMate")
 library(hastaLaVista)
-library(MetaboMate)
+#library(MetaboMate)
 library(car)
 ```
 
@@ -39,10 +39,12 @@ metadata <- bariatricRat$metadata
 ```
 
 A very useful package **kimsche/MetaboMate** available on github.com contains a lot of functions for metabolic profiling. We use it for this example to normalize the data.
+For the sake of simplicity, MetaboMate is not a dependency of the hastaLaVista package. You should install it manually and then uncomment the next two lines.
 
 ```{r}
-Xn <- MetaboMate::pqn(X)
-MetaboMate::matspec(ppm, Xn, shift=c(7,8))
+Xn <- X # comment this line and uncomment the next two if you want to use MetaboMate.
+#Xn <- MetaboMate::pqn(X)
+#MetaboMate::matspec(ppm, Xn, shift=c(7,8))
 ```
 
 The we prepare the dataset for visualization using **jwist/visualizeR**
