@@ -1,0 +1,1 @@
+'use strict';define([require,'../../field'],function(a,b){'use strict';var c=function(e){this;this.name=e};return c.prototype=new b,c.prototype.initimpl=function(){this.options=$.extend({min:0,max:1,step:0.1},this.options)},c});

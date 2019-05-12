@@ -1,0 +1,126 @@
+---
+title: "PCA Explorer - Bariatric Surgery Rat Urine Dataset"
+author: "Julien Wist"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{PCA Explorer}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+
+## Understanding multivariate analysis
+### a simple PCA example
+
+Let's create a simple dataset. But first, we shall load a few libraries.
+
+```{r}
+#install.packages("MetaboMate")
+library(hastaLaVista)
+library(MetaboMate)
+library(car)
+```
+
+Data are readily loaded from the dataset provided with this package. The description of the dataset can be found here: https://www.frontiersin.org/articles/10.3389/fmicb.2011.00183
+
+```{r}
+data("bariatricRat")
+X <- bariatricRat$X
+ppm <- bariatricRat$ppm
+metadata <- bariatricRat$metadata
+```
+
+A very useful package **kimsche/MetaboMate** available on github.com contains a lot of functions for metabolic profiling. We use it for this example to normalize the data.
+
+```{r}
+Xn <- MetaboMate:::pqn(X)
+MetaboMate:::matspec(ppm, Xn, shift=c(7,8))
+```
+
+The we prepare the dataset for visualization using **jwist/visualizeR**
+
+```{r}
+ID <- metadata$Sample.Label
+group <- metadata$Class
+#metadata <- data.frame(metadata)
+x <- matrix(Xn, dim(X)[1], dim(X)[2])
+x_axis <- as.numeric( ppm )
+color = sapply(group, function(x) getColor2(as.character(x)))
+
+bariatric <- data.frame(ID = ID,
+                group = group,
+                color = color,
+                "_highlight" = seq_along(group) - 1,
+                dataMatrix = I(matrix( c(rbind(repRow(x_axis, nrow(x)), x)), nrow(x), ncol(x)*2)),
+                metadata = I(metadata),
+                check.names = FALSE)
+```
+
+and start appending data to the list that will then become the data.json file passed to the **npellet/visualizer** package. The latter package will look for a variable named "data".
+
+```{r}
+d <- list()
+d <- appendData(data = d, variableName = "data", variable = bariatric, type = "table")
+```
+
+Multivariate analyisis is performed and scores and loadings displayed statically.
+
+```{r}
+mod <- MetaboMate:::pca(Xn)
+MetaboMate:::plotscores(mod, an=list(Class=metadata$Class), title = 'PCA')
+MetaboMate:::plotload(mod, Xn, ppm, title='PCA loadings PC 1')
+MetaboMate:::plotload(mod, Xn, ppm, title='PCA loadings PC 2', pc = 2)
+```
+
+Scores are written as chart object and appended to the data as "score12". Any chart object should provide the following elements that **visualizer** will expect to display it correctly. All the above items must have the same length = length(x).
+```{r}
+chart12 <- data.frame("x" = mod@t[,1],
+                      "y" = mod@t[,2],
+                      "highlight" = seq_along(group) - 1,
+                      "info"= ID,
+                      "group" = as.numeric( group ),
+                      "color" = color
+)
+
+d <- appendData( data = d, variableName = "score12", variable = chart12, type = "score")
+```
+
+Additional information can be passed to the view by appending it to the data.json file. This information can be latter accessed by modifying the view.json file directly. Here we store the scores and the loadings as raw data, instead as chart objects. Statistical reconstruction is used to display the loadings. 
+```{r}
+d[['scores']] <- mod@t
+d[['loadings']] <- cov(mod@t, x)
+d[['loadingsColor']] <- abs(cor(mod@t, x))
+```
+
+PCA is first used to detect outliers. Here we prepare ellipses that will delineate the area where of 80% confidence
+
+```{r}
+ellipse <- car:::dataEllipse(mod@t[,1], mod@t[,2], levels=0.80)
+
+ellipseChart <- data.frame("x" = ellipse[,1],
+                           "y" = ellipse[,2],
+                           "color" = rep('black', length(ellipse[,1])))
+
+d <- appendData( data = d, variableName = "ellipse", variable = ellipseChart, type = "color")
+```
+
+Finally, visualization object is created. The data list is converted to json and push ito the corresponding data.json file. The view is selected and the server triggered. The last line is commented for convenience, to accelerate testing procedure when building the package.
+
+```{r}
+# v <- new("visualization")
+# v@data <- "rat_bariatric_pcaExplorer.data.json"
+# v@view <- "pcaExplorer2.view.json"
+# push(v, type="data", d)
+# visualize(v)
+```
+
+For further information about the dataset please read https://www.frontiersin.org/articles/10.3389/fmicb.2011.00183
+

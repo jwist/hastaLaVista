@@ -1,0 +1,1 @@
+"use strict";onmessage=function(b){var c=JSON.parse(b.data),d=Infinity,e=-Infinity,f,g;for(f=0;f<c.length;f++)for(g=0;g<c[f].length;g++)c[f][g]<d&&(d=c[f][g]),c[f][g]>e&&(e=c[f][g]);this.postMessage({min:d,max:e})};

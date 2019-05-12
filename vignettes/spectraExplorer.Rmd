@@ -1,0 +1,126 @@
+---
+title: "Spectra Explorer"
+author: "Julien Wist"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Spectra Explorer}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+library(jsonlite)
+library(hastaLaVista)
+```
+
+## Prepare your data
+
+To give an example on how to prepare data, we will use a dataset used in another analysis^[[Comparison of Attenuated Total Reflectance Mid-Infrared, Near Infrared, and 1H-Nuclear Magnetic Resonance Spectroscopies for the Determination of Coffee’s Geographical Origin](https://www.hindawi.com/journals/ijac/2017/7210463/)]. The dataset is provided with the package `visualizeR` and can be called with the `data()` function. 
+
+Since the data have been prepared for another analysis, the data have to be reshaped to be used in the `visualizeR` pipeline. The following elements must be present:
+
+* a vector `ID` of **unique** IDs that is used to identify each entry or sample
+* a vector `group` that describes to which class each sample belong
+* a table `metadata` of information that belong to each sample and that will be displayed 
+* a matrix `x` that contains the data. Each row represents a sample, each columns a variable
+* a vector `x_axis` that contains the names or values of each variable
+
+```{r create_dataset, fig.show='hold'}
+
+data("coffeeNMRSpectra")
+
+ID <- coffeeNMRSpectra$param$catalogID
+group <- coffeeNMRSpectra$param$country1
+metadata <- data.frame( sapply(coffeeNMRSpectra$param, function(x) x) )
+x <- matrix(sapply(I(as.matrix(coffeeNMRSpectra$nmr)), function(x) x), 34, 1610)
+x_axis <- as.numeric( colnames(coffeeNMRSpectra$nmr) )
+```
+
+You can verify that the data includes 34 NMR spectra of Arabica coffee from Brazil, Colombia and Peru. The original data of lenght `r 128*1024` have been binned or bucketed down to 1610 variables.
+
+The `visualizeR` pipeline needs JSON files^[[see JSON webpage](http://www.json.org/)] that look like:
+
+  {'a': 1}
+  
+where the object contains a key `a` that has a value `1`. JSON are object natively supported in JavaScript, but not very handy in R. In R, the best way to represent a JSON is using a `list()`. So each object that must be passed to the `visualizeR` has to be added to a list using the `appendData()` function. Let's create the data object with the following block of commands. 
+
+```{r append_data, fig.show='hold'}
+d = list()
+c <- data.frame(ID = ID,
+                group = group,
+                color = sapply(group, function(x) getColor2(as.character(x))),
+                "_highlight" = seq_along(group),
+                dataMatrix = I(matrix( c(rbind(repRow(x_axis, nrow(x)), x)), nrow(x), ncol(x)*2)),
+                metadata = I(metadata),
+                check.names = FALSE
+)
+d <- appendData(data = d, variableName = "data", variable = c, type = "table")
+```
+
+Note that a vector `_highlight` has been added for internal use. It consist of a unique index and is used to provide highlight of object when hoovered by the mouse in the `visualizer`. Here a simple sequence is used, but in principle any vector of unique IDs could be used. 
+
+Now your data are ready to be pushed to the `http://github.com/npellet/visualizer`.
+
+## Univariate statistics
+
+Before pushing your data you may want to compute univariate statistics using R and display it when you explore your data. In this example, boxplots by groups are calculated for each variable. Because we will visualize our date in a webpage, all the figure are exported as png and encoded in base 64. This is a convenient way to display figure in a webpage that are embedded directly into the webpage. But because embedding does't compress the images, the resulting file weight accordingly.
+
+```{r create_boxplots, fig.show='hold'}
+imag = NULL
+for (i in seq(from=2, to=3220, by=2)) {
+  png(tf1 <- tempfile(fileext = ".png"));  boxplot( dataMatrix[,i] ~ group, data = c); dev.off()
+  imag[[i/2]] <- paste0("data:image/png;base64,", base64enc::base64encode(tf1))#base64enc::base64encode(tf1)
+}
+l <- data.frame("_highlight" = seq_along(x_axis),
+                #value = paste0("data:image/png;base64,", base64enc::base64encode(tf1)),
+                value = unlist(imag),
+                check.names = FALSE)
+d <- appendData(data = d, variableName = "img", variable = l, type = "table")
+```
+
+Note that after computing the boxplots, a data.frame is created and appended to the same list with name `img`. That is the list `d` now contains two elements:
+
+```{r check_d_names, fig.show='hold'}
+names(d)
+```
+
+## Set up the visualization
+
+The `http://github.com/npellet/visualizer` needs 3 parts to work:
+
+ 1. The visualizer itself that contains the code to visualize various kind of data interactively
+ 2. a JSON file with data, usually named as data.json
+ 3. a JSON file with information of how to display the data, usually referred to as view.json
+ 
+Here we just created a data.json file and we need to tell the webserver its name. Therefore we create a new visualization object and tell him where both the data and the view are to be found. The view has been created for this example and thus we just have to indicate the name of the file, while the data are the one we just created. The `visualizer::push()` function allows to serve the data just created under a specified name. 
+
+```{r push_data, fig.show='hold'}
+# v <- new("visualization")
+# v@view <- "spectraExplorer3.1.view.json"
+# v@data <- "spectraExplorer3.data.json"
+# push(v, type="data", d)
+```
+
+`v` is an object that contains the configuration of the webserver. The method `print()` permit to see the final url. The first part of the URL point to the `http://github.com/npellet/visualizer` itself, while the second and thirs points to the data and the view, i.e., how to display the data.
+
+```{r check_visualization_object, fig.show='hold'}
+# print(v)
+```
+
+## Explore your data
+
+Use the commented function, directly into the console to start the webserver and interact with your data.
+
+```{r visualize, fig.show='hold'}
+#visualize(v)
+```
+
+## Troubleshooting
+
+Click the following [link](https://my.cheminfo.org/?viewURL=https://gist.githubusercontent.com/jwist/226596ad9ed6b25b790a61870fb76f33/raw/spectraExplorer3.1.view.json&dataURL=https://gist.githubusercontent.com/jwist/aacb0b820c823f38863b9fd3d065c839/raw/spectraExplorer3.data.json) to see a demo version of the result you should obtain.
+

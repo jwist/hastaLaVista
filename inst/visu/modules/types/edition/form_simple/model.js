@@ -1,0 +1,1 @@
+'use strict';define(['modules/default/defaultmodel','src/util/datatraversing'],function(a,b){'use strict';function c(){}return $.extend(!0,c.prototype,a,{getjPath:function(e){var f=[];return'formValue'===e?b.getJPathsFromElement(this.module.view.formValue,f):void 0,f}}),c});

@@ -1,0 +1,1 @@
+'use strict';define(['../../field'],function(a){'use strict';var b=function(d){this;this.name=d};return b.prototype=new a,b.prototype.getOptions=function(c){return c.getOptions()||this.options.options},b});

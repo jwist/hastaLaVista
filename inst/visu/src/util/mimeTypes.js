@@ -1,0 +1,1 @@
+'use strict';define(['mime-types'],function(a){'use strict';return{lookup:function(c,d){var e=a.lookup(c);return(!e||d)&&(/\.j?dx$/i.test(c)?e='chemical/x-jcamp-dx':/\.gbk?$/i.test(c)?e='chemical/seq-na-genbank':/\.genbank$/i.test(c)?e='chemical/seq-na-genbank':/\.(fasta|fa|fna)$/i.test(c)?e='chemical/seq-na-fasta':/\.(mpfa|faa)$/i.test(c)&&(e='chemical/seq-aa-fasta')),e}}});

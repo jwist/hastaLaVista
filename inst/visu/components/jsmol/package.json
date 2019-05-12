@@ -1,0 +1,14 @@
+{
+  "name": "jsmol",
+  "version": "1.1.0",
+  "description": "JavaScript-Based Molecular Viewer From Jmol",
+  "scripts": {
+    "build": "echo 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cheminfo/jsmol.git"
+  },
+  "license": "LGPL-2.1+",
+  "private": true
+}

@@ -1,0 +1,2708 @@
+{
+  "version": "2.95.0",
+  "grid": {
+    "layers": {
+      "Default layer": {
+        "name": "Default layer"
+      },
+      "admin": {
+        "name": "admin"
+      }
+    },
+    "xWidth": 10,
+    "yHeight": 10
+  },
+  "modules": [
+    {
+      "url": "modules/types/client_interaction/code_executor/",
+      "configuration": {
+        "sections": {},
+        "groups": {
+          "group": [
+            {
+              "display": [
+                [
+                  "editor",
+                  "buttons"
+                ]
+              ],
+              "execOnLoad": [
+                []
+              ],
+              "asyncAwait": [
+                [
+                  "top"
+                ]
+              ],
+              "script": [
+                "let data = API.getData('data');\n\n// select all\nlet action = this.button;\n\nif (action === 'selectall') {\n  API.createData('selectedData', data);\n  action = null;\n}\n// here we just take the selected markers and filter data\n\nif (this.variable === 'selectedMarker') {\n  let marker = API.getData('selectedMarker');\n\n  let selectedMarkers = marker.map((r) => r._highlight[0]);\n\n  let selectedData = data.filter((val) =>\n    selectedMarkers.includes(val._highlight));\n\n  API.createData('selectedData', selectedData);\n\n}\n\n// not sure why this is needed??\n// API.createData('selectedIndex', selectedMarkers);\n\n"
+              ]
+            }
+          ],
+          "libs": [
+            [
+              {}
+            ]
+          ],
+          "buttons": [
+            [
+              {
+                "name": "selectall",
+                "label": "Select All",
+                "hide": [],
+                "disable": []
+              }
+            ]
+          ]
+        }
+      },
+      "layers": {
+        "Default layer": {
+          "position": {
+            "left": 36,
+            "top": 1
+          },
+          "size": {
+            "width": 10,
+            "height": 5
+          },
+          "zIndex": 0,
+          "display": true,
+          "title": "",
+          "bgColor": [
+            255,
+            255,
+            255,
+            0
+          ],
+          "wrapper": false,
+          "created": true,
+          "name": "Default layer"
+        },
+        "admin": {
+          "position": {
+            "left": 0,
+            "top": 0
+          },
+          "size": {
+            "width": 61,
+            "height": 43
+          },
+          "zIndex": 0,
+          "display": true,
+          "title": "filter data with selected markers in score plot ",
+          "bgColor": [
+            255,
+            255,
+            255,
+            0
+          ],
+          "wrapper": true,
+          "created": true,
+          "name": "Default layer"
+        }
+      },
+      "id": 1,
+      "vars_in": [
+        {
+          "rel": "inputValue",
+          "name": "selectedMarker"
+        }
+      ],
+      "actions_in": [
+        {}
+      ],
+      "vars_out": [
+        {
+          "jpath": []
+        }
+      ],
+      "actions_out": [
+        {
+          "jpath": []
+        }
+      ],
+      "toolbar": {
+        "custom": [
+          [
+            {
+              "title": "",
+              "icon": "",
+              "action": "",
+              "position": "begin",
+              "color": [
+                100,
+                100,
+                100,
+                1
+              ]
+            }
+          ]
+        ],
+        "common": [
+          {
+            "toolbar": [
+              [
+                "Open Preferences"
+              ]
+            ]
+          }
+        ]
+      },
+      "css": [
+        {
+          "fontSize": [
+            ""
+          ],
+          "fontFamily": [
+            ""
+          ]
+        }
+      ],
+      "title": "",
+      "zindex": 12
+    },
+    {
+      "url": "modules/types/edition/slick_grid/",
+      "configuration": {
+        "sections": {},
+        "groups": {
+          "group": [
+            {
+              "slickCheck": [
+                [
+                  "enableCellNavigation",
+                  "rowNumbering",
+                  "forceFitColumns",
+                  "highlightScroll",
+                  "forgetLastActive",
+                  "editable",
+                  "filterColumns",
+                  "keepSelected"
+                ]
+              ],
+              "copyPaste": [
+                []
+              ],
+              "copyPasteOptions": [
+                [
+                  "newRows"
+                ]
+              ],
+              "autoColumns": [
+                []
+              ],
+              "toolbar": [
+                []
+              ],
+              "colorjpath": [
+                [
+                  "color"
+                ]
+              ],
+              "slick.defaultColumnWidth": [
+                null
+              ],
+              "slick.rowHeight": [
+                null
+              ],
+              "slick.headerRowHeight": [
+                30
+              ],
+              "slick.selectionModel": [
+                "row"
+              ],
+              "idProperty": [
+                ""
+              ],
+              "filterType": [
+                "pref"
+              ],
+              "filterRow": [
+                "// Documentation: https://github.com/NPellet/visualizer/blob/46b40ca86345f8fa313563bf9c6ecb80ba323101/src/modules/types/edition/slick_grid/view.js#L1695-L1735"
+              ],
+              "customJpaths": [
+                ""
+              ]
+            }
+          ],
+          "cols": [
+            [
+              {
+                "name": "ID",
+                "jpath": [
+                  "ID"
+                ],
+                "editor": "none",
+                "forceType": "",
+                "formatter": "typerenderer",
+                "copyFormatter": "default",
+                "visibility": "both",
+                "rendererOptions": "",
+                "editorOptions": "",
+                "hideColumn": []
+              },
+              {
+                "name": "Group",
+                "jpath": [
+                  "group"
+                ],
+                "editor": "none",
+                "forceType": "",
+                "formatter": "typerenderer",
+                "copyFormatter": "default",
+                "visibility": "both",
+                "rendererOptions": "",
+                "editorOptions": "",
+                "hideColumn": []
+              }
+            ]
+          ],
+          "actionCols": [
+            [
+              {
+                "backgroundColor": [
+                  255,
+                  255,
+                  255,
+                  0
+                ],
+                "color": [
+                  0,
+                  0,
+                  0,
+                  1
+                ],
+                "position": "end",
+                "clickMode": "text"
+              }
+            ]
+          ],
+          "groupings": [
+            [
+              {
+                "getter": []
+              }
+            ]
+          ],
+          "actionOutButtons": [
+            [
+              {}
+            ]
+          ],
+          "data": [
+            {
+              "saveInView": [
+                []
+              ],
+              "varname": [
+                ""
+              ],
+              "data": [
+                "[]"
+              ]
+            }
+          ]
+        }
+      },
+      "layers": {
+        "Default layer": {
+          "position": {
+            "left": 0,
+            "top": 0
+          },
+          "size": {
+            "width": 35,
+            "height": 47
+          },
+          "zIndex": 0,
+          "display": true,
+          "title": "Selected Data (select on score plot)",
+          "bgColor": [
+            255,
+            255,
+            255,
+            0
+          ],
+          "wrapper": true,
+          "created": true,
+          "name": "Default layer"
+        },
+        "admin": {
+          "position": {
+            "left": 0,
+            "top": 0
+          },
+          "size": {
+            "width": 44,
+            "height": 65
+          },
+          "zIndex": 0,
+          "display": false,
+          "title": "",
+          "bgColor": [
+            255,
+            255,
+            255,
+            0
+          ],
+          "wrapper": true,
+          "created": true,
+          "name": "Default layer"
+        }
+      },
+      "id": 2,
+      "vars_in": [
+        {
+          "rel": "list",
+          "name": "selectedData"
+        }
+      ],
+      "actions_in": [
+        {}
+      ],
+      "actions_out": [
+        {
+          "event": "onDoubleClick",
+          "rel": "row",
+          "jpath": [],
+          "name": "reset"
+        }
+      ],
+      "vars_out": [
+        {
+          "event": "onHover",
+          "rel": "row",
+          "jpath": [
+            "ID"
+          ],
+          "name": "currentID"
+        },
+        {
+          "event": "onHover",
+          "rel": "row",
+          "jpath": [
+            "dataMatrix"
+          ],
+          "name": "currentSpectra"
+        },
+        {
+          "event": "onSelect",
+          "rel": "row",
+          "jpath": [],
+          "name": "currentData"
+        },
+        {
+          "event": "onSelect",
+          "rel": "row",
+          "jpath": [
+            "ID"
+          ],
+          "name": "selectedID"
+        }
+      ],
+      "toolbar": {
+        "custom": [
+          [
+            {
+              "title": "",
+              "icon": "",
+              "action": "",
+              "position": "begin",
+              "color": [
+                100,
+                100,
+                100,
+                1
+              ]
+            }
+          ]
+        ],
+        "common": [
+          {
+            "toolbar": [
+              [
+                "Open Preferences"
+              ]
+            ]
+          }
+        ]
+      },
+      "css": [
+        {
+          "fontSize": [
+            ""
+          ],
+          "fontFamily": [
+            ""
+          ]
+        }
+      ],
+      "title": "Selected Data (select on score plot)",
+      "zindex": 0
+    },
+    {
+      "url": "modules/types/science/spectra/spectra_displayer/",
+      "configuration": {
+        "sections": {
+          "graph": [
+            {
+              "sections": {},
+              "groups": {
+                "graph": [
+                  {
+                    "url": [
+                      ""
+                    ],
+                    "zoom": [
+                      "xy"
+                    ],
+                    "wheelAction": [
+                      "none"
+                    ],
+                    "wheelbaseline": [
+                      0
+                    ],
+                    "fullOut": [
+                      "none"
+                    ],
+                    "legend": [
+                      "none"
+                    ],
+                    "legendOptions": [
+                      [
+                        "isSerieHideable",
+                        "isSerieSelectable"
+                      ]
+                    ],
+                    "mouseTracking": [
+                      []
+                    ],
+                    "selectScatter": [
+                      [
+                        "yes"
+                      ]
+                    ],
+                    "independantYZoom": [
+                      []
+                    ]
+                  }
+                ]
+              }
+            }
+          ],
+          "axis": [
+            {
+              "sections": {},
+              "groups": {
+                "xAxis": [
+                  {
+                    "checkboxes": [
+                      [
+                        "display",
+                        "main",
+                        "sec"
+                      ]
+                    ],
+                    "label": [
+                      "PC 1"
+                    ],
+                    "beforeSpacing": [
+                      "0"
+                    ],
+                    "afterSpacing": [
+                      0
+                    ],
+                    "min": [
+                      ""
+                    ],
+                    "max": [
+                      ""
+                    ],
+                    "nbTicksPrimary": [
+                      5
+                    ],
+                    "axismodification": [
+                      "none"
+                    ]
+                  }
+                ],
+                "yAxis": [
+                  {
+                    "checkboxes": [
+                      [
+                        "display",
+                        "main",
+                        "sec"
+                      ]
+                    ],
+                    "label": [
+                      "PC 2"
+                    ],
+                    "beforeSpacing": [
+                      "0"
+                    ],
+                    "afterSpacing": [
+                      0
+                    ],
+                    "min": [
+                      ""
+                    ],
+                    "max": [
+                      ""
+                    ],
+                    "nbTicksPrimary": [
+                      5
+                    ],
+                    "fitToAxisOnFromTo": [
+                      []
+                    ]
+                  }
+                ]
+              }
+            }
+          ],
+          "series": [
+            {
+              "sections": {},
+              "groups": {
+                "series": [
+                  {
+                    "overflow": [
+                      []
+                    ],
+                    "stackVerticalSpacing": [
+                      0
+                    ]
+                  }
+                ]
+              }
+            }
+          ],
+          "variables": [
+            {
+              "sections": {},
+              "groups": {
+                "variables": [
+                  [
+                    {
+                      "variable": "ellipse1",
+                      "axis": "0",
+                      "adaptTo": "none",
+                      "plotcolor": [
+                        255,
+                        1,
+                        1,
+                        1
+                      ],
+                      "strokewidth": "1",
+                      "strokestyle": "1",
+                      "plotcontinuous": "continuous",
+                      "peakpicking": [],
+                      "markers": [],
+                      "markerShape": "1",
+                      "markerSize": 2,
+                      "normalize": "none",
+                      "optimizeSlots": [],
+                      "tracking": []
+                    }
+                  ]
+                ]
+              }
+            }
+          ],
+          "misc": [
+            {
+              "sections": {},
+              "groups": {
+                "misc": [
+                  {
+                    "highlightOptions": [
+                      "{}"
+                    ]
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        "groups": {}
+      },
+      "layers": {
+        "Default layer": {
+          "position": {
+            "left": 36,
+            "top": 0
+          },
+          "size": {
+            "width": 97,
+            "height": 47
+          },
+          "zIndex": 0,
+          "display": true,
+          "title": "Scatter plot (use Alt + draw to select points)",
+          "bgColor": [
+            255,
+            255,
+            255,
+            0
+          ],
+          "wrapper": true,
+          "created": true,
+          "name": "Default layer"
+        },
+        "admin": {
+          "position": {
+            "left": 45,
+            "top": 0
+          },
+          "size": {
+            "width": 77,
+            "height": 38
+          },
+          "zIndex": 0,
+          "display": false,
+          "title": "Scatter plot (use Alt + draw to select points)",
+          "bgColor": [
+            255,
+            255,
+            255,
+            0
+          ],
+          "wrapper": true,
+          "created": true,
+          "name": "Default layer"
+        }
+      },
+      "id": 3,
+      "vars_in": [
+        {
+          "rel": "chart",
+          "name": "modifiedScores"
+        },
+        {
+          "rel": "chart",
+          "name": "ellipse1"
+        },
+        {
+          "rel": "chart",
+          "name": "ellipse2"
+        },
+        {
+          "rel": "chart",
+          "name": "ellipse3"
+        },
+        {
+          "rel": "chart",
+          "name": "ellipse4"
+        }
+      ],
+      "actions_in": [
+        {}
+      ],
+      "vars_out": [
+        {
+          "event": "onSelectScatter",
+          "rel": "selectedData",
+          "jpath": [],
+          "name": "selectedMarker"
+        }
+      ],
+      "actions_out": [
+        {
+          "event": "onSelectMarker",
+          "rel": "markerInfos",
+          "jpath": [],
+          "name": "test"
+        }
+      ],
+      "toolbar": {
+        "custom": [
+          [
+            {
+              "title": "",
+              "icon": "",
+              "action": "",
+              "position": "begin",
+              "color": [
+                100,
+                100,
+                100,
+                1
+              ]
+            }
+          ]
+        ],
+        "common": [
+          {
+            "toolbar": [
+              [
+                "Open Preferences"
+              ]
+            ]
+          }
+        ]
+      },
+      "css": [
+        {
+          "fontSize": [
+            ""
+          ],
+          "fontFamily": [
+            ""
+          ]
+        }
+      ],
+      "title": "Scatter plot (use Alt + draw to select points)",
+      "zindex": 0
+    },
+    {
+      "url": "modules/types/client_interaction/code_executor/",
+      "configuration": {
+        "sections": {},
+        "groups": {
+          "group": [
+            {
+              "display": [
+                [
+                  "editor",
+                  "buttons"
+                ]
+              ],
+              "execOnLoad": [
+                []
+              ],
+              "asyncAwait": [
+                [
+                  "top"
+                ]
+              ],
+              "script": [
+                "let currentID = API.getData('currentID')\n\nif (currentID != null) { \nlet score = JSON.parse(JSON.stringify(API.getData('score')))\n//let score = API.getData('score').resurrect();\n\nlet index = score.data[0].info.filter( val => val.id == currentID.s_ )[0]._highlight[0]\n//console.log(index)\n\n//score.data[0].styles.unselected[index].fill = \"transparent\"\nscore.data[0].styles.unselected[index].r = 6\nscore.data[0].styles.unselected[index].stroke = \"red\"\n\nlet currentChart = ({\"title\": \"score plot\",\n    \"data\": [{\n        \"type\": \"scatter\",\n        \"info\":[],\n        \"x\":[score.data[0].x[1]],\n        \"y\":[score.data[0].y[1]],\n        \"styles\": {\n            \"unselected\": [\n                {\"fill\": \"transparent\",\n                \"shape\": \"circle\",\n                \"cx\": 0,\n                \"cy\": 0,\n                \"r\": 8,\n                \"height\": \"5px\",\n                \"width\": \"5px\",\n                \"stroke\": \"red\"}]\n            }\n        }]\n})\n\n//API.createData('currentChart', currentChart)\nAPI.createData('modifiedScores', score)\nAPI.createData('currentID', null)\nconsole.log('executed')\n}\n\n"
+              ]
+            }
+          ],
+          "libs": [
+            [
+              {}
+            ]
+          ],
+          "buttons": [
+            [
+              {
+                "name": "button1",
+                "label": "Execute",
+                "hide": [],
+                "disable": []
+              }
+            ]
+          ]
+        }
+      },
+      "layers": {
+        "Default layer": {
+          "position": {
+            "left": 4,
+            "top": 130
+          },
+          "size": {
+            "width": 73,
+            "height": 44
+          },
+          "zIndex": 0,
+          "display": false,
+          "title": "",
+          "bgColor": [
+            255,
+            255,
+            255,
+            0
+          ],
+          "wrapper": true,
+          "created": true,
+          "name": "Default layer"
+        },
+        "admin": {
+          "position": {
+            "left": 0,
+            "top": 44
+          },
+          "size": {
+            "width": 61,
+            "height": 18
+          },
+          "zIndex": 0,
+          "display": true,
+          "title": "exec highlight score hoovered in the table",
+          "bgColor": [
+            255,
+            255,
+            255,
+            0
+          ],
+          "wrapper": true,
+          "created": true,
+          "name": "Default layer"
+        }
+      },
+      "id": 4,
+      "vars_in": [
+        {
+          "rel": "inputValue",
+          "name": "currentID"
+        }
+      ],
+      "actions_in": [
+        {}
+      ],
+      "vars_out": [
+        {
+          "jpath": []
+        }
+      ],
+      "actions_out": [
+        {
+          "jpath": []
+        }
+      ],
+      "toolbar": {
+        "custom": [
+          [
+            {
+              "title": "",
+              "icon": "",
+              "action": "",
+              "position": "begin",
+              "color": [
+                100,
+                100,
+                100,
+                1
+              ]
+            }
+          ]
+        ],
+        "common": [
+          {
+            "toolbar": [
+              [
+                "Open Preferences"
+              ]
+            ]
+          }
+        ]
+      },
+      "css": [
+        {
+          "fontSize": [
+            ""
+          ],
+          "fontFamily": [
+            ""
+          ]
+        }
+      ],
+      "title": "exec highlight score hoovered in the table",
+      "zindex": 0
+    },
+    {
+      "url": "modules/types/science/spectra/spectra_displayer/",
+      "configuration": {
+        "sections": {
+          "graph": [
+            {
+              "sections": {},
+              "groups": {
+                "graph": [
+                  {
+                    "url": [
+                      ""
+                    ],
+                    "zoom": [
+                      "x"
+                    ],
+                    "wheelAction": [
+                      "zoomY"
+                    ],
+                    "wheelbaseline": [
+                      0
+                    ],
+                    "fullOut": [
+                      "none"
+                    ],
+                    "legend": [
+                      null
+                    ],
+                    "legendOptions": [
+                      [
+                        "isSerieHideable",
+                        "isSerieSelectable"
+                      ]
+                    ],
+                    "mouseTracking": [
+                      [
+                        "track"
+                      ]
+                    ],
+                    "selectScatter": [
+                      []
+                    ],
+                    "independantYZoom": [
+                      []
+                    ]
+                  }
+                ]
+              }
+            }
+          ],
+          "axis": [
+            {
+              "sections": {},
+              "groups": {
+                "xAxis": [
+                  {
+                    "checkboxes": [
+                      [
+                        "display",
+                        "flip"
+                      ]
+                    ],
+                    "label": [
+                      "ppm"
+                    ],
+                    "beforeSpacing": [
+                      "0"
+                    ],
+                    "afterSpacing": [
+                      0
+                    ],
+                    "min": [
+                      "0"
+                    ],
+                    "max": [
+                      "10"
+                    ],
+                    "nbTicksPrimary": [
+                      5
+                    ],
+                    "axismodification": [
+                      "none"
+                    ]
+                  }
+                ],
+                "yAxis": [
+                  {
+                    "checkboxes": [
+                      []
+                    ],
+                    "label": [
+                      "Relative Intensity"
+                    ],
+                    "beforeSpacing": [
+                      "0"
+                    ],
+                    "afterSpacing": [
+                      0
+                    ],
+                    "min": [
+                      ""
+                    ],
+                    "max": [
+                      ""
+                    ],
+                    "nbTicksPrimary": [
+                      5
+                    ],
+                    "fitToAxisOnFromTo": [
+                      []
+                    ]
+                  }
+                ]
+              }
+            }
+          ],
+          "series": [
+            {
+              "sections": {},
+              "groups": {
+                "series": [
+                  {
+                    "overflow": [
+                      []
+                    ],
+                    "stackVerticalSpacing": [
+                      0
+                    ]
+                  }
+                ]
+              }
+            }
+          ],
+          "variables": [
+            {
+              "sections": {},
+              "groups": {
+                "variables": [
+                  [
+                    {
+                      "variable": "jcamp",
+                      "axis": "0",
+                      "adaptTo": "none",
+                      "plotcolor": [
+                        1,
+                        1,
+                        255,
+                        1
+                      ],
+                      "strokewidth": "1",
+                      "strokestyle": "1",
+                      "plotcontinuous": "continuous",
+                      "peakpicking": [],
+                      "markers": [],
+                      "markerShape": "1",
+                      "markerSize": 2,
+                      "normalize": "none",
+                      "optimizeSlots": [],
+                      "tracking": []
+                    },
+                    {
+                      "variable": "selectedJcamp",
+                      "axis": "0",
+                      "adaptTo": "none",
+                      "plotcolor": [
+                        255,
+                        1,
+                        15,
+                        1
+                      ],
+                      "strokewidth": "1",
+                      "strokestyle": "1",
+                      "plotcontinuous": "continuous",
+                      "peakpicking": [],
+                      "markers": [],
+                      "markerShape": "1",
+                      "markerSize": 2,
+                      "normalize": "none",
+                      "optimizeSlots": [],
+                      "tracking": []
+                    }
+                  ]
+                ]
+              }
+            }
+          ],
+          "misc": [
+            {
+              "sections": {},
+              "groups": {
+                "misc": [
+                  {
+                    "highlightOptions": [
+                      "{}"
+                    ]
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        "groups": {}
+      },
+      "layers": {
+        "Default layer": {
+          "position": {
+            "left": 0,
+            "top": 48
+          },
+          "size": {
+            "width": 144,
+            "height": 51
+          },
+          "zIndex": 0,
+          "display": true,
+          "title": "Selected Spectra (current is blue line, hoovering on the table row)",
+          "bgColor": [
+            255,
+            255,
+            255,
+            0
+          ],
+          "wrapper": true,
+          "created": true,
+          "name": "Default layer"
+        },
+        "admin": {
+          "position": {
+            "left": 45,
+            "top": 39
+          },
+          "size": {
+            "width": 77,
+            "height": 26
+          },
+          "zIndex": 0,
+          "display": false,
+          "title": "",
+          "bgColor": [
+            255,
+            255,
+            255,
+            0
+          ],
+          "wrapper": true,
+          "created": true,
+          "name": "Default layer"
+        }
+      },
+      "id": 5,
+      "vars_in": [
+        {
+          "rel": "jcamp",
+          "name": "jcamp"
+        },
+        {
+          "rel": "jcamp",
+          "name": "selectedJcamp"
+        }
+      ],
+      "actions_in": [
+        {
+          "rel": "fromToX",
+          "name": "zoomSync"
+        }
+      ],
+      "vars_out": [
+        {
+          "jpath": []
+        }
+      ],
+      "actions_out": [
+        {
+          "event": "onZoomChange",
+          "rel": "fromToX",
+          "jpath": [],
+          "name": "zoomSync"
+        }
+      ],
+      "toolbar": {
+        "custom": [
+          [
+            {
+              "title": "",
+              "icon": "",
+              "action": "",
+              "position": "begin",
+              "color": [
+                100,
+                100,
+                100,
+                1
+              ]
+            }
+          ]
+        ],
+        "common": [
+          {
+            "toolbar": [
+              [
+                "Open Preferences"
+              ]
+            ]
+          }
+        ]
+      },
+      "css": [
+        {
+          "fontSize": [
+            ""
+          ],
+          "fontFamily": [
+            ""
+          ]
+        }
+      ],
+      "title": "Selected Spectra (current is blue line, hoovering on the table row)",
+      "zindex": 0
+    },
+    {
+      "url": "modules/types/client_interaction/code_executor/",
+      "configuration": {
+        "sections": {},
+        "groups": {
+          "group": [
+            {
+              "display": [
+                [
+                  "editor",
+                  "buttons"
+                ]
+              ],
+              "execOnLoad": [
+                []
+              ],
+              "asyncAwait": [
+                [
+                  "top"
+                ]
+              ],
+              "script": [
+                "let currentID = API.getData('currentID');\nlet selectedID = API.getData('selectedID');\n\nlet data = API.getData('selectedData');\n\nif (currentID != null) {\n  let selectedData = data.filter(val => \n    currentID.includes(val.ID));\n  \n  let jcampUrl = selectedData[0].metadata.JcampUrl;\n  let jcamp = (await superagent.get(jcampUrl).withCredentials()).text;\n  API.createData('jcamp', jcamp);\n\n  API.createData('modifiedSelectedSpectra', jcamp)\n  API.createData('currentID', null);\n  console.log('executed+');\n}\n\nif (selectedID != null) {\n  let selectedData = data.filter(val => \n    selectedID.includes(val.ID));\n  \n  let jcampUrl = selectedData[0].metadata.JcampUrl;\n  let jcamp = (await superagent.get(jcampUrl).withCredentials()).text;\n  API.createData('selectedJcamp', jcamp);\n\n  API.createData('modifiedSelectedSpectra', jcamp)\n  API.createData('selectedID', null);\n  console.log('executed s+');\n}\n\n\n  //clone selectedSpectra\n  //let sspectra = JSON.parse(JSON.stringify(API.getData('selectedSpectra')))\n"
+              ]
+            }
+          ],
+          "libs": [
+            [
+              {
+                "lib": "superagent",
+                "alias": "superagent"
+              },
+              {
+                "lib": "vh/eln/libs",
+                "alias": "libs"
+              }
+            ]
+          ],
+          "buttons": [
+            [
+              {
+                "name": "button1",
+                "label": "Execute",
+                "hide": [],
+                "disable": []
+              }
+            ]
+          ]
+        }
+      },
+      "layers": {
+        "Default layer": {
+          "position": {
+            "left": 4,
+            "top": 96
+          },
+          "size": {
+            "width": 70,
+            "height": 33
+          },
+          "zIndex": 0,
+          "display": false,
+          "title": "",
+          "bgColor": [
+            255,
+            255,
+            255,
+            0
+          ],
+          "wrapper": true,
+          "created": true,
+          "name": "Default layer"
+        },
+        "admin": {
+          "position": {
+            "left": 62,
+            "top": 0
+          },
+          "size": {
+            "width": 61,
+            "height": 62
+          },
+          "zIndex": 0,
+          "display": true,
+          "title": "exec highlight spectra hooverd in the table",
+          "bgColor": [
+            255,
+            255,
+            255,
+            0
+          ],
+          "wrapper": true,
+          "created": true,
+          "name": "Default layer"
+        }
+      },
+      "id": 6,
+      "vars_in": [
+        {
+          "rel": "inputValue",
+          "name": "currentID"
+        },
+        {
+          "rel": "inputValue",
+          "name": "selectedID"
+        }
+      ],
+      "actions_in": [
+        {}
+      ],
+      "vars_out": [
+        {
+          "jpath": []
+        }
+      ],
+      "actions_out": [
+        {
+          "jpath": []
+        }
+      ],
+      "toolbar": {
+        "custom": [
+          [
+            {
+              "title": "",
+              "icon": "",
+              "action": "",
+              "position": "begin",
+              "color": [
+                100,
+                100,
+                100,
+                1
+              ]
+            }
+          ]
+        ],
+        "common": [
+          {
+            "toolbar": [
+              [
+                "Open Preferences"
+              ]
+            ]
+          }
+        ]
+      },
+      "css": [
+        {
+          "fontSize": [
+            ""
+          ],
+          "fontFamily": [
+            ""
+          ]
+        }
+      ],
+      "title": "exec highlight spectra hooverd in the table",
+      "zindex": 0
+    },
+    {
+      "url": "modules/types/client_interaction/code_executor/",
+      "configuration": {
+        "sections": {},
+        "groups": {
+          "group": [
+            {
+              "display": [
+                [
+                  "editor",
+                  "buttons"
+                ]
+              ],
+              "execOnLoad": [
+                []
+              ],
+              "asyncAwait": [
+                [
+                  "top"
+                ]
+              ],
+              "script": [
+                "console.log(GD)\nvar options = ({\n    dataClass: true,\n    binaryDataClassMatrix: true,\n    seed: 22,\n    classes: [\n        {\n            nbSample: 500,\n            elements: [\n                {\n                    index: 0,\n                    distribution: {\n                        name: 'normal',\n                        parameters: {\n                            mean: 9.4,\n                            standardDeviation: 0.1\n                        }\n                    }\n                },\n                {\n                    index: 1,\n                    distribution: {\n                        name: 'normal',\n                        parameters: {\n                            mean: 9.4,\n                            standardDeviation: 0.1\n                        }\n                    }\n                },\n                {\n                    index: 2,\n                    distribution: {\n                        name: 'normal',\n                        parameters: {\n                            mean: 9.4,\n                            standardDeviation: 0.1\n                        }\n                    }\n                }\n            ]\n        },\n        {\n            nbSample: 500,\n            elements: [\n                {\n                    index: 0,\n                    distribution: {\n                        name: 'normal',\n                        parameters: {\n                            mean: 9.4,\n                            standardDeviation: 0.1\n                        }\n                    }\n                },\n                {\n                    index: 1,\n                    distribution: {\n                        name: 'normal',\n                        parameters: {\n                            mean: 10.3,\n                            standardDeviation: 0.15\n                        }\n                    }\n                },\n                {\n                    index: 2,\n                    distribution: {\n                        name: 'normal',\n                        parameters: {\n                            mean: 9.4,\n                            standardDeviation: 0.1\n                        }\n                    }\n                }\n            ]\n        }\n    ]\n});\nvar pureElements = ([\n    [0, 0, 0, 1, 0, 0, 0],\n    [0, 0, 0, 0, 0, 1, 0],\n    [0, 1, 0, 0, 0, 0, 0]\n]);\n\nvar dataset = GD(pureElements, options);\nconsole.log(dataset);"
+              ]
+            }
+          ],
+          "libs": [
+            [
+              {
+                "lib": "ML",
+                "alias": "ML"
+              },
+              {
+                "lib": "http://127.0.0.1:5474/gd.js",
+                "alias": "GD"
+              }
+            ]
+          ],
+          "buttons": [
+            [
+              {
+                "name": "button1",
+                "label": "Execute",
+                "hide": [],
+                "disable": []
+              }
+            ]
+          ]
+        }
+      },
+      "layers": {
+        "Default layer": {
+          "position": {
+            "left": 0,
+            "top": 0
+          },
+          "size": {
+            "width": 20,
+            "height": 20
+          },
+          "zIndex": 0,
+          "display": false,
+          "title": "",
+          "bgColor": [
+            255,
+            255,
+            255,
+            0
+          ],
+          "wrapper": true,
+          "created": true,
+          "name": "Default layer"
+        },
+        "admin": {
+          "position": {
+            "left": 62,
+            "top": 84
+          },
+          "size": {
+            "width": 61,
+            "height": 18
+          },
+          "zIndex": 0,
+          "display": true,
+          "title": "",
+          "bgColor": [
+            255,
+            255,
+            255,
+            0
+          ],
+          "wrapper": true,
+          "created": true,
+          "name": "admin"
+        }
+      },
+      "id": 7,
+      "vars_in": [
+        {}
+      ],
+      "actions_in": [
+        {}
+      ],
+      "vars_out": [
+        {
+          "jpath": []
+        }
+      ],
+      "actions_out": [
+        {
+          "jpath": []
+        }
+      ],
+      "toolbar": {
+        "custom": [
+          [
+            {
+              "title": "",
+              "icon": "",
+              "action": "",
+              "position": "begin",
+              "color": [
+                100,
+                100,
+                100,
+                1
+              ]
+            }
+          ]
+        ],
+        "common": [
+          {
+            "toolbar": [
+              [
+                "Open Preferences"
+              ]
+            ]
+          }
+        ]
+      },
+      "css": [
+        {
+          "fontSize": [
+            ""
+          ],
+          "fontFamily": [
+            ""
+          ]
+        }
+      ],
+      "title": "",
+      "zindex": 0
+    },
+    {
+      "url": "modules/types/client_interaction/code_executor/",
+      "configuration": {
+        "sections": {},
+        "groups": {
+          "group": [
+            {
+              "display": [
+                [
+                  "editor",
+                  "buttons"
+                ]
+              ],
+              "execOnLoad": [
+                []
+              ],
+              "asyncAwait": [
+                [
+                  "top"
+                ]
+              ],
+              "script": [
+                "// get access to golbal variables ellipse1 and modifiedScores\nlet ellipse = API.getData('ellipse1').resurrect();\nlet scores = API.getData('modifiedScores').resurrect();\n\n// add a new point at 0.0\nscores.data[0].x.push(0);\nscores.data[0].y.push(0);\n\n// add style options for the new point\nscores.data[0].styles.unselected.push({\n            \"fill\": \"rgba(0,0,0,1)\",\n            \"shape\": \"circle\",\n            \"cx\": 0,\n            \"cy\": 0,\n            \"r\": 8,\n            \"height\": \"5px\",\n            \"width\": \"5px\",\n            \"stroke\": \"transparent\"\n          });\nscores.data[0].styles.selected.push({\n            \"fill\": \"rgba(0,0,0,1)\",\n            \"shape\": \"circle\",\n            \"cx\": 0,\n            \"cy\": 0,\n            \"r\": 12,\n            \"height\": \"5px\",\n            \"width\": \"5px\",\n            \"stroke\": \"transparent\"\n          });\n          \n// add info for the new point\nscores.data[0].info.push({id: \"test\", _highlight: \"test\"})\n\n// export the modified score back to the global context\nAPI.createData('modifiedScores', scores)\n\n// log the output in the browser console\nconsole.log(scores.data[0]);"
+              ]
+            }
+          ],
+          "libs": [
+            [
+              {}
+            ]
+          ],
+          "buttons": [
+            [
+              {
+                "name": "button1",
+                "label": "Execute",
+                "hide": [],
+                "disable": []
+              }
+            ]
+          ]
+        }
+      },
+      "layers": {
+        "Default layer": {
+          "position": {
+            "left": 0,
+            "top": 92
+          },
+          "size": {
+            "width": 64,
+            "height": 46
+          },
+          "zIndex": 0,
+          "display": false,
+          "title": "",
+          "bgColor": [
+            255,
+            255,
+            255,
+            0
+          ],
+          "wrapper": true,
+          "created": true,
+          "name": "Default layer"
+        },
+        "admin": {
+          "position": {
+            "left": 0,
+            "top": 84
+          },
+          "size": {
+            "width": 61,
+            "height": 18
+          },
+          "zIndex": 0,
+          "display": true,
+          "title": "",
+          "bgColor": [
+            255,
+            255,
+            255,
+            0
+          ],
+          "wrapper": true,
+          "created": true,
+          "name": "admin"
+        }
+      },
+      "id": 8,
+      "vars_in": [
+        {}
+      ],
+      "actions_in": [
+        {}
+      ],
+      "vars_out": [
+        {
+          "jpath": []
+        }
+      ],
+      "actions_out": [
+        {
+          "jpath": []
+        }
+      ],
+      "toolbar": {
+        "custom": [
+          [
+            {
+              "title": "",
+              "icon": "",
+              "action": "",
+              "position": "begin",
+              "color": [
+                100,
+                100,
+                100,
+                1
+              ]
+            }
+          ]
+        ],
+        "common": [
+          {
+            "toolbar": [
+              [
+                "Open Preferences"
+              ]
+            ]
+          }
+        ]
+      },
+      "css": [
+        {
+          "fontSize": [
+            ""
+          ],
+          "fontFamily": [
+            ""
+          ]
+        }
+      ],
+      "title": "",
+      "zindex": 0
+    },
+    {
+      "url": "modules/types/client_interaction/code_executor/",
+      "configuration": {
+        "sections": {},
+        "groups": {
+          "group": [
+            {
+              "display": [
+                [
+                  "editor",
+                  "buttons"
+                ]
+              ],
+              "execOnLoad": [
+                []
+              ],
+              "asyncAwait": [
+                [
+                  "top"
+                ]
+              ],
+              "script": [
+                "let fh = API.cache('helperFunctions');\n(!fh) ? API.doAction('loadFunction') : [];\n\nlet scale = fh.scale;\n\nlet xAxis = API.getData('xAxis');\n\nlet loadings = API.getData('loadings').resurrect();\n//let loadings = fh.transpose(API.getData('loadings').resurrect());\n\nlet varLength = loadings[0].length;\nlet obsLength = loadings.length;\n\nlet selectedLoading = API.getData('selectedLoading');\nlet list = fh.seq_along(loadings);\n(!selectedLoading) ? API.createData('loadingList', list.map(x => [x])) : [];\nconsole.log(selectedLoading.resurrect());\nlet eigenVectors = new Array(obsLength);\n//let xAxis = fh.seq_along(loadings[0]);\n\nlet loadingsColors = API.getData('loadingsColors').resurrect();\n\n//let loadingsColors = fh.transpose(API.getData('loadingsColors').resurrect());\n\n    var max = loadingsColors[selectedLoading - 1].reduce(function(a, b) {\n        return Math.max(a, b);\n    });\n\n    var min = loadingsColors[selectedLoading - 1].reduce(function(a, b) {\n        return Math.min(a, b);\n    });\n\nlet unselectedScale = chroma.scale(['blue', 'cyan',  'yellow', 'red']).domain([0, max]).mode('lch');\n\n//for (let i = 0; i < obsLength; i++) {\n\nlet colorScale = loadingsColors[selectedLoading - 1].map((x, j) => unselectedScale(x));\n\neigenVectors[selectedLoading - 1] = { id: [selectedLoading],\n        data: { 'type': 'color', x: xAxis, y: loadings[selectedLoading - 1], 'color': colorScale} };\n\nAPI.createData('coloredLoadings', eigenVectors[selectedLoading - 1].data);\n\n\nAPI.createData('loadingTable', eigenVectors);\n"
+              ]
+            }
+          ],
+          "libs": [
+            [
+              {
+                "lib": "ML",
+                "alias": "ML"
+              },
+              {
+                "lib": "SD",
+                "alias": "SD"
+              },
+              {
+                "lib": "src/util/ui",
+                "alias": "UI"
+              },
+              {
+                "lib": "chroma",
+                "alias": "chroma"
+              }
+            ]
+          ],
+          "buttons": [
+            [
+              {
+                "name": "button1",
+                "label": "Execute",
+                "hide": [],
+                "disable": []
+              }
+            ]
+          ]
+        }
+      },
+      "layers": {
+        "Default layer": {
+          "position": {
+            "left": 32,
+            "top": 97
+          },
+          "size": {
+            "width": 93,
+            "height": 34
+          },
+          "zIndex": 0,
+          "display": false,
+          "title": "",
+          "bgColor": [
+            255,
+            255,
+            255,
+            0
+          ],
+          "wrapper": true,
+          "created": true,
+          "name": "Default layer"
+        },
+        "admin": {
+          "position": {
+            "left": 62,
+            "top": 63
+          },
+          "size": {
+            "width": 61,
+            "height": 20
+          },
+          "zIndex": 0,
+          "display": true,
+          "title": "create color loadings",
+          "bgColor": [
+            255,
+            255,
+            255,
+            0
+          ],
+          "wrapper": true,
+          "created": true,
+          "name": "admin"
+        }
+      },
+      "id": 9,
+      "vars_in": [
+        {
+          "rel": "inputValue",
+          "name": "selectedData"
+        },
+        {
+          "rel": "inputValue",
+          "name": "selectedLoading"
+        },
+        {
+          "rel": "inputValue",
+          "name": "xAxis"
+        }
+      ],
+      "actions_in": [
+        {}
+      ],
+      "vars_out": [
+        {
+          "jpath": []
+        }
+      ],
+      "actions_out": [
+        {
+          "jpath": []
+        }
+      ],
+      "toolbar": {
+        "custom": [
+          [
+            {
+              "title": "",
+              "icon": "",
+              "action": "",
+              "position": "begin",
+              "color": [
+                100,
+                100,
+                100,
+                1
+              ]
+            }
+          ]
+        ],
+        "common": [
+          {
+            "toolbar": [
+              [
+                "Open Preferences"
+              ]
+            ]
+          }
+        ]
+      },
+      "css": [
+        {
+          "fontSize": [
+            ""
+          ],
+          "fontFamily": [
+            ""
+          ]
+        }
+      ],
+      "title": "create color loadings",
+      "zindex": 0
+    },
+    {
+      "url": "modules/types/client_interaction/code_executor/",
+      "configuration": {
+        "sections": {},
+        "groups": {
+          "group": [
+            {
+              "display": [
+                [
+                  "editor",
+                  "buttons"
+                ]
+              ],
+              "execOnLoad": [
+                [
+                  "yes"
+                ]
+              ],
+              "asyncAwait": [
+                [
+                  "top"
+                ]
+              ],
+              "script": [
+                "'use strict';\n\nlet Utils = {};\nUtils.norm = function norm(X) {\n  return Math.sqrt(X.clone().apply(pow2array).sum());\n};\n\n\nconst {\n  Matrix,\n  PCA,\n  CrossValidation: CV,\n  MatrixStat: Stat,\n  ArrayStat\n} = ML;\n\nconst computeMean = ArrayStat.mean;\nconst computeVariance = ArrayStat.variance;\nconst EVD = ML.EVD;\nconst SVD = ML.SVD;\nconst mean = Stat.mean;\nconst stdev = Stat.standardDeviation;\n\n\n// ============================================\n// Factory functions\n// ============================================\n\n// factory function to create datasets\n// factory function are preferred to class because of flexibility\n// https://medium.com/javascript-scene/javascript-factory-functions-with-es6-4d224591a8b1\nconst Dataset = ({ dataMatrix, options } = {}) => {\n  let nObs = dataMatrix.rows;\n  let nVar = dataMatrix.columns;\n\n  let aa = {};\n  const {\n    descriptio = 123\n    // observations = Array(nObs).fill(null).map((x, i) => 'OBS' + (i + 1)),\n    // variables = Array(nVar).fill(null).map((x, i) => 'VAR' + (i + 1)),\n    // description = 'NA'\n    // metadata = [],\n    // outliers = []\n  } = aa;\n\n  let defaults = {\n    observations: Array(nObs).fill(null).map((x, i) => `OBS${i + 1}`),\n    variables: Array(nVar).fill(null).map((x, i) => `VAR${i + 1}`),\n    description: 'NA',\n    metadata: [],\n    outliers: []\n  };\n\n  options = Object.assign({}, defaults, options);\n\n  let observations = options.observations;\n  let variables = options.variables;\n  let description = options.description;\n  let dataClass = options.dataClass;\n  let metadata = options.metadata;\n  let outliers = options.outliers;\n\n  if (options.observations.length !== nObs ||\n        options.variables.length !== nVar ||\n        options.dataClass[0].value.length !== nObs) {\n    throw new RangeError('observations and dataMatrix have different number of rows');\n  }\n\n  // private util functions\n\n  function getRowIndexByID() {\n    let sampleList = observations.map((x) => x);\n    let outlierList = outliers.map((x) => x.id);\n    let ind = outlierList.map((e) => sampleList.indexOf(e));\n    return ind;\n  }\n\n  function getClassVector(dataClass) {\n    let title = dataClass.title;\n    let classVector = dataClass.value;\n    let type = typeof (classVector[0]);\n    let counts = {};\n    switch (type) {\n      case 'string':\n        counts = {};\n        classVector.forEach((x) => counts[x] = (counts[x] || 0) + 1);\n        break;\n      case 'number':\n        classVector = classVector.map((x) => x.toString());\n        counts = {};\n        classVector.forEach((x) => counts[x] = (counts[x] || 0) + 1);\n        break;\n      default:\n    }\n    let groupIDs = Object.keys(counts);\n    let nClass = groupIDs.length;\n    let classFactor = classVector.map((x) => groupIDs.indexOf(x));\n    let classMatrix = Matrix.from1DArray(nObs, 1, classFactor);\n    return ({ title,\n      groupIDs,\n      nClass,\n      classVector,\n      classFactor,\n      classMatrix\n    });\n  }\n\n  return ({ description,\n\n    // API exposed functions\n\n    getClass() {\n      let a = dataClass.map((x) => getClassVector(x));\n      return a;\n    },\n\n    getOutliers() {\n      return outliers;\n    },\n\n    addOutliers(outliersList) {\n      let outliersIDs = outliers.map((x) => x.id);\n      let newList = outliersList.filter((f) => !outliersIDs.includes(f.id));\n      console.log(newList);\n      if (newList.length > 0) newList.forEach((e) => outliers.push(e));\n      console.log(outliers);\n      this.summary();\n      // return this;\n    },\n\n    rmOutliers(outliersList) {\n      outliers = outliers.filter((f) => !outliersList.includes(f.id));\n      console.log(outliers);\n      this.summary();\n      // return this;\n    },\n\n    clean() {\n      if (outliers.length > 0) {\n        let ind = getRowIndexByID();\n        console.log(ind);\n        let cleanObservations = observations.filter((e, i) => !ind.includes(i));\n        let cleanDataMatrix = new Matrix(nObs - ind.length, nVar);\n\n        let counter = 0;\n        dataMatrix.forEach((e, i) => {\n          if (!ind.includes(i)) {\n            cleanDataMatrix.setRow(counter, e);\n            counter += 1;\n          }\n        });\n\n        let cleanDataClass = dataClass.map((x) => {\n          return { title: x.title,\n            value: x.value.filter((e, i) => !ind.includes(i)) };\n        });\n        // let cleanMetadata = metadata.filter((e, i) => !ind.includes(i));\n\n        return Dataset({\n          dataMatrix: cleanDataMatrix,\n          options: {\n              observations: cleanObservations,\n              variables: variables,\n              dataClass: cleanDataClass,\n              outliers: [],\n            // metadata: cleanMetadata, // lack of test for dimensions\n            description: `clean ${description}` } });\n      } else {\n        return this;\n      }\n    },\n\n    sample(list) {\n        // console.log(list.length)\n      if (list.length > 0) {\n        let ind = list;\n        // console.log(ind);\n        // filter Observations vector\n\n        let trainObservations = observations.filter((e, i) => !ind.includes(i));\n        let testObservations = observations.filter((e, i) => ind.includes(i));\n\n        // filter data matrix\n        let trainDataMatrix = new Matrix(nObs - ind.length, nVar);\n        let testDataMatrix = new Matrix(ind.length, nVar);\n\n        let counter = 0;\n        dataMatrix.forEach((e, i) => {\n          if (!ind.includes(i)) {\n            trainDataMatrix.setRow(counter, e);\n            counter += 1;\n          }\n        });\n\n        counter = 0;\n        dataMatrix.forEach((e, i) => {\n          if (ind.includes(i)) {\n            testDataMatrix.setRow(counter, e);\n            counter += 1;\n          }\n        });\n\n        // filter class vector\n        let trainDataClass = dataClass.map((x) => {\n          return { title: x.title,\n            value: x.value.filter((e, i) => !ind.includes(i)) };\n        });\n\n        let testDataClass = dataClass.map((x) => {\n          return { title: x.title,\n            value: x.value.filter((e, i) => ind.includes(i)) };\n        });\n\n        // let cleanMetadata = metadata.filter((e, i) => !ind.includes(i));\n\n        let train = Dataset({\n          dataMatrix: trainDataMatrix,\n          options: {\n              observations: trainObservations,\n              variables: variables,\n              dataClass: trainDataClass,\n              outliers: [],\n              // metadata: cleanMetadata, // lack of test for dimensions\n              description: `train ${description}` } });\n\n        let test = Dataset({\n          dataMatrix: testDataMatrix,\n          options: {\n              observations: testObservations,\n              variables: variables,\n              dataClass: testDataClass,\n              outliers: [],\n              // metadata: cleanMetadata, // lack of test for dimensions\n              description: `test ${description}` } });\n\n        return { train, test };\n      } else {\n        return this;\n      }\n    },\n\n    // return everything but cannot be changed\n    summary(verbose = 0) {\n      if (verbose === 1) {\n        console.log(`Description: ${description\n        }\\nNumber of variables: ${nVar\n        }\\nNumber of observations: ${nObs\n        }\\nNumber of outliers:${outliers.length\n        }\\nHas class: ${dataClass.length\n        }\\nHas metadata: ${metadata.length > 0}`);\n      }\n      return ({ dataMatrix,\n        dataClass,\n        nObs,\n        nVar,\n        observations,\n        variables,\n        metadata,\n        description\n      });\n    }\n\n  });\n};\n\nconst oplsWrapper = (data) => {\n  let train; let test;\n\n  if (!data.train && !data.test) {\n    train = data;\n  } else {\n    train = data.train;\n    test = data.test;\n  }\n\n  // get data\n  let matrixYData = train.summary().dataMatrix;\n  let dataClass = train.getClass()[0].classMatrix;\n\n  if (test) {\n    var testMatrixYData = test.summary().dataMatrix;\n    var testDataClass = test.getClass()[0].classMatrix;\n\n  }\n  \n  // scaling\n  let options = { center: true, scale: true };\n  matrixYData = scale(matrixYData, options);\n  dataClass = scale(dataClass, options);\n\n  if (test) {\n    testMatrixYData = scale(testMatrixYData, options);\n    testDataClass = scale(testDataClass, options);\n  }\n\n  let variables = train.summary().variables;\n  let observations = train.summary().observations;\n\n  if (test) {\n    let testVariables = test.summary().variables;\n    let testObservations = test.summary().observations;\n  }\n\n  let oplsResultV = [];\n  let plsCompV = [];\n  let testPlsCompV = [];\n\n  let R2Y = []; let R2X = []; let Q2 = [];\n  let xResidual, testxResidual, scores, testScores, E_h, testE_h, Yhat, testYhat, oplsResult, plsComp, testPlsComp, msg, testOpls;\n\n  let scoresExport = [];\n  let testScoresExport = [];\n\n  for (let i = 1; i < 5; i++) {\n    if (i == 1) {\n      oplsResult = OPLS(matrixYData.clone(), dataClass.clone());\n      (test) ? testOpls = OPLS(testMatrixYData.clone(), testDataClass.clone()) : [];\n    } else {\n      oplsResult = OPLS(xResidual.clone(), dataClass.clone());\n      (test) ? testOpls = OPLS(testxResidual.clone(), testDataClass.clone()) : [];\n    }\n    \n    oplsResultV.push(oplsResult);\n    console.log(oplsResult);\n    xResidual = oplsResult.err;\n    (test) ? testxResidual = testOpls.err : [];\n\n    plsComp = PLS(xResidual.clone(), dataClass.clone());\n    plsCompV.push(plsComp);\n    console.log(plsComp);\n    \n    if (test) {\n      testPlsComp = PLS(testxResidual.clone(), testDataClass.clone());\n      testPlsCompV.push(testPlsComp);\n    }\n    \n\n    scores = xResidual.mmul(plsComp.weights.transpose()); // ok\n    E_h = xResidual.clone().sub(scores.clone().mmul(plsComp.loadings)); // ok\n    Yhat = scores.clone().mul(plsComp.betas); // ok\n\n    if (test) {\n      testScores = testxResidual.mmul(testPlsComp.weights.transpose()); // ok\n      testE_h = testxResidual.clone().sub(testScores.clone().mmul(testPlsComp.loadings)); // ok\n      testYhat = testScores.clone().mul(testPlsComp.betas); // ok\n    }\n\n    if (test) {\n      let testTssy = tss(testDataClass.clone());\n      console.log('tssy:'+testTssy)\n      let testRss = testDataClass.clone().sub(testYhat);\n      \n      testRss = testRss.clone().mul(testRss).sum();\n      \n      let Q2y = 1 - (testRss / testTssy);\n      console.log('Q2y:'+Q2y)\n      Q2.push(Q2y);\n      msg = `Q2y: ${Q2y.toFixed(4).toString()}`;\n    }\n\n    let tssy = tss(dataClass.clone());\n    let rss = dataClass.clone().sub(Yhat);\n    rss = rss.clone().mul(rss).sum();\n    let R2y = 1 - (rss / tssy);\n    R2Y.push(R2y);\n    msg = `R2y: ${R2y.toFixed(4).toString()}`;\n\n    let tssx = tss(matrixYData.clone());\n    let X_ex = plsComp.scores.clone().mmul(plsComp.loadings);\n    let rssx = tss(X_ex.clone());\n    let R2x = rssx / tssx;\n    R2X.push(R2x);\n    msg = `${msg}\\nR2x: ${R2x.toFixed(4).toString()}`;\n\n    // store scores for export\n    scoresExport.push({\n      scoresX: scores.map((x) => x[0]),\n      scoresY: oplsResult.tOrtho.map((x) => x[0])\n    });\n    \n    if (test) {\n        testScoresExport.push({\n          scoresX: testScores.map((x) => x[0]),\n          scoresY: testOpls.tOrtho.map((x) => x[0])\n        });\n    }\n    \n    console.log(`OPLS iteration over #ofComponents: ${i}`);\n  } // end of loop\n\n  let eigenVectorMatrix = new Matrix(plsCompV.length, variables.length);\n  plsCompV.forEach((e, i) => eigenVectorMatrix.setRow(i, e.loadings));\n\n  let eigenVectors = new Array(eigenVectorMatrix.rows);\n\n  let xAxis;\n  if (typeof (variables[0]) === 'number') {\n    xAxis = variables;\n  } else {\n    xAxis = seq_along(variables);\n  }\n\n  for (let i = 0, l = eigenVectors.length; i < l; i++) {\n    eigenVectors[i] = { id: [i + 1],\n      eigenVal: null,\n      data: { x: xAxis, y: eigenVectorMatrix[i] } };\n  }\n  API.createData('loadings', eigenVectors);\n\n\n  let R2YPlot = bar([], R2Y);\n  API.createData('R2Y', R2YPlot);\n\n  let R2XPlot = bar([], R2X);\n  API.createData('R2X', R2XPlot);\n  \n  if (test) {\n    let Q2Plot = bar([], Q2);\n    API.createData('Q2', Q2Plot);\n  }\n\n  return ({\n    R2X,\n    R2Y,\n\n    getScores(markers, radius) {\n\n        let scoresPlot = [];\n        scoresExport.forEach((e, i) => {\n            let splot = plot(e.scoresX, e.scoresY, observations, train.getClass()[0], markers, radius);\n            scoresPlot.push({index: i + 1, chart: splot});\n        })\n        \n        // API.createData('pcaResult', scoresPlot[0].chart.chart);\n        // API.createData('pcaResult' + 'ellipse', scoresPlot[0].chart.ellipse);\n        //API.createData('scoresPlot', scoresPlot);\n        \n        let testScoresPlot = [];\n        if (test) {\n            \n            testScoresExport.forEach((e, i) => {\n                let splot = plot(e.scoresX, e.scoresY, observations, test.getClass()[0], markers, radius * 2);\n                testScoresPlot.push({index: i + 1, chart: splot});\n            })\n            \n            // API.createData('testPcaResult', testScoresPlot[0].chart.chart);\n            // API.createData('testScoresPlot', testScoresPlot);\n            \n        }\n        if (test) {\n            return {scoresPlot, testScoresPlot};\n            // return {scoresExport, testScoresExport};\n        } else {\n            return {scoresPlot};\n            // return {scoresExport};\n        }\n        \n    //   console.log('scores');\n    //   let scorePlot = plot(scoresExport[nc - 1].scoresX,\n    //     scoresExport[nc - 1].scoresY,\n    //     observations,\n    //     train.getClass()[0]\n    //   );\n\n    //   API.createData('pcaResult', scorePlot.chart);\n    //   API.createData('pcaResult' + 'ellipse', scorePlot.ellipse);\n\n    //   return scoresExport;\n    }\n  });\n};\n\n\n// outlier factory\nconst Outlier = ([id, comment] = {}) => ({\n  id,\n  comment\n});\n// let llist = [];\n// let list = ['ID2', 'ID3'];\n// list.forEach((e,i) => llist.push(Outlier([e])));\n// console.log(llist);\n//\n// a = list.map(x => Outlier([x]));\n\n\n// is this function a closure? it works as is, but has not\n// the signature  Object = (() => {})();\n// const count = (() => {\n//     let counter = 0;\n//     return () => counter += 1; return counter;\n// })();\nconst DataClass = (title, value) => {\n  let dataClasses = [];\n  dataClasses.push({ title, value });\n  return ({\n    getClass() {\n      return dataClasses;\n    },\n    addClass(title, value) {\n      dataClasses.push({ title, value });\n      return this;\n    }\n  });\n};\n// let a = DataClass( 'testClass',  ['id1', 'id2', 'id2', 'id1', 'id3'] );\n// a.addClass( 'testClass',  ['id1', 'id2', 'id2', 'id1', 'id3'] );\n// console.log(a.getClass());\n\n// ============================================\n// Stat functions\n// ============================================\n\nfunction tss(x) {\n  return x.mul(x).sum();\n}\n\nfunction featureNormalize(dataset) {\n  let means = Stat.mean(dataset);\n  let std = Stat.standardDeviation(dataset, means, true);\n  let result = Matrix.checkMatrix(dataset).subRowVector(means);\n  return { result: result.divRowVector(std), means: means, std: std };\n}\n\nfunction pow2array(i, j) {\n  this[i][j] = this[i][j] * this[i][j];\n  return this;\n}\n\n// https://bost.ocks.org/mike/shuffle/\nfunction shuffle(array) {\n  let m = array.length; let t; let i;\n\n  // While there remain elements to shuffle…\n  while (m) {\n    // Pick a remaining element…\n    i = Math.floor(Math.random() * m--);\n\n    // And swap it with the current element.\n    t = array[m];\n    array[m] = array[i];\n    array[i] = t;\n  }\n\n  return array;\n}\n\n// check this function to importa class from csv\n// it should be possible to import dataset from csv\nfunction createMatrixClass(classFile, spectraDataSet, options = {}) {\n  options = Object.assign({}, { delimiter: ',', header: true, debug: false }, options);\n  let classVector = [];\n  let dataName = [];\n  let meta = Papa.parse(classFile, { delimiter: options.delimiter, header: options.header }).data;\n  let metaIndex = {};\n  meta.forEach((a) => metaIndex[a.filename] = a);\n  let withoutClass = [];\n  let dataClass = new Array(spectraDataSet.length);\n  let i = dataClass.length;\n  while (i--) {\n    dataClass[i] = new Array(2).fill(-1);\n    let vector = dataClass[i];\n    let filename = spectraDataSet[i].sd.filename;\n    let index = metaIndex[filename];\n    if (typeof index === 'undefined') {\n      withOutClass.push(filename);\n    } else {\n      vector[index.class] = 1;\n    }\n  }\n  return { dataClass: dataClass, withOutClass: withoutClass };\n}\n\nfunction computeQ2(realY, predictedY) {\n  realY = Matrix.checkMatrix(realY);\n  predictedY = Matrix.checkMatrix(predictedY);\n  let meansY = Stat.mean(realY);\n\n  let press = predictedY.map((row, rowIndex) => {\n    return row.map((element, colIndex) => {\n      return Math.pow(realY[rowIndex][colIndex] - element, 2);\n    });\n  });\n\n\n  let tss = Y.map((row) => {\n    return row.map((element, colIndex) => {\n      return Math.pow(element - meansY[colIndex], 2);\n    });\n  });\n\n  press = Matrix.checkMatrix(press).sum();\n  tss = Matrix.checkMatrix(tss).sum();\n\n  return 1 - press / tss;\n}\n\nfunction getColSum(matrix, column) {\n  let sum = 0;\n  for (let i = 0; i < matrix.rows; i++) {\n    sum += matrix[i][column];\n  }\n  return sum;\n}\n\nfunction maxSumColIndex(data) {\n  let maxIndex = 0;\n  let maxSum = -Infinity;\n  for (let i = 0; i < data.columns; ++i) {\n    let currentSum = getColSum(data, i);\n    if (currentSum > maxSum) {\n      maxSum = currentSum;\n      maxIndex = i;\n    }\n  }\n  return maxIndex;\n}\n\n\nfunction seq_along(x) {\n  return x.map((x, i) => i + 1);\n}\n\nfunction bar(x = [], y) {\n  x.length == 0 ? x = y.map((x, i) => i + 1) : [];\n  return ({ x, y });\n}\n\nfunction transpose(matrix) {\n  return matrix[0].map((col, i) => matrix.map((row) => row[i]));\n}\n\nfunction sampleClass(classVector, fraction) {\n  // sort the vector\n  let classVectorSorted = JSON.parse(JSON.stringify(classVector));\n  let result = Array.from(Array(classVectorSorted.length).keys())\n    .sort((a, b) => (classVectorSorted[a] < classVectorSorted[b] ? -1 :\n      (classVectorSorted[b] < classVectorSorted[a]) | 0));\n  classVectorSorted.sort((a, b) => (a < b ? -1 : (b < a) | 0));\n\n  // counts the class elements\n  let counts = {};\n  classVectorSorted.forEach((x) => counts[x] = (counts[x] || 0) + 1);\n\n  // pick a few per class\n  let indexOfSelected = [];\n\n  Object.keys(counts).forEach((e, i) => {\n    let shift = [];\n    Object.values(counts).reduce((a, c, i) => shift[i] = a + c, 0);\n\n    let arr = [...Array(counts[e]).keys()];\n\n    let r = [];\n    for (let i = 0; i < Math.floor(counts[e] * fraction); i++) {\n      let n = arr[Math.floor(Math.random() * arr.length)];\n      r.push(n);\n      let ind = arr.indexOf(n);\n      arr.splice(ind, 1);\n    }\n\n    (i == 0) ? indexOfSelected = indexOfSelected.concat(r) : indexOfSelected = indexOfSelected.concat(r.map((x) => x + shift[i - 1]));\n  });\n\n  // sort back the index\n  let indexBack = [];\n  indexOfSelected.forEach((e) => indexBack.push(result[e]));\n\n  return indexBack;\n}\n\nfunction scale(dataset, options) {\n  let center = !!options.center;\n  let scale = !!options.scale;\n\n  dataset = new Matrix(dataset);\n\n  if (center) {\n    const means = mean(dataset);\n    const stdevs = scale ? stdev(dataset, means, true) : null;\n    // means = means;\n    dataset.subRowVector(means);\n    if (scale) {\n      for (var i = 0; i < stdevs.length; i++) {\n        if (stdevs[i] === 0) {\n          throw new RangeError(`Cannot scale the dataset (standard deviation is zero at index ${i}`);\n        }\n      }\n      // stdevs = stdevs;\n      dataset.divRowVector(stdevs);\n    }\n  }\n\n  return dataset;\n}\n\nfunction plot(x, y, observations, dataClass, markerStyle, size) {\n  let nClass = dataClass.nClass;\n\n  let selectedScale = chroma.scale(['green', 'black']).domain([0, nClass - 1]).mode('hsl');\n  let unselectedScale = chroma.scale(['red', 'blue']).domain([0, nClass - 1]).mode('hsl');\n  // console.log(unselectedScale(0).toString());\n\n  let result = {\n    title: 'main plot',\n    data: [\n      {\n        x: x,\n        y: y,\n        type: 'scatter',\n        info: Array.from({ length: x.length }, (v, k) => k + 1),\n        _highlight: [],\n        styles: {\n          unselected: new Array(x.length),\n          selected: new Array(x.length)\n        }\n      }\n    ]\n  };\n\n  let unselected = dataClass.classFactor.map((x, i) => ({\n    fill: unselectedScale(x).toString(),\n    shape: markerStyle,\n    cx: 0,\n    cy: 0,\n    r: size,\n    height: '5px',\n    width: '5px',\n    stroke: 'transparent'\n  }));\n  // console.log(unselected);\n\n  let selected = dataClass.classFactor.map((x, i) => ({\n    fill: selectedScale(x).toString(),\n    shape: markerStyle,\n    cx: 0,\n    cy: 0,\n    r: size,\n    height: '5px',\n    width: '5px',\n    stroke: 'transparent'\n  }));\n\n  let highlight = observations.map((x, i) => ({ _highlight: x }));\n\n  result.data[0].styles.unselected = unselected;\n  result.data[0].styles.selected = selected;\n  result.data[0]._highlight = highlight;\n\n  let ellipse = predictEllipse(x, y, dataClass, 5, 0.95, 1024);\n\n  return { chart: result, ellipse };\n}\n\nfunction plotResult(prediction, observations, dataClass, pcaPlot, varName) {\n  let x = prediction.getColumn(pcaPlot.pcx - 1);\n  let y = prediction.getColumn(pcaPlot.pcy - 1);\n\n  let nbClasses = dataClass.nClass;\n\n  let selectedScale = chroma.scale(['green', 'black']).domain([0, nbClasses - 1]).mode('hsl');\n  let unselectedScale = chroma.scale(['red', 'blue']).domain([0, nbClasses - 1]).mode('hsl');\n  // console.log(unselectedScale(0).toString());\n\n  let result = {\n    title: 'main plot',\n    data: [\n      {\n        x: x,\n        y: y,\n        type: 'scatter',\n        info: Array.from({ length: x.length }, (v, k) => k + 1),\n        _highlight: [],\n        styles: {\n          unselected: new Array(x.length),\n          selected: new Array(x.length)\n        }\n      }\n    ]\n  };\n\n  let unselected = dataClass.classFactor.map((x, i) => ({\n    fill: unselectedScale(x).toString(),\n    shape: 'circle',\n    cx: 0,\n    cy: 0,\n    r: 3,\n    height: '5px',\n    width: '5px',\n    stroke: 'transparent'\n  }));\n  console.log(unselected);\n\n  let selected = dataClass.classFactor.map((x, i) => ({\n    fill: selectedScale(x).toString(),\n    shape: 'circle',\n    cx: 0,\n    cy: 0,\n    r: 3,\n    height: '5px',\n    width: '5px',\n    stroke: 'transparent'\n  }));\n\n  let highlight = observations.map((x, i) => ({ _highlight: x }));\n\n  result.data[0].styles.unselected = unselected;\n  result.data[0].styles.selected = selected;\n  result.data[0]._highlight = highlight;\n\n  let ellipse = predictEllipse(x, y, dataClass, 5, 0.95, 1024);\n\n  return { chart: result, ellipse };\n}\n\nfunction PCA_fast(dataset, options = {}) {\n  let {\n    nComponents = 2,\n    threshold = 1e-9,\n    maxIterations = 100\n  } = options;\n\n  let eMatrix = _adjust(dataset, options);\n\n  let r = eMatrix.rows;\n  let c = eMatrix.columns;\n\n  let T = Matrix.zeros(r, nComponents);\n  let P = Matrix.zeros(c, nComponents);\n  let eigenvalues = new Array(nComponents);\n\n  for (let i = 0; i < nComponents; i++) {\n    let tIndex = maxSumColIndex(eMatrix.clone().mulM(eMatrix));\n    let t = eMatrix.getColumnVector(tIndex);\n\n    let k = 0;\n    let tNew = t.dot(t);\n    for (let tOld = Number.MAX_SAFE_INTEGER; Math.abs(tOld - tNew) > threshold && k < maxIterations; k++) {\n      let p = getLoading(eMatrix, t);\n      t = eMatrix.mmul(p);\n      tOld = tNew;\n      tNew = t.dot(t);\n    }\n    eigenvalues[i] = tNew;\n    T.setColumn(i, t);\n    P.setColumn(i, p);\n    eMatrix.sub(t.mmul(p.transpose()));\n  }\n  return { T, P };\n}\n\nfunction getLoading(e, t) {\n  let m = e.columns;\n  let n = e.rows;\n\n  let result = new Matrix(m, 1);\n\n  let Bcolj = new Array(n);\n  for (let i = 0; i < m; i++) {\n    let s = 0;\n    for (let k = 0; k < n; k++) {\n      s += e.get(k, i) * t[k][0];\n    }\n    result.set(i, 0, s);\n  }\n  return result.mul(1 / result.norm());\n}\n\nfunction PLS(dataset, predictions, options = {}) {\n  const {\n    numberOSC = 2,\n    scale = false\n  } = options;\n\n  var X = Matrix.checkMatrix(dataset);\n  var Y = Matrix.checkMatrix(predictions);\n\n  if (scale) {\n    X = featureNormalize(X).result;\n    Y = featureNormalize(y).result;\n  }\n  // console.log(X, Y);\n  var rows = X.rows;\n  var columns = X.columns;\n\n  var u = Y.getColumnVector(0);\n  let diff = 1;\n  let t, q, w, tOld;\n  for (var i = 0; i < numberOSC && diff > 1e-10; i++) {\n    w = X.transpose().mmul(u).div(u.transpose().mmul(u)[0][0]);\n    // console.log('w without norm', JSON.stringify(w));\n    w = w.div(Utils.norm(w));\n    // console.log('w', JSON.stringify(w));\n    // console.log(w.transpose().mmul(w));\n    // calc X scores\n    t = X.mmul(w).div(w.transpose().mmul(w)[0][0]);// t_h paso 3\n    // calc loading\n    // console.log('scores', t);\n    if (i > 0) {\n      diff = t.clone().sub(tOld).pow(2).sum();\n      // console.log('diff', diff);\n    }\n    tOld = t.clone();\n    // Y block, calc weights, normalise and calc Y scores\n    // steps can be omitted for 2 class Y (simply by setting q_h=1)\n    q = Y.transpose().mmul(t).div(t.transpose().mmul(t)[0][0]);\n    q = q.div(Utils.norm(q));\n\n    u = Y.mmul(q).div(q.transpose().mmul(q)[0][0]);\n    console.log(`PLS iteration: ${i}`);\n  }\n  // calculate the X loadings and rescale scores and weights accordingly\n  let xP = X.transpose().mmul(t).div(t.transpose().mmul(t)[0][0]);\n  xP = xP.div(Utils.norm(xP));\n  // calc Y loadings\n  let yP = Y.transpose().mmul(u).div(u.transpose().mmul(u)[0][0]);\n  // calc b for residuals Y\n  // calculate beta (regression coefficient) via inverse insted of subtracting q_h directly\n  let residual = u.transpose().mmul(t).div(t.transpose().mmul(t)[0][0]);\n  // console.log('residuals', residual);\n  // calc residual matrice X and Y\n  let xRes = X.sub(t.clone().mmul(xP.transpose()));\n  let yRes = Y.sub(t.clone().mulS(residual[0][0]).mmul(q.transpose()));\n  return { xRes, yRes, scores: t, loadings: xP.transpose(), weights: w.transpose(), betas: residual[0][0], qPC: q };\n}\n\nfunction OPLS(dataset, predictions, options = {}) {\n  const {\n    numberOSC = 100,\n    scale = true,\n    verbose = false\n  } = options;\n\n  let X = Matrix.checkMatrix(dataset);\n  let Y = Matrix.checkMatrix(predictions);\n  if (verbose) console.log('data checked');\n\n  if (scale) {\n    X = featureNormalize(X).result;\n    Y = featureNormalize(Y).result;\n    if (verbose) console.log('data scaled, if scaling not wanted, set options.scale to false');\n  }\n\n  let rows = X.rows;\n  let columns = X.columns;\n  if (verbose) console.log(`number of rows: ${rows} / number of columns: ${columns}`);\n\n  let sumOfSquaresX = X.clone().mul(X).sum();\n\n  let u = Y.getColumnVector(0);\n  let diff = 1;\n  let t, c, w, uNew;\n  for (let i = 0; i < numberOSC && diff > 1e-10; i++) {\n  // for (let i = 0; i < 1; i++) {\n    w = u.transpose().mmul(X).div(u.transpose().mmul(u)[0][0]);\n\n    w = w.transpose().div(Utils.norm(w));\n\n    t = X.mmul(w).div(w.transpose().mmul(w)[0][0]);// t_h paso 3\n\n    // calc loading\n\n    c = t.transpose().mmul(Y).div(t.transpose().mmul(t)[0][0]);\n\n    // 4. calc new u and compare with one in previus iteration (stop criterion)\n    uNew = Y.mmul(c.transpose());\n    uNew = uNew.div(c.transpose().mmul(c)[0][0]);\n\n    if (i > 0) {\n      diff = uNew.clone().sub(u).pow(2).sum() / uNew.clone().pow(2).sum();\n      if (verbose) console.log('diff', diff);\n    }\n\n    u = uNew.clone();\n    if (verbose) console.log(`number of iterations: ${i}`);\n    console.log(`OPLS iteration: ${i}`);\n  }\n  if (verbose) console.log('unew', uNew);\n  // calc loadings\n  let p = t.transpose().mmul(X).div(t.transpose().mmul(t)[0][0]);\n\n  let wOrtho = p.clone().sub(w.transpose().mmul(p.transpose()).div(w.transpose().mmul(w)[0][0]).mmul(w.transpose()));\n  wOrtho.div(Utils.norm(wOrtho));\n  if (verbose) console.log('wOrtho norm', wOrtho);\n\n  // orthogonal scores\n  let tOrtho = X.mmul(wOrtho.transpose()).div(wOrtho.transpose().mmul(wOrtho)[0][0]);\n  if (verbose) console.log(`scores: ${tOrtho}`);\n\n  // orthogonal loadings\n  let pOrtho = tOrtho.transpose().mmul(X).div(tOrtho.transpose().mmul(tOrtho)[0][0]);\n  if (verbose) console.log(`loadings: ${pOrtho}`);\n\n  // filtered data\n  let err = X.sub(tOrtho.mmul(pOrtho));\n  if (verbose) console.log(`filtered data: ${err}`);\n  return { err, pOrtho, tOrtho, wOrtho, w, p, t, c };\n}\n\n\nfunction predictEllipse(x, y, dataClass, n, alpha, nbPoints) {\n  // separate data by class\n  let toExport = {\n    type: 'chart',\n    value: {\n      data: []\n    }\n  };\n  let nClass = dataClass.nClass;\n  let scaleColor = chroma.scale(['green', 'black']).domain([0, nClass - 1]).mode('hsl');\n  let yMatrix = new Array(nClass).fill(0).map((e) => []);\n  let xMatrix = JSON.parse(JSON.stringify(yMatrix));\n  for (let k = 0; k < x.length; k++) {\n    let index = dataClass.classFactor[k];\n    yMatrix[index].push(y[k]);\n    xMatrix[index].push(x[k]);\n  }\n  for (let k = 0; k < nClass; k++) {\n    // console.log(scaleColor(k).toString());\n    let xyMatrix = Matrix.from1DArray(xMatrix[k].length, 1, xMatrix[k]);\n    xyMatrix.addColumn(1, yMatrix[k]);\n    let means = [computeMean(xMatrix[k]), computeMean(yMatrix[k])];\n    let pca = new PCA(xyMatrix, { useCovarianceMatrix: true });\n    var evec = new Matrix(pca.U);\n    let elp = new Matrix(ellipse([0, 0], pca.S, nbPoints));\n    elp = evec.mmul(elp.transpose()).transpose();\n    let c = 2 * (n - 1) / n * (n + 1) / (n - 2);\n    let F = Math.sqrt(c * 4.7374);\n    elp = elp.map((point) => {\n      return point.map((p, i) => F * p + means[i]);\n    });\n    elp = new Matrix(elp);\n    let xData = elp.getColumn(0);\n    let yData = elp.getColumn(1);\n    toExport.value.data.push({\n      y: yData,\n      x: xData\n    });\n  }\n  return toExport;\n}\n\nfunction ellipse(center, std, nbPoints) {\n  let vector = new Array(nbPoints);\n  let jump = 2 * Math.PI / (nbPoints - 1);\n  let t = 0;\n  for (let i = 0; i < nbPoints; i++) {\n    vector[i] = [center[0] + Math.sqrt(std[0]) * Math.cos(t), center[1] + Math.sqrt(std[1]) * Math.sin(t)];\n    t += jump;\n  }\n  return vector;\n}\n\nfunction log(title, txt) {\n    \n    let log = API.getData('log').resurrect();\n    log = log.concat('\\n', '===============', title, '===============', '\\n');\n    txt.forEach((e, i) => {\n    \n        log = log.concat(Object.keys(e), ' ', Object.values(e), '\\n');\n    \n        return log;\n    });\n    API.createData('log', log);\n    \n}\n\n\n\nfunction covariance(a,b) {\n\tvar bias = false,\n\t\targs,\n\t\topts,\n\t\tnArgs,\n\t\tlen,\n\t\tdeltas,\n\t\tdelta,\n\t\tmeans,\n\t\tC,\n\t\tcov,\n\t\tarr,\n\t\tN, r, A, B, sum, val,\n\t\ti, j, n;\n\n// \targs = Array.prototype.slice.call( arguments );\n// \tnArgs = args.length;\n// \tconsole.log(args)\n\n// \tif ( isObject( args[nArgs-1] ) ) {\n// \t\topts = args.pop();\n// \t\tnArgs = nArgs - 1;\n// \t\tif ( opts.hasOwnProperty( 'bias' ) ) {\n// \t\t\tif ( typeof opts.bias !== 'boolean' ) {\n// \t\t\t\tthrow new TypeError( 'covariance()::invalid input argument. Bias option must be a boolean.' );\n// \t\t\t}\n// \t\t\tbias = opts.bias;\n// \t\t}\n// \t}\n// \tif ( !nArgs ) {\n// \t\tthrow new Error( 'covariance()::insufficient input arguments. Must provide array arguments.' );\n// \t}\n// \tfor ( i = 0; i < nArgs; i++ ) {\n// \t\tif ( !Array.isArray( args[i] ) ) {\n// \t\t\tthrow new TypeError( 'covariance()::invalid input argument. Must provide array arguments.' );\n// \t\t}\n// \t}\n// \tif ( Array.isArray( args[0][0] ) ) {\n// \t\t// If the first argument is an array of arrays, calculate the covariance over the nested arrays, disregarding any other arguments...\n// \t\targs = args[ 0 ];\n// \t}\n// \tnArgs = args.length;\n// \tlen = args[ 0 ].length;\n// \tfor ( i = 1; i < nArgs; i++ ) {\n// \t\tif ( args[i].length !== len ) {\n// \t\t\tthrow new Error( 'covariance()::invalid input argument. All arrays must have equal length.' );\n// \t\t}\n// \t}\n\t// [0] Initialization...\n\tdeltas = new Array( nArgs );\n\tmeans = new Array( nArgs );\n\tC = new Array( nArgs );\n\tcov = new Array( nArgs );\n\tfor ( i = 0; i < nArgs; i++ ) {\n\t\tmeans[ i ] = args[ i ][ 0 ];\n\t\tarr = new Array( nArgs );\n\t\tfor ( j = 0; j < nArgs; j++ ) {\n\t\t\tarr[ j ] = 0;\n\t\t}\n\t\tC[ i ] = arr;\n\t\tcov[ i ] = arr.slice(); // copy!\n\t}\n\tif ( len < 2 ) {\n\t\treturn cov;\n\t}\n\t// [1] Compute the covariance...\n\tfor ( n = 1; n < len; n++ ) {\n\n\t\tN = n + 1;\n\t\tr = n / N;\n\n\t\t// [a] Extract the values and compute the deltas...\n\t\tfor ( i = 0; i < nArgs; i++ ) {\n\t\t\tdeltas[ i ] = args[ i ][ n ] - means[ i ];\n\t\t}\n\n\t\t// [b] Update the covariance between one array and every other array...\n\t\tfor ( i = 0; i < nArgs; i++ ) {\n\t\t\tarr = C[ i ];\n\t\t\tdelta = deltas[ i ];\n\t\t\tfor ( j = i; j < nArgs; j++ ) {\n\t\t\t\tA = arr[ j ];\n\t\t\t\tB = r * delta * deltas[ j ];\n\t\t\t\tsum = A + B;\n\t\t\t\t// Exploit the fact that the covariance matrix is symmetric...\n\t\t\t\tif ( i !== j ) {\n\t\t\t\t\tC[ j ][ i ] = sum;\n\t\t\t\t}\n\t\t\t\tarr[ j ] = sum;\n\t\t\t} // end FOR j\n\t\t} // end FOR i\n\n\t\t// [c] Update the means...\n\t\tfor ( i = 0; i < nArgs; i++ ) {\n\t\t\tmeans[ i ] += deltas[ i ] / N;\n\t\t}\n\t} // end FOR n\n\n\t// [2] Normalize the co-moments...\n\tn = N - 1;\n\tif ( bias ) {\n\t\tn = N;\n\t}\n\tfor ( i = 0; i < nArgs; i++ ) {\n\t\tarr = C[ i ];\n\t\tfor ( j = i; j < nArgs; j++ ) {\n\t\t\tval = arr[ j ] / n;\n\t\t\tcov[ i ][ j ] = val;\n\t\t\tif ( i !== j ) {\n\t\t\t\tcov[ j ][ i ] = val;\n\t\t\t}\n\t\t}\n\t}\n\treturn cov;\n} // end FUNCTION covariance()\n\n\nAPI.cache('helperFunctions', {\n  DataClass,\n  Outlier,\n  Dataset,\n  oplsWrapper,\n  sampleClass,\n  transpose,\n  bar,\n  seq_along,\n  scale,\n  tss,\n  plotResult,\n  plot,\n  predictEllipse,\n  ellipse,\n  pow2array,\n  featureNormalize,\n  shuffle,\n  maxSumColIndex,\n  getColSum,\n  computeQ2,\n  PCA_fast,\n  PLS,\n  OPLS,\n  createMatrixClass,\n  log,\n  covariance\n});\n\n// ============================================\n// Dataset section\n// ============================================\n\nconst iris = () => {\n  const iris = [\n    [5.1, 3.5, 1.4, 0.2, 'setosa'],\n    [4.9, 3, 1.4, 0.2, 'setosa'],\n    [4.7, 3.2, 1.3, 0.2, 'setosa'],\n    [4.6, 3.1, 1.5, 0.2, 'setosa'],\n    [5, 3.6, 1.4, 0.2, 'setosa'],\n    [5.4, 3.9, 1.7, 0.4, 'setosa'],\n    [4.6, 3.4, 1.4, 0.3, 'setosa'],\n    [5, 3.4, 1.5, 0.2, 'setosa'],\n    [4.4, 2.9, 1.4, 0.2, 'setosa'],\n    [4.9, 3.1, 1.5, 0.1, 'setosa'],\n    [5.4, 3.7, 1.5, 0.2, 'setosa'],\n    [4.8, 3.4, 1.6, 0.2, 'setosa'],\n    [4.8, 3, 1.4, 0.1, 'setosa'],\n    [4.3, 3, 1.1, 0.1, 'setosa'],\n    [5.8, 4, 1.2, 0.2, 'setosa'],\n    [5.7, 4.4, 1.5, 0.4, 'setosa'],\n    [5.4, 3.9, 1.3, 0.4, 'setosa'],\n    [5.1, 3.5, 1.4, 0.3, 'setosa'],\n    [5.7, 3.8, 1.7, 0.3, 'setosa'],\n    [5.1, 3.8, 1.5, 0.3, 'setosa'],\n    [5.4, 3.4, 1.7, 0.2, 'setosa'],\n    [5.1, 3.7, 1.5, 0.4, 'setosa'],\n    [4.6, 3.6, 1, 0.2, 'setosa'],\n    [5.1, 3.3, 1.7, 0.5, 'setosa'],\n    [4.8, 3.4, 1.9, 0.2, 'setosa'],\n    [5, 3, 1.6, 0.2, 'setosa'],\n    [5, 3.4, 1.6, 0.4, 'setosa'],\n    [5.2, 3.5, 1.5, 0.2, 'setosa'],\n    [5.2, 3.4, 1.4, 0.2, 'setosa'],\n    [4.7, 3.2, 1.6, 0.2, 'setosa'],\n    [4.8, 3.1, 1.6, 0.2, 'setosa'],\n    [5.4, 3.4, 1.5, 0.4, 'setosa'],\n    [5.2, 4.1, 1.5, 0.1, 'setosa'],\n    [5.5, 4.2, 1.4, 0.2, 'setosa'],\n    [4.9, 3.1, 1.5, 0.2, 'setosa'],\n    [5, 3.2, 1.2, 0.2, 'setosa'],\n    [5.5, 3.5, 1.3, 0.2, 'setosa'],\n    [4.9, 3.6, 1.4, 0.1, 'setosa'],\n    [4.4, 3, 1.3, 0.2, 'setosa'],\n    [5.1, 3.4, 1.5, 0.2, 'setosa'],\n    [5, 3.5, 1.3, 0.3, 'setosa'],\n    [4.5, 2.3, 1.3, 0.3, 'setosa'],\n    [4.4, 3.2, 1.3, 0.2, 'setosa'],\n    [5, 3.5, 1.6, 0.6, 'setosa'],\n    [5.1, 3.8, 1.9, 0.4, 'setosa'],\n    [4.8, 3, 1.4, 0.3, 'setosa'],\n    [5.1, 3.8, 1.6, 0.2, 'setosa'],\n    [4.6, 3.2, 1.4, 0.2, 'setosa'],\n    [5.3, 3.7, 1.5, 0.2, 'setosa'],\n    [5, 3.3, 1.4, 0.2, 'setosa'],\n    [7, 3.2, 4.7, 1.4, 'versicolor'],\n    [6.4, 3.2, 4.5, 1.5, 'versicolor'],\n    [6.9, 3.1, 4.9, 1.5, 'versicolor'],\n    [5.5, 2.3, 4, 1.3, 'versicolor'],\n    [6.5, 2.8, 4.6, 1.5, 'versicolor'],\n    [5.7, 2.8, 4.5, 1.3, 'versicolor'],\n    [6.3, 3.3, 4.7, 1.6, 'versicolor'],\n    [4.9, 2.4, 3.3, 1, 'versicolor'],\n    [6.6, 2.9, 4.6, 1.3, 'versicolor'],\n    [5.2, 2.7, 3.9, 1.4, 'versicolor'],\n    [5, 2, 3.5, 1, 'versicolor'],\n    [5.9, 3, 4.2, 1.5, 'versicolor'],\n    [6, 2.2, 4, 1, 'versicolor'],\n    [6.1, 2.9, 4.7, 1.4, 'versicolor'],\n    [5.6, 2.9, 3.6, 1.3, 'versicolor'],\n    [6.7, 3.1, 4.4, 1.4, 'versicolor'],\n    [5.6, 3, 4.5, 1.5, 'versicolor'],\n    [5.8, 2.7, 4.1, 1, 'versicolor'],\n    [6.2, 2.2, 4.5, 1.5, 'versicolor'],\n    [5.6, 2.5, 3.9, 1.1, 'versicolor'],\n    [5.9, 3.2, 4.8, 1.8, 'versicolor'],\n    [6.1, 2.8, 4, 1.3, 'versicolor'],\n    [6.3, 2.5, 4.9, 1.5, 'versicolor'],\n    [6.1, 2.8, 4.7, 1.2, 'versicolor'],\n    [6.4, 2.9, 4.3, 1.3, 'versicolor'],\n    [6.6, 3, 4.4, 1.4, 'versicolor'],\n    [6.8, 2.8, 4.8, 1.4, 'versicolor'],\n    [6.7, 3, 5, 1.7, 'versicolor'],\n    [6, 2.9, 4.5, 1.5, 'versicolor'],\n    [5.7, 2.6, 3.5, 1, 'versicolor'],\n    [5.5, 2.4, 3.8, 1.1, 'versicolor'],\n    [5.5, 2.4, 3.7, 1, 'versicolor'],\n    [5.8, 2.7, 3.9, 1.2, 'versicolor'],\n    [6, 2.7, 5.1, 1.6, 'versicolor'],\n    [5.4, 3, 4.5, 1.5, 'versicolor'],\n    [6, 3.4, 4.5, 1.6, 'versicolor'],\n    [6.7, 3.1, 4.7, 1.5, 'versicolor'],\n    [6.3, 2.3, 4.4, 1.3, 'versicolor'],\n    [5.6, 3, 4.1, 1.3, 'versicolor'],\n    [5.5, 2.5, 4, 1.3, 'versicolor'],\n    [5.5, 2.6, 4.4, 1.2, 'versicolor'],\n    [6.1, 3, 4.6, 1.4, 'versicolor'],\n    [5.8, 2.6, 4, 1.2, 'versicolor'],\n    [5, 2.3, 3.3, 1, 'versicolor'],\n    [5.6, 2.7, 4.2, 1.3, 'versicolor'],\n    [5.7, 3, 4.2, 1.2, 'versicolor'],\n    [5.7, 2.9, 4.2, 1.3, 'versicolor'],\n    [6.2, 2.9, 4.3, 1.3, 'versicolor'],\n    [5.1, 2.5, 3, 1.1, 'versicolor'],\n    [5.7, 2.8, 4.1, 1.3, 'versicolor'],\n    [6.3, 3.3, 6, 2.5, 'virginica'],\n    [5.8, 2.7, 5.1, 1.9, 'virginica'],\n    [7.1, 3, 5.9, 2.1, 'virginica'],\n    [6.3, 2.9, 5.6, 1.8, 'virginica'],\n    [6.5, 3, 5.8, 2.2, 'virginica'],\n    [7.6, 3, 6.6, 2.1, 'virginica'],\n    [4.9, 2.5, 4.5, 1.7, 'virginica'],\n    [7.3, 2.9, 6.3, 1.8, 'virginica'],\n    [6.7, 2.5, 5.8, 1.8, 'virginica'],\n    [7.2, 3.6, 6.1, 2.5, 'virginica'],\n    [6.5, 3.2, 5.1, 2, 'virginica'],\n    [6.4, 2.7, 5.3, 1.9, 'virginica'],\n    [6.8, 3, 5.5, 2.1, 'virginica'],\n    [5.7, 2.5, 5, 2, 'virginica'],\n    [5.8, 2.8, 5.1, 2.4, 'virginica'],\n    [6.4, 3.2, 5.3, 2.3, 'virginica'],\n    [6.5, 3, 5.5, 1.8, 'virginica'],\n    [7.7, 3.8, 6.7, 2.2, 'virginica'],\n    [7.7, 2.6, 6.9, 2.3, 'virginica'],\n    [6, 2.2, 5, 1.5, 'virginica'],\n    [6.9, 3.2, 5.7, 2.3, 'virginica'],\n    [5.6, 2.8, 4.9, 2, 'virginica'],\n    [7.7, 2.8, 6.7, 2, 'virginica'],\n    [6.3, 2.7, 4.9, 1.8, 'virginica'],\n    [6.7, 3.3, 5.7, 2.1, 'virginica'],\n    [7.2, 3.2, 6, 1.8, 'virginica'],\n    [6.2, 2.8, 4.8, 1.8, 'virginica'],\n    [6.1, 3, 4.9, 1.8, 'virginica'],\n    [6.4, 2.8, 5.6, 2.1, 'virginica'],\n    [7.2, 3, 5.8, 1.6, 'virginica'],\n    [7.4, 2.8, 6.1, 1.9, 'virginica'],\n    [7.9, 3.8, 6.4, 2, 'virginica'],\n    [6.4, 2.8, 5.6, 2.2, 'virginica'],\n    [6.3, 2.8, 5.1, 1.5, 'virginica'],\n    [6.1, 2.6, 5.6, 1.4, 'virginica'],\n    [7.7, 3, 6.1, 2.3, 'virginica'],\n    [6.3, 3.4, 5.6, 2.4, 'virginica'],\n    [6.4, 3.1, 5.5, 1.8, 'virginica'],\n    [6, 3, 4.8, 1.8, 'virginica'],\n    [6.9, 3.1, 5.4, 2.1, 'virginica'],\n    [6.7, 3.1, 5.6, 2.4, 'virginica'],\n    [6.9, 3.1, 5.1, 2.3, 'virginica'],\n    [5.8, 2.7, 5.1, 1.9, 'virginica'],\n    [6.8, 3.2, 5.9, 2.3, 'virginica'],\n    [6.7, 3.3, 5.7, 2.5, 'virginica'],\n    [6.7, 3, 5.2, 2.3, 'virginica'],\n    [6.3, 2.5, 5, 1.9, 'virginica'],\n    [6.5, 3, 5.2, 2, 'virginica'],\n    [6.2, 3.4, 5.4, 2.3, 'virginica'],\n    [5.9, 3, 5.1, 1.8, 'virginica']\n  ];\n  return iris;\n};\n\nAPI.cache('helperDataset', {\n  iris\n});\n\nAPI.doAction('tipsOn');\n\nconsole.log('functions created');\n"
+              ]
+            }
+          ],
+          "libs": [
+            [
+              {
+                "lib": "ML",
+                "alias": "ML"
+              },
+              {
+                "lib": "src/util/couchdbAttachments",
+                "alias": "cdb"
+              },
+              {
+                "lib": "chroma",
+                "alias": "chroma"
+              }
+            ]
+          ],
+          "buttons": [
+            [
+              {
+                "name": "button1",
+                "label": "Execute",
+                "hide": [],
+                "disable": []
+              }
+            ]
+          ]
+        }
+      },
+      "layers": {
+        "Default layer": {
+          "position": {
+            "left": 0,
+            "top": 126
+          },
+          "size": {
+            "width": 35,
+            "height": 15
+          },
+          "zIndex": 0,
+          "display": false,
+          "title": "",
+          "bgColor": [
+            255,
+            255,
+            255,
+            0
+          ],
+          "wrapper": true,
+          "created": true,
+          "name": "Default layer"
+        },
+        "admin": {
+          "position": {
+            "left": 0,
+            "top": 63
+          },
+          "size": {
+            "width": 61,
+            "height": 20
+          },
+          "zIndex": 0,
+          "display": true,
+          "title": "function helper",
+          "bgColor": [
+            255,
+            255,
+            255,
+            0
+          ],
+          "wrapper": true,
+          "created": true,
+          "name": "admin"
+        }
+      },
+      "id": 10,
+      "vars_in": [
+        {}
+      ],
+      "actions_in": [
+        {}
+      ],
+      "vars_out": [
+        {
+          "jpath": []
+        }
+      ],
+      "actions_out": [
+        {
+          "jpath": []
+        }
+      ],
+      "toolbar": {
+        "custom": [
+          [
+            {
+              "title": "",
+              "icon": "",
+              "action": "",
+              "position": "begin",
+              "color": [
+                100,
+                100,
+                100,
+                1
+              ]
+            }
+          ]
+        ],
+        "common": [
+          {
+            "toolbar": [
+              [
+                "Open Preferences"
+              ]
+            ]
+          }
+        ]
+      },
+      "css": [
+        {
+          "fontSize": [
+            ""
+          ],
+          "fontFamily": [
+            ""
+          ]
+        }
+      ],
+      "title": "function helper",
+      "zindex": 0
+    },
+    {
+      "url": "modules/types/edition/slick_grid/",
+      "configuration": {
+        "sections": {},
+        "groups": {
+          "group": [
+            {
+              "slickCheck": [
+                [
+                  "enableCellNavigation",
+                  "rowNumbering",
+                  "forceFitColumns",
+                  "highlightScroll",
+                  "forgetLastActive",
+                  "editable"
+                ]
+              ],
+              "copyPaste": [
+                []
+              ],
+              "copyPasteOptions": [
+                [
+                  "newRows"
+                ]
+              ],
+              "autoColumns": [
+                []
+              ],
+              "toolbar": [
+                []
+              ],
+              "colorjpath": [
+                []
+              ],
+              "slick.defaultColumnWidth": [
+                null
+              ],
+              "slick.rowHeight": [
+                null
+              ],
+              "slick.headerRowHeight": [
+                30
+              ],
+              "slick.selectionModel": [
+                "row"
+              ],
+              "idProperty": [
+                ""
+              ],
+              "filterType": [
+                "pref"
+              ],
+              "filterRow": [
+                "// Documentation: https://github.com/NPellet/visualizer/blob/46b40ca86345f8fa313563bf9c6ecb80ba323101/src/modules/types/edition/slick_grid/view.js#L1695-L1735"
+              ],
+              "customJpaths": [
+                ""
+              ]
+            }
+          ],
+          "cols": [
+            [
+              {
+                "jpath": [],
+                "editor": "none",
+                "forceType": "",
+                "formatter": "typerenderer",
+                "copyFormatter": "default",
+                "visibility": "both",
+                "rendererOptions": "",
+                "editorOptions": "",
+                "hideColumn": []
+              }
+            ]
+          ],
+          "actionCols": [
+            [
+              {
+                "backgroundColor": [
+                  255,
+                  255,
+                  255,
+                  0
+                ],
+                "color": [
+                  0,
+                  0,
+                  0,
+                  1
+                ],
+                "position": "end",
+                "clickMode": "text"
+              }
+            ]
+          ],
+          "groupings": [
+            [
+              {
+                "getter": []
+              }
+            ]
+          ],
+          "actionOutButtons": [
+            [
+              {}
+            ]
+          ],
+          "data": [
+            {
+              "saveInView": [
+                []
+              ],
+              "varname": [
+                ""
+              ],
+              "data": [
+                "[]"
+              ]
+            }
+          ]
+        }
+      },
+      "layers": {
+        "Default layer": {
+          "position": {
+            "left": 134,
+            "top": 0
+          },
+          "size": {
+            "width": 10,
+            "height": 47
+          },
+          "zIndex": 0,
+          "display": true,
+          "title": "Loadings",
+          "bgColor": [
+            255,
+            255,
+            255,
+            0
+          ],
+          "wrapper": true,
+          "created": true,
+          "name": "Default layer"
+        },
+        "admin": {
+          "position": {
+            "left": 0,
+            "top": 0
+          },
+          "size": {
+            "width": 20,
+            "height": 20
+          },
+          "zIndex": 0,
+          "display": false,
+          "title": "",
+          "bgColor": [
+            255,
+            255,
+            255,
+            0
+          ],
+          "wrapper": true,
+          "created": true,
+          "name": "admin"
+        }
+      },
+      "id": 11,
+      "vars_in": [
+        {
+          "rel": "list",
+          "name": "loadingList"
+        }
+      ],
+      "actions_in": [
+        {}
+      ],
+      "actions_out": [
+        {
+          "jpath": []
+        }
+      ],
+      "vars_out": [
+        {
+          "event": "onSelect",
+          "rel": "row",
+          "jpath": [],
+          "name": "selectedLoading"
+        }
+      ],
+      "toolbar": {
+        "custom": [
+          [
+            {
+              "title": "",
+              "icon": "",
+              "action": "",
+              "position": "begin",
+              "color": [
+                100,
+                100,
+                100,
+                1
+              ]
+            }
+          ]
+        ],
+        "common": [
+          {
+            "toolbar": [
+              [
+                "Open Preferences"
+              ]
+            ]
+          }
+        ]
+      },
+      "css": [
+        {
+          "fontSize": [
+            ""
+          ],
+          "fontFamily": [
+            ""
+          ]
+        }
+      ],
+      "title": "Loadings",
+      "zindex": 0
+    },
+    {
+      "url": "modules/types/science/spectra/spectra_displayer/",
+      "configuration": {
+        "sections": {
+          "graph": [
+            {
+              "sections": {},
+              "groups": {
+                "graph": [
+                  {
+                    "url": [
+                      ""
+                    ],
+                    "zoom": [
+                      "x"
+                    ],
+                    "wheelAction": [
+                      "zoomY"
+                    ],
+                    "wheelbaseline": [
+                      0
+                    ],
+                    "fullOut": [
+                      "none"
+                    ],
+                    "legend": [
+                      null
+                    ],
+                    "legendOptions": [
+                      [
+                        "isSerieHideable",
+                        "isSerieSelectable"
+                      ]
+                    ],
+                    "mouseTracking": [
+                      []
+                    ],
+                    "selectScatter": [
+                      []
+                    ],
+                    "independantYZoom": [
+                      []
+                    ]
+                  }
+                ]
+              }
+            }
+          ],
+          "axis": [
+            {
+              "sections": {},
+              "groups": {
+                "xAxis": [
+                  {
+                    "checkboxes": [
+                      [
+                        "flip"
+                      ]
+                    ],
+                    "label": [
+                      ""
+                    ],
+                    "beforeSpacing": [
+                      "0"
+                    ],
+                    "afterSpacing": [
+                      0
+                    ],
+                    "min": [
+                      "0"
+                    ],
+                    "max": [
+                      "10"
+                    ],
+                    "nbTicksPrimary": [
+                      5
+                    ],
+                    "axismodification": [
+                      "none"
+                    ]
+                  }
+                ],
+                "yAxis": [
+                  {
+                    "checkboxes": [
+                      []
+                    ],
+                    "label": [
+                      ""
+                    ],
+                    "beforeSpacing": [
+                      "0"
+                    ],
+                    "afterSpacing": [
+                      0
+                    ],
+                    "min": [
+                      ""
+                    ],
+                    "max": [
+                      ""
+                    ],
+                    "nbTicksPrimary": [
+                      5
+                    ],
+                    "fitToAxisOnFromTo": [
+                      []
+                    ]
+                  }
+                ]
+              }
+            }
+          ],
+          "series": [
+            {
+              "sections": {},
+              "groups": {
+                "series": [
+                  {
+                    "overflow": [
+                      []
+                    ],
+                    "stackVerticalSpacing": [
+                      0
+                    ]
+                  }
+                ]
+              }
+            }
+          ],
+          "variables": [
+            {
+              "sections": {},
+              "groups": {
+                "variables": [
+                  [
+                    {
+                      "variable": "coloredLoadings",
+                      "axis": "0",
+                      "adaptTo": "none",
+                      "plotcolor": [
+                        1,
+                        1,
+                        255,
+                        1
+                      ],
+                      "strokewidth": "1",
+                      "strokestyle": "1",
+                      "plotcontinuous": "continuous",
+                      "peakpicking": [],
+                      "markers": [],
+                      "markerShape": "1",
+                      "markerSize": 2,
+                      "normalize": "none",
+                      "optimizeSlots": [],
+                      "tracking": []
+                    }
+                  ]
+                ]
+              }
+            }
+          ],
+          "misc": [
+            {
+              "sections": {},
+              "groups": {
+                "misc": [
+                  {
+                    "highlightOptions": [
+                      "{}"
+                    ]
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        "groups": {}
+      },
+      "layers": {
+        "Default layer": {
+          "position": {
+            "left": 0,
+            "top": 48
+          },
+          "size": {
+            "width": 144,
+            "height": 27
+          },
+          "zIndex": 0,
+          "display": true,
+          "title": "",
+          "bgColor": [
+            255,
+            255,
+            255,
+            0
+          ],
+          "wrapper": false,
+          "created": true,
+          "name": "Default layer"
+        },
+        "admin": {
+          "position": {
+            "left": 0,
+            "top": 0
+          },
+          "size": {
+            "width": 20,
+            "height": 20
+          },
+          "zIndex": 0,
+          "display": false,
+          "title": "",
+          "bgColor": [
+            255,
+            255,
+            255,
+            0
+          ],
+          "wrapper": true,
+          "created": true,
+          "name": "admin"
+        }
+      },
+      "id": 12,
+      "vars_in": [
+        {
+          "rel": "chart",
+          "name": "coloredLoadings"
+        }
+      ],
+      "actions_in": [
+        {
+          "rel": "fromToX",
+          "name": "zoomSync"
+        }
+      ],
+      "vars_out": [
+        {
+          "jpath": []
+        }
+      ],
+      "actions_out": [
+        {
+          "event": "onZoomChange",
+          "rel": "fromToX",
+          "jpath": [],
+          "name": "zoomSync"
+        }
+      ],
+      "toolbar": {
+        "custom": [
+          [
+            {
+              "title": "",
+              "icon": "",
+              "action": "",
+              "position": "begin",
+              "color": [
+                100,
+                100,
+                100,
+                1
+              ]
+            }
+          ]
+        ],
+        "common": [
+          {
+            "toolbar": [
+              [
+                "Open Preferences"
+              ]
+            ]
+          }
+        ]
+      },
+      "css": [
+        {
+          "fontSize": [
+            ""
+          ],
+          "fontFamily": [
+            ""
+          ]
+        }
+      ],
+      "title": "",
+      "zindex": 0
+    }
+  ],
+  "variables": [
+    {
+      "varname": "data",
+      "jpath": [
+        "data"
+      ]
+    },
+    {
+      "varname": "score",
+      "jpath": [
+        "score12"
+      ]
+    },
+    {
+      "varname": "ellipse1",
+      "jpath": [
+        "ellipse"
+      ]
+    },
+    {
+      "varname": "ellipse2",
+      "jpath": [
+        "ellipse2"
+      ]
+    },
+    {
+      "varname": "ellipse3",
+      "jpath": [
+        "ellipse3"
+      ]
+    },
+    {
+      "varname": "xAxis",
+      "jpath": [
+        "xAxis"
+      ]
+    },
+    {
+      "varname": "loadings",
+      "jpath": [
+        "loadings"
+      ]
+    },
+    {
+      "varname": "loadingsColors",
+      "jpath": [
+        "loadingsColor"
+      ]
+    }
+  ],
+  "aliases": [
+    {
+      "path": "https://www.lactame.com/lib/ml/HEAD/ml",
+      "alias": "ML"
+    },
+    {
+      "path": "https://www.lactame.com/lib/spectra-data/3.2.4/spectra-data.min",
+      "alias": "SD"
+    },
+    {
+      "path": "https://www.lactame.com/github/cheminfo-js/visualizer-helper/3ffac8f5646dd4231c1cb33cebae970e5ee0d503/",
+      "alias": "vh"
+    },
+    {
+      "path": "src/util/couchdbAttachments",
+      "alias": "cdb"
+    }
+  ],
+  "configuration": {
+    "title": "hastaLaVista scoresExplorer 1.1"
+  },
+  "actionscripts": [
+    {
+      "sections": {},
+      "groups": {
+        "action": [
+          {
+            "name": [
+              null
+            ],
+            "script": [
+              null
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "init_script": [
+    {
+      "sections": {},
+      "groups": {
+        "general": [
+          {
+            "script": [
+              "let scores = API.getData('score')\nAPI.createData('modifiedScores', scores)"
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "custom_filters": [
+    {
+      "sections": {
+        "modules": [
+          {
+            "sections": {},
+            "groups": {
+              "modules": [
+                [
+                  {}
+                ]
+              ]
+            }
+          }
+        ],
+        "filtersLib": [
+          {
+            "sections": {},
+            "groups": {
+              "filters": [
+                [
+                  {}
+                ]
+              ]
+            }
+          }
+        ],
+        "filters": [
+          {
+            "sections": {},
+            "groups": {
+              "filter": [
+                {
+                  "name": [
+                    null
+                  ],
+                  "script": [
+                    null
+                  ]
+                }
+              ],
+              "libs": [
+                [
+                  {}
+                ]
+              ]
+            }
+          }
+        ]
+      },
+      "groups": {}
+    }
+  ],
+  "actionfiles": [
+    {
+      "sections": {},
+      "groups": {
+        "action": [
+          [
+            {}
+          ]
+        ]
+      }
+    }
+  ]
+}
+

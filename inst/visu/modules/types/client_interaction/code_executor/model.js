@@ -1,0 +1,1 @@
+'use strict';define(['modules/types/client_interaction/code_editor/model','src/util/datatraversing','src/util/util'],function(a,b,c){'use strict';function d(){a.call(this)}return c.inherits(d,a,{getjPath:function(f){var g=[];return'outputValue'===f&&this.module.controller.outputObject&&b.getJPathsFromElement(this.module.controller.outputObject,g),g}}),d});

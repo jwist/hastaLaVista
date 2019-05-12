@@ -1,0 +1,222 @@
+{
+  "version": "2.95.0",
+  "grid": {
+    "layers": {
+      "Default layer": {
+        "name": "Default layer"
+      }
+    },
+    "xWidth": 10,
+    "yHeight": 10
+  },
+  "modules": [
+    {
+      "url": "modules/types/client_interaction/code_executor/",
+      "configuration": {
+        "sections": {},
+        "groups": {
+          "group": [
+            {
+              "display": [
+                [
+                  "editor",
+                  "buttons"
+                ]
+              ],
+              "execOnLoad": [
+                []
+              ],
+              "asyncAwait": [
+                [
+                  "top"
+                ]
+              ],
+              "script": [
+                "\nlet url = 'http://127.0.0.1:5474/view/';\nvar parser = new DOMParser();\n\nfetch(url)\n.then(res => res.text())\n.then(txt => {\n    let dir = parser.parseFromString(txt, 'text/html').getElementsByTagName('a');\n    dir = Array.from(dir);\n    let list = dir.filter(x => x.innerText.substr(-1) == '/');\n    console.log(list.map(x => x.innerText));\n    }\n);\n\n\n"
+              ]
+            }
+          ],
+          "libs": [
+            [
+              {}
+            ]
+          ],
+          "buttons": [
+            [
+              {
+                "name": "button1",
+                "label": "Execute",
+                "hide": [],
+                "disable": []
+              }
+            ]
+          ]
+        }
+      },
+      "layers": {
+        "Default layer": {
+          "position": {
+            "left": 37,
+            "top": 24
+          },
+          "size": {
+            "width": 92,
+            "height": 57
+          },
+          "zIndex": 0,
+          "display": true,
+          "title": "",
+          "bgColor": [
+            255,
+            255,
+            255,
+            0
+          ],
+          "wrapper": true,
+          "created": true,
+          "name": "Default layer"
+        }
+      },
+      "id": 39,
+      "vars_in": [
+        {}
+      ],
+      "actions_in": [
+        {}
+      ],
+      "vars_out": [
+        {
+          "jpath": []
+        }
+      ],
+      "actions_out": [
+        {
+          "jpath": []
+        }
+      ],
+      "toolbar": {
+        "custom": [
+          [
+            {
+              "title": "",
+              "icon": "",
+              "action": "",
+              "position": "begin",
+              "color": [
+                100,
+                100,
+                100,
+                1
+              ]
+            }
+          ]
+        ],
+        "common": [
+          {
+            "toolbar": [
+              [
+                "Open Preferences"
+              ]
+            ]
+          }
+        ]
+      },
+      "css": [
+        {
+          "fontSize": [
+            ""
+          ],
+          "fontFamily": [
+            ""
+          ]
+        }
+      ],
+      "title": ""
+    }
+  ],
+  "variables": [
+    {
+      "varname": "data",
+      "jpath": [
+        "data"
+      ]
+    },
+    {
+      "varname": "spec",
+      "jpath": [
+        "spec"
+      ]
+    },
+    {
+      "varname": "pcaPlot",
+      "jpath": [
+        "pcaPlot"
+      ]
+    },
+    {
+      "varname": "selectedMetadata",
+      "jpath": [
+        "selectedMetadata"
+      ]
+    },
+    {
+      "varname": "selectedDataSets",
+      "jpath": [
+        "selectedDataSets"
+      ]
+    },
+    {
+      "varname": "selectedData",
+      "jpath": [
+        "selectedData"
+      ]
+    },
+    {
+      "varname": "html",
+      "jpath": [
+        "html"
+      ]
+    },
+    {
+      "varname": "help",
+      "jpath": [
+        "help"
+      ]
+    },
+    {
+      "varname": "selectedDataMatrix",
+      "jpath": [
+        "selectedDataMatrix"
+      ]
+    },
+    {
+      "varname": "x",
+      "jpath": [
+        "x"
+      ]
+    },
+    {
+      "varname": "varNames",
+      "jpath": [
+        "varNames"
+      ]
+    },
+    {
+      "varname": "selectedParallel",
+      "jpath": [
+        "selectedParallel"
+      ]
+    },
+    {
+      "varname": "selectedSamples",
+      "jpath": [
+        "selectedSamples"
+      ]
+    }
+  ],
+  "aliases": [],
+  "configuration": {
+    "title": "No title"
+  }
+}
+

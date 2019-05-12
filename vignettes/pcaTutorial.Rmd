@@ -1,0 +1,409 @@
+---
+title: "PCA Explorer"
+author: "Julien Wist"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{PCA Explorer}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+
+## Understanding multivariate analysis
+### a simple PCA example
+
+Let's create a simple dataset. Because PCA is a very general mathematical method, it has been applied to many research area and thereby explained in many different terms. Let's choose a chemical representation of our dataset. Assume that we've prepared 8 solutions of known composition using 3 compounds. The "spectra" of each compound and the compositions are simply represented by one or zeros.
+
+```{r, fig.show='hold'}
+Elements <- t(array(c(1,0,0,0,0,1,0,0,0,0,1,1), dim = c(4,3)))
+noise <- matrix(runif(24) * 0.5, 3, 8)
+Compositions <- t(array(c(1,0,0, 0,1,0, 0,0,1, 1,1,0, 1,0,1, 0,1,1, 1,1,1, 0,0,0), dim = c(3,8)))
+labels <- c("100", "010", "001", "110", "101", "011", "111", "000")
+```
+
+The "spectra" of the three compounds look like this:
+```{r, fig.show='hold', fig.width = 2.2, fig.height=1}
+par(mar=c(0,2,0,0))
+barplot(Elements[1,])
+barplot(Elements[2,])
+barplot(Elements[3,])
+```
+
+Each spectra has 4 variables.
+
+If we assume that the compounds are not interacting and so on, the resulting spectra of each solution is a linear combination these spectra, according to the composition. We can thus create a matrix of data by multiplying both the composition and each element.
+
+Les's look at the compositions:
+```{r, echo=FALSE, results='asis'}
+knitr::kable(Compositions)
+```
+
+and the resulting data matrix `M`:
+
+```{r, fig.show='hold'}
+M <- Compositions %*% Elements
+knitr::kable(M)
+```
+
+This is important because PCA and other methods are factorization method that allows to factor a matrix into the product of two. Thus in this case, we hope that applying the PCA to our matrix of data, we should be able to recover the composition and the individual elements. Let's see if this works.
+
+The first step is to scale the data. Then we can use one of the simplest method to compute a PCA, which is to find the eigenvalues. The most robust form of performing this task is by Singular Value Decomposition (SVD). This decomposition tries to find 3 matrices so that $$M = U \times D \times V^{\dagger}$$ 
+
+```{r, fig.show='hold'}
+SM <- scale(M)
+SVD <- svd(SM)
+# max(abs(SM - t(SVD$v %*% diag(SVD$d) %*% t(SVD$u)))) # difference 
+```
+
+After computing the SVD we can check how good the factorization performed by reconstructing the original matrix and taking the difference that is in this case `r max(abs(SM - t(SVD$v %*% diag(SVD$d) %*% t(SVD$u))))`.
+
+The idea behind PCA is to reduce the dimension of the problem. Do we need 4 variables to describe correctly the data or is it possible to reduce this.
+
+```{r, fig.show='hold'}
+Maprox <- t(SVD$v[,1:2] %*% diag(SVD$d[1:2]) %*% t(SVD$u[,1:2]))
+ERR <- max(abs(SM - Maprox))
+```
+
+Here we only use the two first principal components to reconstruct `M` and the error is still small: `r ERR`. This means that a representation of our data can be found that correctly describes the data with only two dimensions.
+
+We can now look at this representation in two dimension that is called score plots. The scores are simple the rotation of the original scaled data, that is the multiplication of the data by the rotation vectors, or loadings.
+
+```{r, fig.show='hold', fig.width = 2.2}
+scores <- SM %*% SVD$v[,1:3]
+par(mar=c(4,4,1,1))
+plot(scores[,1], scores[,2])
+plot(scores[,1], scores[,3])
+plot(scores[,2], scores[,3])
+```
+
+We said that the error was small, but we can do better at quantifying how good we perform. This is called the explained variance in the world of statistics and describes how much of our data are actually described using 1, 2, 3, or more principle components. This is related to the eigenvalues and is readily computed.
+
+```{r, fig.show='hold'}
+EXVAR <- sapply(SVD$d,function(x){100*x/sum(SVD$d)})
+CUMVAR <- cumsum(EXVAR)
+par(mar=c(4,4,1,0))
+barplot(CUMVAR, ylab = "cum.variance %", xlab = "# of comp.")
+```
+
+with two principle components we can reproduce almost 80% of our original data, `M`. While using 3 we can explain 100%. This should not surprise us, since all our solutions were indeed prepared using 3 compounds. So mixing 3 components should allow to describe a 3-compounds mixture, or linear combination.
+
+If our factorization is correct, we should recover both the composition and the elements. Let's see the composition
+
+```{r, fig.show='hold', fig.width=1.6, fig.height=1}
+for (i in 1:8) {
+  par(mar=c(1,0,1,0))
+ barplot(SVD$u[i,1:3]) 
+}
+```
+
+Clearly, the first three columns of `U` are our compositions. The matrix `V` contains the elements:
+ 
+```{r, fig.show='hold', fig.width=1.6, fig.height=1}
+for (i in 1:4) {
+ par(mar=c(1,0,1,0))
+ barplot(SVD$v[,i]) 
+}
+```
+At least the first three, since we have only three different compounds. It is thus possible to factorize the original data matrix `M` and recover the original composition and the individual elements. It has to be noted that only 4 points are visible on the score plot, while 8 points (8 compositions) are expected. This is because we need a third dimension to completely describe the data. We used three columns of the PC matrix, that is 3 principal components. Because we mixed 3 compounds this is the least we can do without loosing information.
+
+```{r, fig.show='hold'}
+cbind(labels, scores)
+SVD$d
+```
+## Classification
+
+We can apply the same idea to classify solution that are similar.
+
+```{r, fig.show='hold'}
+Elements <- t(array(c(1,0,0,0,0,1,0,0,0,0,1,1), dim = c(4,3)))
+Compositions <- t(array(c(1,2,0.1, 1,2.05,0.1, 1,2.1,0.1, 2,1,0.82, 1.9,1,0.9, 1.99,1,0.8, 1.06,2,0.05, 1,2,0.12, 2,1,1, 2,0.9,0.8), dim = c(3,10)))
+M <- Compositions %*% Elements
+SM <- scale(M)
+SVD <- svd(SM)
+scores <- SM %*% SVD$v[,1:2]
+par(mar=c(4,4,1,1))
+plot(scores[,1], scores[,2])
+```
+
+Les's look at the compositions:
+```{r, echo=FALSE, results='asis'}
+knitr::kable(Compositions)
+```
+
+Looking at the screeplot, the two first principal components explains almost 95% of the data. 
+```{r, fig.show='hold'}
+EXVAR <- sapply(SVD$d,function(x){100*x/sum(SVD$d)})
+CUMVAR <- cumsum(EXVAR)
+par(mar=c(4,4,1,0))
+barplot(CUMVAR, ylab = "cum.variance %", xlab = "# of comp.")
+```
+
+The matrix `V` contains the elements, but in this case the interpretation we make is different. Looking at our composition it is clear that the first and second compounds are forming two classes, the class with almost the double of compound 1 and the class with more of compound 2. Looking at the loadings, we see that the second compound is discriminant (the first loading) while the second loading shows a difference for compound 1. 
+ 
+```{r, fig.show='hold', fig.width=1.6, fig.height=1}
+for (i in 1:4) {
+  par(mar=c(1,0,1,0))
+ barplot(SVD$v[,i]) 
+}
+```
+
+As a conclusion, the two first principal components suffice to classify the data into two categories. In this latter case, the loadings are the individual components that are most important to the classification, i.e., the most important variables.
+
+## Alternative methods and built-in functions
+
+Althouth it goes behond the scope of this topic to explain how to compute PCA from a numerical point of view, it is important to understand that it require the decomposition of the matrix into eigenvalues and eigenvectors. There are two main techniques to achieve this, the most reliable is using SVD, while the same results may be often obtained using a correlation matrix. Here a few lines of code to show that result is the same for our simple example.
+
+The data:
+```{r, fig.show='hold'}
+Elements <- t(array(c(1,0,0,0,0,1,0,0,0,0,1,1), dim = c(4,3)))
+Compositions <- t(array(c(1,0,0, 0,1,0, 0,0,1, 1,1,0, 1,0,1, 0,1,1, 1,1,1, 0,0,0), dim = c(3,8)))
+M <- Compositions %*% Elements
+```
+
+and the scores:
+```{r, fig.show='hold'}
+C <- cor(M)
+S <- eigen(C)
+scores <- M %*% S$vectors[,1:2]
+par(mar=c(4,4,1,1))
+plot(scores[,1], scores[,2])
+```
+
+While it is important to understand the underlying concepts of PCA, most software for statistics have built-in functions. Here is an example of such, that relies on SVD.
+
+```{r, fig.show='hold'}
+pca <- prcomp(M, scale = TRUE)
+pca
+pc <- c(1,2)
+ev <- c(round(pca$sdev[pc[1]]/sum(pca$sdev)*100,0),
+        round(pca$sdev[pc[2]]/sum(pca$sdev)*100,0),
+        round(pca$sdev[pc[3]]/sum(pca$sdev)*100,0))
+par(mar=c(4,4,1,1))
+plot(pca$x[,pc[1]], pca$x[,pc[2]], col=labels, cex=0.7,
+     xlab=paste0("PC ", pc[1], " (", ev[pc[1]], "%)"),
+     ylab=paste0("PC ", pc[2], " (", ev[pc[2]], "%)"))
+```
+
+## Artificial spectra of 3 component mixtures
+
+### Perfect case
+
+In order to better illustrate untargetted analysis, artificial spectra of different compositions using 3 compounds are created. One of the 3 compound is set to be a biomarker and thus its distribution will be distinct among the two population A and B. 500 individuals are created for each population resulting in a 1000 times 768 matrix, where 768 are the number of variables of our artificial spectra.
+
+```{r, include=FALSE}
+#gist_create("/home/jul/git/visualizeR_root/visualizerExamples/datasets/pureElements.csv", description='pureElements testset for visualizeR/spectraExplorer', browse = FALSE)
+#gist_create("/home/jul/git/visualizeR_root/visualizerExamples/datasets/classMatrix.csv", description='classMatrix testset for visualizeR/spectraExplorer', browse = FALSE)
+#gist_create("/home/jul/git/visualizeR_root/visualizerExamples/datasets/classVector.csv", description='classVector testset for visualizeR/spectraExplorer', browse = FALSE)
+
+pureElements <- read.csv2('https://gist.githubusercontent.com/jwist/f65ee06ad11186d28dd52e0b66af135a/raw/ad4a0dcf05a0c6c5d8bf569efe8eb0fa0ab99ba5/pureElements.csv', sep = ',', dec = '.', header = FALSE)
+classMatrix <- read.csv2('https://gist.githubusercontent.com/jwist/208b86aec0d130a979fa2ea0b78b9a10/raw/172b76aec0c67c93e3ef7fae6888425de2183261/classMatrix.csv', sep = ',', dec = '.', header = FALSE)
+classVector <- factor(read.csv2('https://gist.githubusercontent.com/jwist/1908d524b9e60657c9a8c4582457b2e5/raw/1efbd11f08673b75879f768a7db3f34b68e247e3/classVector.csv', sep = ',', dec = ',', header = FALSE))
+```                  
+
+We can look at each individual spectra and a mixture of them:
+
+```{r, fig.show='hold', fig.width=6.8, fig.height=2}
+par(mar=c(2,2,1,1))
+
+for (i in 1:3) {
+  plot(as.numeric(pureElements[i,]), type='l', col = 1, main = paste("compound", i), xlab = "ppm", ylab = "relative intensity")
+}
+
+par(mar=c(2,2,1,1))
+plot(as.numeric(pureElements[1,]), type='l', col = 1, main = "mixture", xlab = "ppm", ylab = "relative intensity")
+lines(as.numeric(pureElements[2,]), col = 2)
+lines(as.numeric(pureElements[3,]), col = 3)
+```
+
+Artificial compositions should reflects the conditions stated above. A boxplot analysis should illustrate the distribution for each population of all biomarkers. Here are the first row of the composition matrix.
+
+```{r, fig.show='hold'}                                  
+#gist_create("/home/jul/git/visualizeR_root/visualizerExamples/datasets4/compositionMatrix.csv", description='compositionMatrix testset 4 for visualizeR/spectraExplorer', browse = FALSE)
+compositionMatrix <- read.csv2('https://gist.githubusercontent.com/jwist/f53e5bfde74e59ff1b4fdef7e546807c/raw/222eb1b2985f62137abfb23211f028c6d5cd050d/compositionMatrix.csv', sep = ',', dec = '.', header = FALSE)
+colnames(compositionMatrix) <- c("c1", "c2", "c3")
+knitr::kable(head(compositionMatrix[,1:3]))
+```
+
+And here are the boxplots
+
+```{r, fig.show='hold', fig.width=2.2, fig.height=2}
+par(mar=c(2,2,1,1))
+for (i in 1:3) {
+  boxplot(compositionMatrix[,i] ~ classVector)
+}
+```
+
+The second compound show a deviation in the mean from 9.4 to 9.5, while the standard deviation is similar. A density plot shows the same inforation differently. It is helpful to plot densities if we think about t-test and univariate analysis. Both boxplots and density plots give a hint about the effect size of the phenomenon that is being observed. The larger the mean deviation the larger the effect size and the **easier** it is to observe it.
+
+```{r, fig.show='hold', fig.width=2.2, fig.height=2}
+par(mar=c(2,2,1,1))
+F <- as.logical(as.numeric(classVector)-1)
+for (i in 1:3) {
+  plot(density(compositionMatrix[F,i]), main = "")
+  lines(density(compositionMatrix[-F,i]), col=2)
+}
+```
+
+Using the pure elements and the composition matrix it is possible to produce a data matrix (pretty much as we did with `M`)
+
+```{r, fig.show='hold'}  
+#gist_create("/home/jul/git/visualizeR_root/visualizerExamples/datasets4/dataset.csv", description='dataset4 testset for visualizeR/spectraExplorer', browse = FALSE)
+
+dataset <- read.csv2('https://gist.githubusercontent.com/jwist/c6c3d2c953db5217d5f93543b6f1ff37/raw/22277726f079e2e22af28a0eeccf75288e61439a/dataset.csv', sep = ',', dec = '.', header = FALSE)
+```
+
+A PCA is performed as described earlier.
+
+```{r, fig.show='hold', fig.width=3.4, fig.height=3.4}
+pc <- c(1,2)
+COLOR <- classVector
+pca <- prcomp(dataset)
+par(mar=c(4,4,1,1))
+plot(pca$x[,pc[1]], pca$x[,pc[2]], col=COLOR, cex=0.7,
+     xlab=paste0("PC ", pc[1], " (", ev[pc[1]], "%)"),
+     ylab=paste0("PC ", pc[2], " (", ev[pc[2]], "%)"))
+```
+
+```{r, fig.show='hold', fig.width=6.8, fig.height=2}
+op <- par(mar=c(2,2,1,1))
+plot(pca$rotation[,1], type='l', ylim=range(pca$rotation[,1:3]))
+plot(pca$rotation[,2], type='l', col=2)
+plot(pca$rotation[,3], type='l', col=3)
+par(op)
+```
+
+### Add some noise...
+
+```{r, fig.show='hold', fig.width=3.4, fig.height=3.4}
+noise <- matrix(runif(768 * 6), 6, 768)
+pureElements <- pureElements + noise * 1e8
+M <- as.matrix(compositionMatrix) %*% as.matrix(pureElements)
+```
+
+```{r, fig.show='hold', fig.width=6.8, fig.height=2}
+par(mar=c(2,2,1,1))
+
+for (i in 1:3) {
+  plot(as.numeric(pureElements[i,]), type='l', col = 1, main = paste("compound", i), xlab = "ppm", ylab = "relative intensity")
+}
+```
+
+```{r, fig.show='hold', fig.width=3.4, fig.height=3.4}
+pc <- c(1,2)
+COLOR <- classVector
+pca <- prcomp(M, scale. = TRUE)
+par(mar=c(2,2,1,1))
+plot(pca$x[,pc[1]], pca$x[,pc[2]], col=COLOR, cex=0.7,
+     xlab=paste0("PC ", pc[1], " (", ev[pc[1]], "%)"),
+     ylab=paste0("PC ", pc[2], " (", ev[pc[2]], "%)"))
+```
+
+```{r, fig.show='hold', fig.width=6.8, fig.height=2}
+op <- par(mar = c(2,2,1,1))
+plot(pca$rotation[,1] * pca$scale, type='l', ylim=range(pca$rotation[,1:3]*max(abs(pca$scale))))
+lines(as.numeric(pureElements[2,])/100 - 2e7, col = 'gray')
+plot(pca$rotation[,2] * pca$scale, type='l', col=2)
+lines(as.numeric(pureElements[2,])/100 - 2e7, col = 'gray')
+plot(pca$rotation[,3] * pca$scale, type='l', col=3)
+lines(as.numeric(pureElements[2,])/100 - 2e7, col = 'gray')
+par(op)
+```
+
+
+```{r}
+op <- par(mar=c(2,2,1,1))
+plot(cov(pca$x, dataset)[,1], type='l', ylim=range(pca$rotation[,1:3]), col=abs(cor(pca$x, dataset)))
+plot(cov(pca$x, dataset)[,2], type='l', col=abs(cor(pca$x, dataset)))
+plot(cov(pca$x, dataset)[,3], type='l', col=abs(cor(pca$x, dataset)))
+par(op)
+```
+
+
+```{r, fig.show='hold', fig.width=6.8, fig.height=4}
+par(mar=c(2,2,1,1))
+plot(pca$rotation[,1] * pca$scale, pca$rotation[,2] * pca$scale, col = 'gray')
+text(pca$rotation[,1] * pca$scale, pca$rotation[,2] * pca$scale, seq_along(pca$scale), cex = 0.6)
+```
+
+```{r, fig.show='hold', fig.width=6.8, fig.height=2}
+par(mar=c(2,2,1,1))
+plot(as.numeric(pureElements[2,])/100 - 2e7, col = 'gray', type = 'l')
+abline(v = 115, col = 'green')
+abline(v = 265)
+abline(v = 272)
+abline(v = 648)
+abline(v = 672)
+abline(v = 681)
+```
+
+### Sample down
+
+For time, cost and etical reasons it is generally not possible to sample large populations. To illustrate the effect of down sampling we can select only a few samples, 25, from our large study (1000). This is achieved readily using the `sample()` command built in R.
+
+```{r, fig.show='hold', fig.width=3.4, fig.height=3.4}
+FF <- sample(1:1000,25)
+M <-M[FF,]
+classVector <- classVector[FF]
+```
+
+The sampling still contains the variance of the original population and we can observe the spread of the point in the same space as before. Note, however how the distributionis skewed in the -x direction.
+
+```{r, echo = FALSE, fig.show='hold', fig.width=3.4, fig.height=3.4}
+pc <- c(1,2)
+COLOR <- classVector
+pca <- prcomp(M, scale. = TRUE)
+par(mar=c(2,2,1,1))
+plot(pca$x[,pc[1]], pca$x[,pc[2]], col=COLOR, cex=0.7,
+     xlab=paste0("PC ", pc[1], " (", ev[pc[1]], "%)"),
+     ylab=paste0("PC ", pc[2], " (", ev[pc[2]], "%)"))
+```
+
+The resulting loadings:
+
+```{r, echo = FALSE, fig.show='hold', fig.width=6.8, fig.height=2}
+op <- par(mar = c(2,2,1,1)) ## we might want to multiply the loadings by the sqrt of eign (which are pca$sdev)
+plot(pca$rotation[,1] * pca$scale, type='l', ylim=range(pca$rotation[,1:3]*max(abs(pca$scale))))
+lines(as.numeric(pureElements[2,])/100 - 2e7, col = 'gray')
+plot(pca$rotation[,2] * pca$scale, type='l', col=2)
+lines(as.numeric(pureElements[2,])/100 - 2e7, col = 'gray')
+plot(pca$rotation[,3] * pca$scale, type='l', col=3)
+lines(as.numeric(pureElements[2,])/100 - 2e7, col = 'gray')
+par(op)
+```
+
+First vs second loading:
+
+```{r, echo = FALSE, fig.show='hold', fig.width=6.8, fig.height=4}
+par(mar=c(2,2,1,1))
+plot(pca$rotation[,1] * pca$scale, pca$rotation[,2] * pca$scale, col = 'gray')
+text(pca$rotation[,1] * pca$scale, pca$rotation[,2] * pca$scale, seq_along(pca$scale), cex = 0.6)
+```
+
+Pure element 2 with putative important variables highlighted in black:
+
+```{r, echo = FALSE, fig.show='hold', fig.width=6.8, fig.height=2}
+par(mar=c(2,2,1,1))
+plot(as.numeric(pureElements[2,])/100 - 2e7, col = 'gray', type = 'l')
+abline(v = 115, col = 'green')
+abline(v = 265)
+abline(v = 272)
+abline(v = 648)
+abline(v = 672)
+abline(v = 681)
+```
+
+These results show that downsampling is not a problem if all the degree of variance are taken into account and if the original populations are well samples, i.e., the small sample has the same variance as the large sample.
+
+### Concluding remarks
+
+There are a lot more effects to be studied. For example the effect of missalignment. With this regard, please have a look to a recent and very promissing study^[https://www.nature.com/articles/s41467-017-01587-0]. As it often happen, what is noise a day becomes information the next day, when mathematical models exists to describe what is to be observed.
+
+> "There are three kind of lies: lies, damn lies and statistics"
