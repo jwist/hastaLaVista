@@ -77,11 +77,6 @@
 #' chart = list( list(chart=chart1, options=opts), list(chart=chart2, options=opts))
 #' d <- appendData( data = d, variableName = "multiChart", variable = chart, type = "multiChart")
 #'
-#' #saveJSON(d, "~/", "data.json")
-#' v <- new('visualization')
-#' push(v, 'data', d)
-#' #visualize(v)
-#'
 #' @export
 
 appendData <- function(data, variable, variableName, type) {
