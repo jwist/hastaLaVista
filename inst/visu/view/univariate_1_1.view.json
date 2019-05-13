@@ -4500,6 +4500,179 @@
         }
       ],
       "title": ""
+    },
+    {
+      "url": "modules/types/edition/rich_text/",
+      "configuration": {
+        "sections": {},
+        "groups": {
+          "group": [
+            {
+              "editable": [
+                [
+                  "isEditable"
+                ]
+              ],
+              "debouncing": [
+                0
+              ],
+              "modifyInVariable": [
+                []
+              ],
+              "storeInView": [
+                [
+                  "yes"
+                ]
+              ],
+              "autoHeight": [
+                []
+              ],
+              "bgColor": [
+                [
+                  255,
+                  229,
+                  153,
+                  1
+                ]
+              ],
+              "postit": [
+                [
+                  "yes"
+                ]
+              ],
+              "html": [
+                [
+                  "yes"
+                ]
+              ]
+            }
+          ]
+        }
+      },
+      "layers": {
+        "Default layer": {
+          "position": {
+            "left": 172,
+            "top": 20
+          },
+          "size": {
+            "width": 17,
+            "height": 38
+          },
+          "zIndex": 0,
+          "display": true,
+          "title": "",
+          "bgColor": [
+            255,
+            255,
+            255,
+            0
+          ],
+          "wrapper": true,
+          "created": true,
+          "name": "Default layer"
+        },
+        "admin": {
+          "position": {
+            "left": 0,
+            "top": 0
+          },
+          "size": {
+            "width": 20,
+            "height": 20
+          },
+          "zIndex": 0,
+          "display": false,
+          "title": "",
+          "bgColor": [
+            255,
+            255,
+            255,
+            0
+          ],
+          "wrapper": true,
+          "created": true,
+          "name": "admin"
+        },
+        "selectSpectra": {
+          "position": {
+            "left": 0,
+            "top": 0
+          },
+          "size": {
+            "width": 20,
+            "height": 20
+          },
+          "zIndex": 0,
+          "display": false,
+          "title": "",
+          "bgColor": [
+            255,
+            255,
+            255,
+            0
+          ],
+          "wrapper": true,
+          "created": true,
+          "name": "selectSpectra"
+        }
+      },
+      "id": 23,
+      "vars_in": [
+        {}
+      ],
+      "actions_in": [
+        {}
+      ],
+      "vars_out": [
+        {
+          "jpath": []
+        }
+      ],
+      "actions_out": [
+        {
+          "jpath": []
+        }
+      ],
+      "toolbar": {
+        "custom": [
+          [
+            {
+              "title": "",
+              "icon": "",
+              "action": "",
+              "position": "begin",
+              "color": [
+                100,
+                100,
+                100,
+                1
+              ]
+            }
+          ]
+        ],
+        "common": [
+          {
+            "toolbar": [
+              [
+                "Open Preferences"
+              ]
+            ]
+          }
+        ]
+      },
+      "css": [
+        {
+          "fontSize": [
+            ""
+          ],
+          "fontFamily": [
+            ""
+          ]
+        }
+      ],
+      "richtext": "<p>&nbsp;</p>\n\n<p><span style=\"font-family:Arial,Helvetica,sans-serif\"><span style=\"font-size:12px\">First double click on the table on the left to pick a trace to compare to.&nbsp;</span></span></p>\n\n<p>&nbsp;</p>\n\n<p><span style=\"font-family:Arial,Helvetica,sans-serif\"><span style=\"font-size:12px\">Second pick on another row to select a second trace</span></span></p>\n\n<p>&nbsp;</p>\n\n<p><span style=\"font-family:Arial,Helvetica,sans-serif\"><span style=\"font-size:12px\">Third, select a variable by clicking on the top spectra display</span></span></p>\n\n<p>&nbsp;</p>\n\n<p><span style=\"font-family:Arial,Helvetica,sans-serif\"><span style=\"font-size:12px\">Then you may select as much as rows as necessary using shift and control keys. The selected traces will appear in the second (low) spectra display.</span></span></p>\n\n<p>&nbsp;</p>\n\n<p><span style=\"font-family:Arial,Helvetica,sans-serif\"><span style=\"font-size:12px\">Select again a variable to have the univariate statistics computed for the selected samples</span></span></p>\n",
+      "title": ""
     }
   ],
   "variables": [
