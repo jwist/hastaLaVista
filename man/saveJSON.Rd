@@ -19,7 +19,7 @@ a json file to be passed to the https://github.com/npellet/visualizer
 \description{
 This function creates a JSON file from a list object using \pkg{jsonlite::toJSON()} function.
 It also create a time versioned of the file to ensure the data are not overwritten by the
-\pkg{visualizeR::push()} function.
+\pkg{hastaLaVista::push()} function.
 }
 \examples{
 
@@ -28,5 +28,5 @@ saveJSON(v, "~/", "view.json")
 
 }
 \seealso{
-\pkg{visualizeR::push()}
+\pkg{hastaLaVista::push()}
 }

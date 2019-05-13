@@ -23,7 +23,7 @@ setClass("server",
                            port = 5474,
                            path = "/",
                            protocole = "http://",
-                           rootDir = file.path( system.file(package = "visualizeR"), "visu" ),
+                           rootDir = file.path( system.file(package = "hastaLaVista"), "visu" ),
                            init = TRUE)
 
 )

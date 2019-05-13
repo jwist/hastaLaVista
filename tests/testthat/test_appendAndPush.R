@@ -13,13 +13,13 @@ test_that("append appends and push creates file", {
   v <- new("visualization")
   push(v, type = "data", d)
 
-  pathToFile <- file.path( system.file(package = "visualizeR"), "visu", "data", "data.json" )
+  pathToFile <- file.path( system.file(package = "hastaLaVista"), "visu", "data", "data.json" )
   expect_true(system(paste("ls", pathToFile)) == 0)
 
   view <- list()
   push(v, type = "view", view)
 
-  pathToFile <- file.path( system.file(package = "visualizeR"), "visu", "view", "view.json" )
+  pathToFile <- file.path( system.file(package = "hastaLaVista"), "visu", "view", "view.json" )
   expect_true(system(paste("ls", pathToFile)) == 0)
 
 })
