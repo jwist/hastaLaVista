@@ -31,5 +31,5 @@ push(v, type="data", d)
 
 }
 \seealso{
-\pkg{visualizeR::saveJSON()}
+\pkg{hastaLaVista::saveJSON()}
 }

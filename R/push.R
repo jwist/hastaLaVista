@@ -16,7 +16,7 @@
 #' v <- new("visualization")
 #' push(v, type="data", d)
 #'
-#' @seealso \pkg{visualizeR::saveJSON()}
+#' @seealso \pkg{hastaLaVista::saveJSON()}
 #' @export
 
 push <- function(visualization, type, list) {
@@ -38,6 +38,6 @@ push <- function(visualization, type, list) {
           }
   )
 
-  visualizeR::saveJSON(list, path, filename)
+  hastaLaVista::saveJSON(list, path, filename)
 
 }
