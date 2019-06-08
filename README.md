@@ -5,6 +5,5 @@
 # hastaLaVista
 R package that provide interactive graphical interface for metabolic profiling
 
-![HLV Logo](/inst/visu/bin/logo/chrome.png)
-![HLV Logo](/hastaLaVista/inst/visu/bin/logo/chrome.png)
-![HLV Logo](hastaLaVista/inst/visu/bin/logo/chrome.png)
+![HLV Logo](/inst/visu/bin/logo/hlvLogo.png)
+
