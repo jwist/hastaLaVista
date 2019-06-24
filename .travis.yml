@@ -11,4 +11,4 @@ r_github_packages:
 after_success:
   - Rscript -e 'covr::coveralls()'
   - Rscript -e 'lintr::lint_package()'
-  - Rscript -e 'covr::codecov()'
+  - Rscript -e 'covr::codecov(token = "5c887b3d-87c3-4d7f-beff-35826d2ef7c8")'
