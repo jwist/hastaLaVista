@@ -2230,7 +2230,7 @@
                       ""
                     ],
                     "zoom": [
-                      "none"
+                      "xy"
                     ],
                     "wheelAction": [
                       "none"
@@ -2527,7 +2527,8 @@
                   "rowNumbering",
                   "forceFitColumns",
                   "highlightScroll",
-                  "forgetLastActive"
+                  "forgetLastActive",
+                  "editable"
                 ]
               ],
               "copyPaste": [
@@ -2727,7 +2728,8 @@
           {
             "toolbar": [
               [
-                "Open Preferences"
+                "Open Preferences",
+                "Export Data"
               ]
             ]
           }
@@ -3018,7 +3020,7 @@
     }
   ],
   "configuration": {
-    "title": "hastaLaVista dataExplorer 1.1"
+    "title": "visualizeR dataExplorer 1.1"
   },
   "actionscripts": [
     {
