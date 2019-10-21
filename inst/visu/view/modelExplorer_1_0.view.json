@@ -169,7 +169,7 @@
           ]
         }
       ],
-      "title": "filter data with selected markers in score plot ",
+      "title": "",
       "zindex": 9
     },
     {
@@ -327,7 +327,7 @@
           },
           "zIndex": 0,
           "display": true,
-          "title": "Selected Data (select on score plot)",
+          "title": "selected data",
           "bgColor": [
             0,
             0,
@@ -424,7 +424,7 @@
           ]
         }
       ],
-      "title": "",
+      "title": "selected data",
       "zindex": 1
     },
     {
@@ -450,7 +450,7 @@
                       0
                     ],
                     "fullOut": [
-                      "none"
+                      "both"
                     ],
                     "legend": [
                       "none"
@@ -491,7 +491,7 @@
                       ]
                     ],
                     "label": [
-                      "PC 1 (17.06%)"
+                      "PC 1 (43.89%)"
                     ],
                     "beforeSpacing": [
                       "0"
@@ -523,7 +523,7 @@
                       ]
                     ],
                     "label": [
-                      "PC 2 (45.92%)"
+                      "PC 2 (16.869999999999997%)"
                     ],
                     "beforeSpacing": [
                       "0"
@@ -628,7 +628,7 @@
           },
           "zIndex": 0,
           "display": true,
-          "title": "Scatter plot (use Alt + draw to select points)",
+          "title": "scores plot (use Alt + draw to select points)",
           "bgColor": [
             0,
             0,
@@ -742,7 +742,7 @@
           ]
         }
       ],
-      "title": "Scatter plot (use Alt + draw to select points)",
+      "title": "scores plot (use Alt + draw to select points)",
       "zindex": 1
     },
     {
@@ -1109,7 +1109,7 @@
           },
           "zIndex": 0,
           "display": true,
-          "title": "Selected Spectra (current is blue line, hoovering on the table row)",
+          "title": "selected spectra",
           "bgColor": [
             0,
             0,
@@ -1218,7 +1218,7 @@
           ]
         }
       ],
-      "title": "Selected Spectra (current is blue line, hoovering on the table row)",
+      "title": "selected spectra",
       "zindex": 1
     },
     {
@@ -1666,7 +1666,7 @@
           },
           "zIndex": 0,
           "display": true,
-          "title": "Loadings",
+          "title": "loadings",
           "bgColor": [
             0,
             0,
@@ -1760,7 +1760,7 @@
           ]
         }
       ],
-      "title": "Loadings",
+      "title": "loadings",
       "zindex": 1
     },
     {
@@ -3503,7 +3503,7 @@
           ]
         }
       ],
-      "richtext": "<p><span style=\"font-size:16px\">Using the lasso select samples.&nbsp;</span></p>\n\n<p><span style=\"font-size:16px\">Using the button below calculate the STOCSY using the selected samples.</span></p>\n\n<p><span style=\"font-size:16px\">Use Alt-key and click on the spectra trace (bottom trace). When hovering over the spectra, a black circle should appear. When Alt+click is used, this variable is selected and the STOCSY trace is displayed (middle trace).</span></p>\n\n<p>&nbsp;</p>\n\n<p><span style=\"font-size:16px\">At any moment you can use double click on the spectra trace to reset the zoom. Double click on the STOCSY will reset its zoom as well independently of the spectra.</span></p>\n",
+      "richtext": "<p>Choose the model to display by selecting a row in the &quot;model selector&quot; table. Scores and loadings will be displayed.</p>\n\n<p>&nbsp;</p>\n\n<p>Use&nbsp;the lasso tool (Alt-Draw) to select scores. Selected data will appear in the table on the left.</p>\n\n<p>&nbsp;</p>\n\n<p>The &quot;calculate STOCSY&quot; button will perform the calculation using the selected data.</p>\n\n<p>&nbsp;</p>\n\n<p>Select spectra to be display by clicking on the row in the &quot;selected data&quot; table. Multiple row can be selected using shift and ctrl keys.</p>\n\n<p>&nbsp;</p>\n\n<p>Zoom in the spectra by using the mouse wheel (Y) and the left-click button (X).&nbsp;</p>\n\n<p>&nbsp;</p>\n\n<p><strong>Zoom out by double-clicking on the spectra.</strong></p>\n\n<p>&nbsp;</p>\n\n<p>When hovering over the spectra, a black circle should appear.&nbsp;Use Alt-key and right-click on the spectra to select a driver variable&nbsp;and display the corresponding STOCSY trace.</p>\n\n<p>&nbsp;</p>\n\n<p>The spectra displayer consists in 3 grayed area used to manipulate loadings (top), STOCSY (middle) and spectra (bottom). Zooming in and out in the spectra area will affect all traces, while STOCSY and loadings can be manipulated independently.</p>\n",
       "title": "",
       "zindex": 1
     },
