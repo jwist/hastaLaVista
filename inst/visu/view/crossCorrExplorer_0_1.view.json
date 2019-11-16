@@ -1291,8 +1291,8 @@
             "top": 44
           },
           "size": {
-            "width": 72,
-            "height": 16
+            "width": 61,
+            "height": 49
           },
           "zIndex": 0,
           "display": true,
@@ -1325,7 +1325,7 @@
             255,
             0
           ],
-          "wrapper": true,
+          "wrapper": false,
           "created": true,
           "name": "Default layer"
         }
