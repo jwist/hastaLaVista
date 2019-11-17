@@ -20,6 +20,8 @@ Some analysis are very common and performed by many researchers. Thus, generic v
 
 Notebook already offer this possibility, however notebooks only provide basic feature for visualizing results, usually as plain static figures. Unlike notebooks, vistas are complex web applications that can provide a much enhanced interactivity to display and play with results.
 
+**hastaLaVista is developped and tested using Chrome, although it is known to work with other browser. In the case that a feature is not working as expected please try using Chrome before filling an issue**
+
 ## installation
 
 Make sure that *devtools* package is installed and run the following command in the R console. 
@@ -60,7 +62,7 @@ To quickly test the package a very simple test demo is available. Just type the 
 
 if you are using an alternative webserver, use the following url to test the demo view
 
-`http://127.0.0.1:5474/?viewURL=http://127.0.0.1:5474/view/test.view.json&dataURL=http://127.0.0.1:5474/data/test.data.json`
+    http://127.0.0.1:5474/?viewURL=http://127.0.0.1:5474/view/test.view.json&dataURL=http://127.0.0.1:5474/data/test.data.json
 
 If your installation is working you should be able to see this:
 
@@ -68,4 +70,34 @@ If your installation is working you should be able to see this:
 
 ### bariatric rat demo
 
+To get a feeling of the interface, use the following lines to explore a demo analysis performed on 59 urine sample of rats.
+
+    v4 <- new("visualization")
+    v4@data <- "rat_bariatric_dataExplorer.data.json"
+    v4@view <- "dataExplorer_1_1.view.json"
+    visualize(v4)
+
+if you are using an alternative webserver, use the following url to test the demo view
+    
+    http://127.0.0.1:5474/?viewURL=http://127.0.0.1:5474/view/dataExplorer_1_1.view.json&dataURL=http://127.0.0.1:5474/data/rat_bariatric_dataExplorer.data.json
+
+The result should look like this:
+
 ![HLV test demo](/inst/visu/bin/help/dataExplorer_1_1.gif)
+
+### real start
+
+The previous demo illustrated the last two points mentioned in the introduction, i.e., using existing results (data.json). The examples in this section illustrate how to run the analysis in R and then push the outcome into a data.json file for visualization. 
+
+For examples are provided. Multivariate statistics is performed using the *MetaboMate* R package. Please refer to its repository for installation at https::/github.com/kimsche/MetaboMate. *Metabomate* itself requires the instalation of 3 packages from Bioconductor (https://bioconductor.org). The 3 packages have to be installed using the bioductor package manager before *MetaboMate* could be installed.
+
+The following command should work once BiocManger has been installed (https://bioconductor.org/install/)
+
+    BiocManager::install(c("MassSpecWavelet", "impute", "pcaMethods"))
+
+1. https://gist.githubusercontent.com/jwist/289f1fa14f8583cf7a062bc9c9b34df5/raw/27400cda47546c4c9df4a2650c9a96d5d72bc550/BariatricRats_dataExplorer.r
+1. https://gist.githubusercontent.com/jwist/43854bfe60c0b245c8df794502b88f6c/raw/d9133642645be3efbd65845eb7a55cdd1cbff937/BariatricRats_metaboscope.r
+1. https://gist.githubusercontent.com/jwist/517323d9e3176c9f9509e0f2293cba3c/raw/67f9e1305879c8712d99a483dcccbe7556bfe7f3/BariatricRats_scoresExplorer.r
+1. https://gist.githubusercontent.com/jwist/88eef3bdc73f2991b18396a533ca96c5/raw/0a4505e4907519fec7243eed4eeac0a21003488f/BariatricRats_univariate.r
+
+
