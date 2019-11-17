@@ -65,3 +65,7 @@ if you are using an alternative webserver, use the following url to test the dem
 If your installation is working you should be able to see this:
 
 ![HLV test demo](/inst/visu/bin/help/demoView.png)
+
+### bariatric rat demo
+
+![HLV test demo](/inst/visu/bin/help/dataExplorer_1_1.gif)
