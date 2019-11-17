@@ -24,13 +24,13 @@ Notebook already offer this possibility, however notebooks only provide basic fe
 
 Make sure that *devtools* package is installed and run the following command in the R console. 
 
-`devtools::install_github("jwist/hastaLaVista")`
+    devtools::install_github("jwist/hastaLaVista")
 
 ## post-installation
 
 *hastaLaVista* will convert the results of the analysis into a JSON object and store it into a file. Both data and the vista files are served by the webserver and are therefore stored in the folder where the package is installed, usually within the home folder of the user. If data are large it may be necessary to clean the old dataset periodically. To find out where the data are being stored use the following command (make sure that the library is loaded):
 
-`path.package("hastaLaVista")`
+    path.package("hastaLaVista")
 
 This will ouput the path to the root directory of the package. The data are stored in the /visu/data folder while the views (vistas) will be found in the /visu/views files.
 
@@ -40,7 +40,7 @@ This will ouput the path to the root directory of the package. The data are stor
 
 Some users may feel happier by using the webserver of their choice. Once the visualization object is ready in R, the print() function will output the URL of for the visualization. To use an alternative webserver, just serve the /visu folder. For example, go into the visu folder and type the following command:
 
-`python3 -m http.server 5474 --bind localhost`
+    python3 -m http.server 5474 --bind localhost
 
 if you prefer to use python build in webserver. This is particularily usefull to visualize old results without having to fire an R session.
 
