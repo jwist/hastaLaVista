@@ -43,3 +43,25 @@ Some users may feel happier by using the webserver of their choice. Once the vis
 `python3 -m http.server 5474 --bind localhost`
 
 if you prefer to use python build in webserver. This is particularily usefull to visualize old results without having to fire an R session.
+
+### large files
+
+To avoid loading very large dataset into the browser it is possible to individually store original files (spectra) within the /visu/data/json folder. This way the vista will be able to access the original data on the fly using their URL. To do so it is mandatory that the files are stored within the reach of the webserver, in this case within its root folder /visu
+
+## quick start
+
+To quickly test the package a very simple test demo is available. Just type the following commands in the R console.
+
+`library(hastaLaVista)`
+`v <- new("visualization")`
+`v@data <- "test.data.json"`
+`v@view <- "test.view.json"`
+`visualize(v)`
+
+if you are using an alternative webserver, use the following url to test the demo view
+
+`http://127.0.0.1:5474/?viewURL=http://127.0.0.1:5474/view/test.view.json&dataURL=http://127.0.0.1:5474/data/test.data.json`
+
+If your installation is working you should be able to see this:
+
+![HLV test demo](/inst/visu/bin/help/demoView.png)
