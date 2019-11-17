@@ -87,17 +87,103 @@ The result should look like this:
 
 ### real start
 
-The previous demo illustrated the last two points mentioned in the introduction, i.e., using existing results (data.json). The examples in this section illustrate how to run the analysis in R and then push the outcome into a data.json file for visualization. 
+The previous demo illustrated the last two points mentioned in the introduction, i.e., the visualization of existing results (data.json). The examples in this section illustrate how to run the analysis in R and then push the outcome into a data.json file for visualization. 
 
-For examples are provided. Multivariate statistics is performed using the *MetaboMate* R package. Please refer to its repository for installation at https::/github.com/kimsche/MetaboMate. *Metabomate* itself requires the instalation of 3 packages from Bioconductor (https://bioconductor.org). The 3 packages have to be installed using the bioductor package manager before *MetaboMate* could be installed.
+Four examples are provided for untargetted analysis of metabolic profiles. 
 
-The following command should work once BiocManger has been installed (https://bioconductor.org/install/)
+**Multivariate statistics is performed using the *MetaboMate* R package. Please refer to its repository for installation at https::/github.com/kimsche/MetaboMate. *Metabomate* itself requires the instalation of 3 packages from Bioconductor (https://bioconductor.org). The 3 packages have to be installed using the bioductor package manager before *MetaboMate* could be installed.**
+
+The following command should work once BiocManager has been installed (https://bioconductor.org/install/)
 
     BiocManager::install(c("MassSpecWavelet", "impute", "pcaMethods"))
 
 1. https://gist.githubusercontent.com/jwist/289f1fa14f8583cf7a062bc9c9b34df5/raw/27400cda47546c4c9df4a2650c9a96d5d72bc550/BariatricRats_dataExplorer.r
-1. https://gist.githubusercontent.com/jwist/43854bfe60c0b245c8df794502b88f6c/raw/d9133642645be3efbd65845eb7a55cdd1cbff937/BariatricRats_metaboscope.r
 1. https://gist.githubusercontent.com/jwist/517323d9e3176c9f9509e0f2293cba3c/raw/67f9e1305879c8712d99a483dcccbe7556bfe7f3/BariatricRats_scoresExplorer.r
+1. https://gist.githubusercontent.com/jwist/43854bfe60c0b245c8df794502b88f6c/raw/d9133642645be3efbd65845eb7a55cdd1cbff937/BariatricRats_metaboscope.r
 1. https://gist.githubusercontent.com/jwist/88eef3bdc73f2991b18396a533ca96c5/raw/0a4505e4907519fec7243eed4eeac0a21003488f/BariatricRats_univariate.r
 
+## preparing results for visualization
 
+The results of the analysis must be reshaped to be used in the `visualizeR` pipeline. For the first example presented in the previous section at least the following information must be available.
+
+* a vector `ID` of **unique** IDs that is used to identify each entry or sample
+* a vector `group` that describes to which class each sample belong
+* a table `metadata` of information that belong to each sample and that will be displayed 
+* a matrix `x` that contains the data. Each row represents a sample, each columns a variable
+* a vector `x_axis` that contains the names or values of each variable
+
+A demo dataset is available with *hastaLaVista*. A complete description of the dataset can be found here: https://www.frontiersin.org/articles/10.3389/fmicb.2011.00183
+
+### load a dataset
+
+As a starter we recommend to use the demo dataset provided with *hastaLaVista* package. This dataset `bariatric` containes a matrix `bariatricRat$X` with the original data (the spectra) and a vector `bariatricRat$ppm` that containes information about the x-axis. Finally, it containes a data.frame `bariatricRat$metadata` with metadata that can be used to explore and colour the data.
+
+```r
+data("bariatricRat")
+X <- bariatricRat$X
+ppm <- bariatricRat$ppm
+metadata <- bariatricRat$metadata
+```
+### label the information
+
+Here we just make sure that we have all the information that is needed by the vista. The name of the variable are self-explanatory. ID, group, metadata, x and color have the same number of rows, one row for each sample (observation). x and x_axis have the same number of columns, one for each measured variables. The metadata has an arbitrary number of columns.
+
+```r
+ID <- metadata$Sample.Label
+group <- metadata$Class
+metadata <- data.frame(metadata)
+x <- matrix(X, dim(X)[1], dim(X)[2])
+x_axis <- as.numeric( ppm )
+color = sapply(group, function(x) getColor2(as.character(x)))
+```
+
+Once the information is correctly labelled we create a data.frame. **The name of the variables within the data.frame must NOT be changed, since the vista is expecting these latters under those pre-defined names (ID, group, color, _highlight, dataMatrix, metadata). 
+
+```r
+bariatric <- data.frame(ID = ID,
+                group = group,
+                color = color,
+                "_highlight" = seq_along(group) - 1,
+                dataMatrix = I(matrix( c(rbind(repRow(x_axis, nrow(x)), x)), nrow(x), ncol(x)*2)),
+                metadata = I(metadata),
+                check.names = FALSE)
+```
+The _highlight variable contains unique identifiers for each samples, here a simple number is given. **Make sure that values in this vector are unique**
+
+### append the data for export
+
+Once the variable that must be converted to JSON objects are ready we will add them to a list. This list will be exported as a single JSON object containing all the variables, i.e., all the items of the list. **Make sure that the list is empty, otherwise the `appendData()` function will just add another item to the end of the existing list**
+
+```r
+d <- list()
+d <- appendData(data = d, variableName = "data", variable = bariatric, type = "table")
+```
+This command will add an item `bariatric` (arbitrary name) to the list that will be named "data" (mantatory name). Again it is important to note that the vista is expecting an object `data` that contains objects `ID`, `group`, `color`, `_highlight`, `dataMatrix` and `metadata`.
+
+## configure visualization and write the data.json
+
+It is time now to setup the visualization. Therefore an object `v` is created of class visualization. The `v@view` allows to define the vista (view) that will be served. `v@data` allows to give a name to the data.json file that will be used to serve the data. The `push()` function takes the list `d` and write the json file into the pathToRootDirectory/visu/data folder (see previous section to find out where this folder is). Finally the function `visualize()` will start a webserver and point your default browser to the correct local URL. The function `print(v)` will display the URL if an alternate webserver is used.
+
+```r
+v <- new("visualization")
+v@view <- "spectraExplorer3.1.view.json"
+v@data <- "spectraExplorer3.data.json"
+push(v, type="data", d)
+visualize(v)
+```
+**Since both the view and data files are stored on the disk, this URL can be later used again to visualize the results without running the analysis again. Just make sure that a webserver is started.**
+
+To run again the visualization from R without re-running the anlysis, just use the following command instead:
+
+```r
+v <- new("visualization")
+v@view <- "spectraExplorer3.1.view.json"
+v@data <- "spectraExplorer3.data.json"
+visualize(v)
+```
+
+We just remove the `push()` command to avoid overwritting the data json file.
+
+## acknowledgements
+
+The author of this package wishes to thank Luc Patiny and Elaine Holmes for their invaluable inputs during years of collaborations, Jia Li and Hutan Ashrafian for provision of the urine spectra, Norman Pellet for his great contribution to our research group as an original contributor to the visualizer project (https://github.com/npellet/visualizer), Michael Zasso and Daniel Kostro as current contributors to the visualizer, Torben Kimhoffer for his advice on multivariate analysis, Andrés Mauricio Castillo and Alejandro Bolaños for their help with my first steps using javaScript.
