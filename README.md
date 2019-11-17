@@ -20,7 +20,7 @@ Some analysis are very common and performed by many researchers. Thus, generic v
 
 Notebook already offer this possibility, however notebooks only provide basic feature for visualizing results, usually as plain static figures. Unlike notebooks, vistas are complex web applications that can provide a much enhanced interactivity to display and play with results.
 
-**hastaLaVista is developped and tested using Chrome, although it is known to work with other browser. In the case that a feature is not working as expected please try using Chrome before filling an issue**
+**hastaLaVista is developed and tested using Chrome, although it is known to work with other browser. In the case that a feature is not working as expected please try using Chrome before filling an issue**
 
 ## installation
 
@@ -30,11 +30,11 @@ Make sure that *devtools* package is installed and run the following command in 
 
 ## post-installation
 
-*hastaLaVista* will convert the results of the analysis into a JSON object and store it into a file. Both data and the vista files are served by the webserver and are therefore stored in the folder where the package is installed, usually within the home folder of the user. If data are large it may be necessary to clean the old dataset periodically. To find out where the data are being stored use the following command (make sure that the library is loaded):
+*hastaLaVista* will convert the results of the analysis into a JSON object and store it into a file. Both data and the vista files are served by the webserver and are therefore stored in the folder where the package is installed, usually within the home folder of the user. If data are large it may be necessary to clean the old datasets periodically. To find out where the data are being stored use the following command (make sure that the library is loaded):
 
     path.package("hastaLaVista")
 
-This will ouput the path to the root directory of the package. The data are stored in the /visu/data folder while the views (vistas) will be found in the /visu/views files.
+This will print the path to the root directory of the package. The data are stored in the /visu/data folder while the views (vistas) will be found in the /visu/views files.
 
 **Because the files are stored, it is later possible visualize the data in the browser even without having an active R session (See next section to use an alternative webserver**
 
@@ -44,11 +44,11 @@ Some users may feel happier by using the webserver of their choice. Once the vis
 
     python3 -m http.server 5474 --bind localhost
 
-if you prefer to use python build in webserver. This is particularily usefull to visualize old results without having to fire an R session.
+if you prefer to use python build in webserver. This is particularly useful to visualize old results without having to fire an R session.
 
 ### large files
 
-To avoid loading very large dataset into the browser it is possible to individually store original files (spectra) within the /visu/data/json folder. This way the vista will be able to access the original data on the fly using their URL. To do so it is mandatory that the files are stored within the reach of the webserver, in this case within its root folder /visu
+To avoid loading very large datasets into the browser it is possible to individually store original files (spectra) within the /visu/data/json folder. This way the vista will be able to access the original data on the fly using their URL. To do so it is mandatory that the files are stored within the reach of the webserver, in this case within its root folder /visu
 
 ## quick start
 
@@ -89,13 +89,15 @@ The result should look like this:
 
 The previous demo illustrated the last two points mentioned in the introduction, i.e., the visualization of existing results (data.json). The examples in this section illustrate how to run the analysis in R and then push the outcome into a data.json file for visualization. 
 
-Four examples are provided for untargetted analysis of metabolic profiles. 
+Four examples are provided for untargeted analysis of metabolic profiles. 
 
-**Multivariate statistics is performed using the *MetaboMate* R package. Please refer to its repository for installation at https::/github.com/kimsche/MetaboMate. *Metabomate* itself requires the instalation of 3 packages from Bioconductor (https://bioconductor.org). The 3 packages have to be installed using the bioductor package manager before *MetaboMate* could be installed.**
+**Multivariate statistics is performed using the *MetaboMate* R package. Please refer to its repository for installation at https::/github.com/kimsche/MetaboMate. *Metabomate* itself requires the installation of 3 packages from Bioconductor (https://bioconductor.org). The 3 packages have to be installed using the bioductor package manager before *MetaboMate* could be installed.**
 
 The following command should work once BiocManager has been installed (https://bioconductor.org/install/)
 
     BiocManager::install(c("MassSpecWavelet", "impute", "pcaMethods"))
+
+Four examples to explore spectra according to metadata, to explores data from scores, to help with identification of reference compounds and to check univariate statistics after multivariate analysis.
 
 1. https://gist.githubusercontent.com/jwist/289f1fa14f8583cf7a062bc9c9b34df5/raw/27400cda47546c4c9df4a2650c9a96d5d72bc550/BariatricRats_dataExplorer.r
 1. https://gist.githubusercontent.com/jwist/517323d9e3176c9f9509e0f2293cba3c/raw/67f9e1305879c8712d99a483dcccbe7556bfe7f3/BariatricRats_scoresExplorer.r
@@ -116,7 +118,7 @@ A demo dataset is available with *hastaLaVista*. A complete description of the d
 
 ### load a dataset
 
-As a starter we recommend to use the demo dataset provided with *hastaLaVista* package. This dataset `bariatric` containes a matrix `bariatricRat$X` with the original data (the spectra) and a vector `bariatricRat$ppm` that containes information about the x-axis. Finally, it containes a data.frame `bariatricRat$metadata` with metadata that can be used to explore and colour the data.
+As a starter we recommend to use the demo dataset provided with *hastaLaVista* package. This dataset `bariatric` contains a matrix `bariatricRat$X` with the original data (the spectra) and a vector `bariatricRat$ppm` that contains information about the x-axis. Finally, it contains a data.frame `bariatricRat$metadata` with metadata that can be used to explore and colour the data.
 
 ```r
 data("bariatricRat")
@@ -137,7 +139,7 @@ x_axis <- as.numeric( ppm )
 color = sapply(group, function(x) getColor2(as.character(x)))
 ```
 
-Once the information is correctly labelled we create a data.frame. **The name of the variables within the data.frame must NOT be changed, since the vista is expecting these latters under those pre-defined names (ID, group, color, _highlight, dataMatrix, metadata). 
+Once the information is correctly labelled we create a data.frame. **The name of the variables within the data.frame must NOT be changed, since the vista is expecting these latter under those pre-defined names (ID, group, color, _highlight, dataMatrix, metadata). 
 
 ```r
 bariatric <- data.frame(ID = ID,
@@ -158,11 +160,11 @@ Once the variable that must be converted to JSON objects are ready we will add t
 d <- list()
 d <- appendData(data = d, variableName = "data", variable = bariatric, type = "table")
 ```
-This command will add an item `bariatric` (arbitrary name) to the list that will be named "data" (mantatory name). Again it is important to note that the vista is expecting an object `data` that contains objects `ID`, `group`, `color`, `_highlight`, `dataMatrix` and `metadata`.
+This command will add an item `bariatric` (arbitrary name) to the list that will be named "data" (mandatory name). Again it is important to note that the vista is expecting an object `data` that contains objects `ID`, `group`, `color`, `_highlight`, `dataMatrix` and `metadata`.
 
 ## configure visualization and write the data.json
 
-It is time now to setup the visualization. Therefore an object `v` is created of class visualization. The `v@view` allows to define the vista (view) that will be served. `v@data` allows to give a name to the data.json file that will be used to serve the data. The `push()` function takes the list `d` and write the json file into the pathToRootDirectory/visu/data folder (see previous section to find out where this folder is). Finally the function `visualize()` will start a webserver and point your default browser to the correct local URL. The function `print(v)` will display the URL if an alternate webserver is used.
+It is time now to setup the visualization. Therefore an object `v` is created of class visualization. The `v@view` allows to define the vista (view) that will be served. `v@data` allows to give a name to the data.json file that will be used to serve the data. The `push()` function takes the list `d` and write the json file into the pathToRootDirectory/visu/data folder (see previous section to find out where this folder is https://github.com/jwist/hastaLaVista#post-installation). Finally the function `visualize()` will start a webserver and point your default browser to the correct local URL. The function `print(v)` will display the URL if an alternate webserver is used.
 
 ```r
 v <- new("visualization")
@@ -173,7 +175,7 @@ visualize(v)
 ```
 **Since both the view and data files are stored on the disk, this URL can be later used again to visualize the results without running the analysis again. Just make sure that a webserver is started.**
 
-To run again the visualization from R without re-running the anlysis, just use the following command instead:
+To run again the visualization from R without re-running the analysis, just use the following command instead:
 
 ```r
 v <- new("visualization")
@@ -181,8 +183,7 @@ v@view <- "spectraExplorer3.1.view.json"
 v@data <- "spectraExplorer3.data.json"
 visualize(v)
 ```
-
-We just remove the `push()` command to avoid overwritting the data json file.
+We just remove the `push()` command to avoid overwriting the data json file.
 
 ## acknowledgements
 
