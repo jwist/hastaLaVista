@@ -52,11 +52,11 @@ To avoid loading very large dataset into the browser it is possible to individua
 
 To quickly test the package a very simple test demo is available. Just type the following commands in the R console.
 
-`library(hastaLaVista)`
-`v <- new("visualization")`
-`v@data <- "test.data.json"`
-`v@view <- "test.view.json"`
-`visualize(v)`
+    library(hastaLaVista)
+    v <- new("visualization")
+    v@data <- "test.data.json"
+    v@view <- "test.view.json"
+    visualize(v)
 
 if you are using an alternative webserver, use the following url to test the demo view
 
