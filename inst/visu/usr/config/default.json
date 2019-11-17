@@ -418,33 +418,6 @@
 			{
 				"type": "blankview",
 				"label": "Blank view"
-			},
-			{
-				"type": "pouchloadview",
-				"label": "Load local view"
-			},
-			{
-				"type": "pouchsaveview",
-				"label": "Save local view"
-			},
-			{
-				"type": "pouchloaddata",
-				"label": "Load local data"
-			},
-			{
-				"type": "pouchsavedata",
-				"label": "Save local data"
-			},
-			{
-				"type": "couchshare",
-				"label": "Share view",
-				"couchUrl": "https://visualizer.epfl.ch",
-				"tinyUrl": "https://visualizer.epfl.ch/tiny",
-				"database": "x"
-			},
-			{
-				"type": "feedback",
-				"label": "Feedback"
 			}
 		]
 	}
