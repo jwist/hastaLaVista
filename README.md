@@ -11,16 +11,16 @@ R package that provide interactive graphical interface for metabolic profiling
 
 ## introduction
 
-This package enables 
-1. the convert R variables into a JSON object and save it as a file 
+This package allows 
+1. to convert R variables into a JSON object and save it as a file 
 1. to select a view (vista) file for the visualization of the data
 1. to start a webserver with both data and view files
 
-Vistas (views) are files that contains the description of how to visualize data. The can be regarded as a notebook that transforms and displays information. Notebook, and vistas, can read data from an external file. So if data are updated, the analysis can be easily computed again. It also allows to readily share a data analysis pipeline to others. 
+Vistas (views) are files that contains the description of how to visualize data or results. This can be regarded as a notebook (jupyter) that transforms and displays information. Notebooks, and vistas, can read data from an external file. So if data is updated, the analysis can easily be computed again. It also allows to readily share a data analysis pipeline with others. 
 
 Some analysis are very common and performed by many researchers. Thus, generic vistas could be used by many to process and visualize their own results.
 
-Notebook already offer this possibility, however notebooks only provide basic feature for visualizing results, usually as plain static figures. Unlike notebooks, vistas are complex web applications that can provide a much enhanced interactivity to display and play with results.
+Notebooks already offer this possibility, however notebooks only provide basic features for visualizing results, usually as plain static figures. Unlike notebooks, vistas are complex web applications that can provide a much enhanced interactivity to display and play with results.
 
 **hastaLaVista is developed and tested using Chrome, although it is known to work with other browser. In the case that a feature is not working as expected please try using Chrome before filling an issue**
 
@@ -38,7 +38,7 @@ Make sure that *devtools* package is installed and run the following command in 
 
 This will print the path to the root directory of the package. The data are stored in the /visu/data folder while the views (vistas) will be found in the /visu/views files.
 
-**Because the files are stored, it is later possible visualize the data in the browser even without having an active R session (See next section to use an alternative webserver**
+**Because the files are stored, it is later possible to visualize the data in the browser even without having an active R session (See next section to use an alternative webserver**
 
 ### alternative webserver
 
@@ -46,7 +46,7 @@ Some users may feel happier by using the webserver of their choice. Once the vis
 
     python3 -m http.server 5474 --bind localhost
 
-if you prefer to use python build in webserver. This is particularly useful to visualize old results without having to fire an R session.
+if you prefer to use python build in webserver. This is particularly useful to visualize old results without having to fire up an R session.
 
 ### large files
 
@@ -72,7 +72,7 @@ If your installation is working you should be able to see this:
 
 ### bariatric rat demo
 
-To get a feeling of the interface, use the following lines to explore a demo analysis performed on 59 urine sample of rats.
+To get a feeling of the interface, use the following lines to explore a demo analysis performed on 59 urine samples of rats.
 
     v4 <- new("visualization")
     v4@data <- "rat_bariatric_dataExplorer.data.json"
@@ -140,7 +140,6 @@ x <- matrix(X, dim(X)[1], dim(X)[2])
 x_axis <- as.numeric( ppm )
 color = sapply(group, function(x) getColor2(as.character(x)))
 ```
-
 Once the information is correctly labelled we create a data.frame. **The name of the variables within the data.frame must NOT be changed, since the vista is expecting these latter under those pre-defined names (ID, group, color, _highlight, dataMatrix, metadata). 
 
 ```r
