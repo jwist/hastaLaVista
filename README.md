@@ -1,5 +1,7 @@
 [![Build Status](https://travis-ci.org/jwist/hastaLaVista.svg?branch=master)](https://travis-ci.org/jwist/hastaLaVista)
 [![Coverage Status](https://coveralls.io/repos/github/jwist/hastaLaVista/badge.svg?branch=master)](https://coveralls.io/github/jwist/hastaLaVista?branch=master)
+[![DOI](https://zenodo.org/badge/186240224.svg)](https://zenodo.org/badge/latestdoi/186240224)
+
 
 
 # hastaLaVista
