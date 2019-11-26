@@ -1,2 +1,9 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
+.travis.yml
+.github
+codecov.yml
+vendor.yml
+data-raw
+.gitignore
+inst/visu/lib/flot/Makefile

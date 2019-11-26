@@ -52,6 +52,19 @@ if you prefer to use python build in webserver. This is particularly useful to v
 
 To avoid loading very large datasets into the browser it is possible to individually store original files (spectra) within the /visu/data/json folder. This way the vista will be able to access the original data on the fly using their URL. To do so it is mandatory that the files are stored within the reach of the webserver, in this case within its root folder /visu
 
+### use local folder
+
+Maybe you are using a folder to store the inputs and outputs of your analysis. In this case, you may prefer to have the data (and the view, if you modify it) stored locally instead of filling the package folder with data.
+The method `useThisFolder()` allows the user to create a symbolic link within the webserver root directory (pathToPackage/visu/) that points to the current folder.
+
+    v <- new("visualization")
+    useThisFolder(v)
+    v@data <- "test.data.json"
+    v@view <- "test.view.json"
+    visualize(v)
+
+** The command will create a symbolic link to current working directory ** Use `getwd()` to check in what directory you are currently working
+
 ## quick start
 
 To quickly test the package a very simple test demo is available. Just type the following commands in the R console.
