@@ -13,7 +13,7 @@ Interactive data visualization is a must to develop attractive tools for a broad
 
 [`visualizer`][visu-link] needs two files, a data.json file that contains the data or result to be displayed in json format and a view.file that contains the description of how to display the data.
 
-Both those files can be produced by an R script and pushed to the webpage. This is what [`hastaLaVista`][hlv-link]  <img src="/hastaLaVista/assets/hlvLogo.png" alt="drawing" width="50px"> R-package.
+Both those files can be produced by an R script and pushed to the webpage. This is what [`hastaLaVista`][hlv-link]  <img src="/hastaLaVista/assets/hlvLogo.png" alt="drawing" width="50px"/> R-package.
 
 ### getting started
 
