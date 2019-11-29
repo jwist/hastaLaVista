@@ -11,11 +11,11 @@ Interactive data visualization is a must to develop attractive tools for a broad
 
 [`visualizer`][visu-link] needs two files, a data.json file that contains the data or result to be displayed in json format and a view.file that contains the description of how to display the data.
 
-Both those files can be produced by an R script and pushed to the webpage. This is what [`hastaLaVista`][hlv-link]  <img src="/visualizeR/assets/hlvLogo.png" alt="drawing" style="width:50px;"/> R-package.
+Both those files can be produced by an R script and pushed to the webpage. This is what [`hastaLaVista`][hlv-link]  <img src="/hastaLaVista/assets/hlvLogo.png" alt="drawing" style="width:50px;"/> R-package.
 
 ### getting started
 
-First install the latest release of <img src="/visualizeR/assets/hlvLogo.png" alt="drawing" style="width:50px;"/> using devtools. 
+First install the latest release of <img src="/hastaLaVista/assets/hlvLogo.png" alt="drawing" style="width:50px;"/> using devtools. 
 
 {% highlight r %}
 devtools::install_github("jwist/hastaLaVista")
@@ -33,7 +33,7 @@ v@view <- "test.view.json"
 visualize(v)
 {% endhighlight %}
 
-In this case, no computation is performed, but R will push two files test.data.json and test.view.json that are available with the package. In case of success, you should see this: <img src="/visualizeR/assets/hlv-test.gif" alt="drawing" style="width:700px;"/>
+In this case, no computation is performed, but R will push two files test.data.json and test.view.json that are available with the package. In case of success, you should see this: <img src="/hastaLaVista/assets/hlv-test.gif" alt="drawing" style="width:700px;"/>
 
 Beware that it may take some while to load the first time. **Be patient!**
 
@@ -78,7 +78,7 @@ Once the results are all stored into the list structure, a visualization object 
  visualize(v)
 {% endhighlight %}
 
-The first line create the object, while the second and third lines defines names for the files to be served. The file "test.data.json" will be created with the `push(v, 'data', d)` command. The `v@view` allows to tell <img src="/visualizeR/assets/hlvLogo.png" alt="drawing" style="width:50px;"/> what *vista* to use. This file must exist.
+The first line create the object, while the second and third lines defines names for the files to be served. The file "test.data.json" will be created with the `push(v, 'data', d)` command. The `v@view` allows to tell <img src="/hastaLaVista/assets/hlvLogo.png" alt="drawing" style="width:50px;"/> what *vista* to use. This file must exist.
 
 The last line `visualize(v)` will start a webserver (based on *servr* package) and point your default browser to the correct URL.
 
