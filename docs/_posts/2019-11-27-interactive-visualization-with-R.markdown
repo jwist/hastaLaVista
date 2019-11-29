@@ -5,7 +5,7 @@ date:   2019-11-27 20:06:34 -0500
 categories: R 
 ---
 
-<media:content medium="image" url="/hastaLaVista/assets/hlvLogo.png" width="50">
+<media:content medium="image" url="/hastaLaVista/assets/hlvLogo.png" width="50"/>
 
 Interactive data visualization is a must to develop attractive tools for a broad audience. Here I will show how to use a JavaScript framework to visualize results computed with R. I think it is a good idea to keep computation separated from visualization to make more robust pipelines, hence the idea to use a webpage as a visualization platform.
 
