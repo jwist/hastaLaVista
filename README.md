@@ -2,6 +2,7 @@
 [![Coverage Status](https://coveralls.io/repos/github/jwist/hastaLaVista/badge.svg?branch=master)](https://coveralls.io/github/jwist/hastaLaVista?branch=master)
 [![DOI](https://zenodo.org/badge/186240224.svg)](https://zenodo.org/badge/latestdoi/186240224)
 
+If you find it useful, please cite this work [![DOI](https://zenodo.org/badge/DOI/10.1186/s13321-019-0399-7.svg)](https://doi.org/10.1186/s13321-019-0399-7)
 
 
 # hastaLaVista
