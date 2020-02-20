@@ -3555,7 +3555,7 @@
         "general": [
           {
             "script": [
-              "\nconst Roc = await API.require('vh/rest-on-couch/Roc');\nvar roc = new Roc({database: \"eln\",kind: \"sample\",url: \"https://clo2v1.mylims.org/roc\"});\nroc.query('nmrIndex').then((references) => {\n    references = references.map( (ref) => {\n        const result = ref.value;\n        if(ref.document.url && ref.value.jcamp) {\n            result.jcamp = ref.document.url + '/' + ref.value.jcamp;\n            result._highlight = Math.random();\n            result.index.forEach( i => {i.from=i.delta-0.05; i.to=i.delta+0.05;});\n        }\n        return result;\n    });\n    API.createData('references', references);\n});\n\nlet scores = API.getData('score')\nAPI.createData('modifiedScores', scores)\n\n"
+              "\nconst Roc = await API.require('vh/rest-on-couch/Roc');\nvar roc = new Roc({database: \"eln\",kind: \"sample\",url: \"https://clo3.mylims.org/roc\"});\nroc.query('nmrIndex').then((references) => {\n    references = references.map( (ref) => {\n        const result = ref.value;\n        if(ref.document.url && ref.value.jcamp) {\n            result.jcamp = ref.document.url + '/' + ref.value.jcamp;\n            result._highlight = Math.random();\n            result.index.forEach( i => {i.from=i.delta-0.05; i.to=i.delta+0.05;});\n        }\n        return result;\n    });\n    API.createData('references', references);\n});\n\nlet scores = API.getData('score')\nAPI.createData('modifiedScores', scores)\n\n"
             ]
           }
         ]
