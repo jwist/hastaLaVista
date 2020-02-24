@@ -27,8 +27,18 @@ setMethod("useThisFolder", c(v = "visualization"),
     
     # create dir if not existing
     if (!dir.exists(to)) {
-      file.symlink(from = folderPath, to = to)
+      warning("windows user may have to run rstudio as administrator")
+      
+      switch(.Platform$OS.type,
+             unix = file.symlink(from = folderPath, to = to),
+             windows = shell(sprintf("mklink /D %s %s", 
+                                     normalizePath(to, mustWork = FALSE),
+                                     normalizePath(folderPath)
+             ))
+             )
+      
       warning(paste("simlink created: ", to))
+      
     } else {
       warning("repository already linked, no simlink created")      
     }
