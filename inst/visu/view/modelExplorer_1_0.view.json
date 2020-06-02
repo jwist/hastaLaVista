@@ -3255,8 +3255,8 @@
       "layers": {
         "Default layer": {
           "position": {
-            "left": 145,
-            "top": 48
+            "left": 146,
+            "top": 86
           },
           "size": {
             "width": 15,
@@ -3410,8 +3410,8 @@
             "top": 9
           },
           "size": {
-            "width": 33,
-            "height": 37
+            "width": 31,
+            "height": 56
           },
           "zIndex": 0,
           "display": true,
@@ -3503,7 +3503,7 @@
           ]
         }
       ],
-      "richtext": "<p>Choose the model to display by selecting a row in the &quot;model selector&quot; table. Scores and loadings will be displayed.</p>\n\n<p>&nbsp;</p>\n\n<p>Use&nbsp;the lasso tool (Alt-Draw) to select scores. Selected data will appear in the table on the left.</p>\n\n<p>&nbsp;</p>\n\n<p>The &quot;calculate STOCSY&quot; button will perform the calculation using the selected data.</p>\n\n<p>&nbsp;</p>\n\n<p>Select spectra to be display by clicking on the row in the &quot;selected data&quot; table. Multiple row can be selected using shift and ctrl keys.</p>\n\n<p>&nbsp;</p>\n\n<p>Zoom in the spectra by using the mouse wheel (Y) and the left-click button (X).&nbsp;</p>\n\n<p>&nbsp;</p>\n\n<p><strong>Zoom out by double-clicking on the spectra.</strong></p>\n\n<p>&nbsp;</p>\n\n<p>When hovering over the spectra, a black circle should appear.&nbsp;Use Alt-key and right-click on the spectra to select a driver variable&nbsp;and display the corresponding STOCSY trace.</p>\n\n<p>&nbsp;</p>\n\n<p>The spectra displayer consists in 3 grayed area used to manipulate loadings (top), STOCSY (middle) and spectra (bottom). Zooming in and out in the spectra area will affect all traces, while STOCSY and loadings can be manipulated independently.</p>\n",
+      "richtext": "<p>&nbsp;</p>\n\n<p><span style=\"font-size:14px\">Choose the multiblock PCA model to display by selecting relevant row in the &ldquo;model selector&rdquo; table.&nbsp; Scores and loadings will be displayed.&nbsp;Change PCs scores and loadings to be displayed using the button on the scores and loadings section.&nbsp;The loading will be displayed on the top panel of the &ldquo;spectra displayer&rdquo;</span></p>\n\n<p>&nbsp;</p>\n\n<p><span style=\"font-size:14px\">To perform STOCY</span></p>\n\n<p><span style=\"font-size:14px\">Select spectra in the PCA scores plot using lasso tool (Alt-Draw for PC or option for Mac).&nbsp; The selected data will be displayed in the &ldquo;selected data&rdquo; section (panel on the left).&nbsp;&nbsp;&nbsp;</span></p>\n\n<p>&nbsp;</p>\n\n<p><span style=\"font-size:14px\">Use shift+ control to select multiple rows from &ldquo;selected data&rdquo; and these spectra will be displayed on the bottom panel of the &ldquo;spectra displayer&rdquo;.&nbsp;</span></p>\n\n<p><span style=\"font-size:14px\">Navigate the &ldquo;spectra displayer&rdquo; using mouse.&nbsp; To zoom into the spectra region of interest using the mouse to drag across the region of interest and left click or to zoom out by double click.&nbsp;&nbsp;&nbsp;</span></p>\n\n<p>&nbsp;</p>\n\n<p><span style=\"font-size:14px\">To select the STOCSY driver peak, use Alt+Key and right click for PC or option and right click for Mac.&nbsp;</span></p>\n\n<p><span style=\"font-size:14px\">Press &ldquo;calculate STOSCY&rdquo; and the correlation plot will be displayed in the middle section of the &ldquo;spectra displayer&rdquo;.&nbsp;</span></p>\n\n<p>&nbsp;</p>\n",
       "title": "",
       "zindex": 1
     },
