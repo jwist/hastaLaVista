@@ -76,8 +76,8 @@ rangeList <- list(F)
 
 The reference features are shown here:
 
-<img src="/hastaLaVista/assets/patternX_4117" alt="drawing" width="800px"/>
-<img src="/hastaLaVista/assets/patternX_4910" alt="drawing" width="800px"/>
+<img src="/hastaLaVista/assets/patternX_4117.png" alt="drawing" width="800px"/>
+<img src="/hastaLaVista/assets/patternX_4910.png" alt="drawing" width="800px"/>
 
 And finally we can compute and display the cross-correlation with as shown in the following chunk.
 
@@ -118,8 +118,8 @@ for (i in seq_along(rangeList)) {
 
 Results are shown here:
 
-<img src="/hastaLaVista/assets/ccX_1" alt="drawing" width="800px"/>
-<img src="/hastaLaVista/assets/ccX_2" alt="drawing" width="800px"/>
+<img src="/hastaLaVista/assets/ccX_1.png" alt="drawing" width="800px"/>
+<img src="/hastaLaVista/assets/ccX_2.png" alt="drawing" width="800px"/>
 
 These figures enable the selection of samples with highest correlation. Although cross-correlation is insensitive to shifts, it is sensitive to distortions of the pattern due to overlap for example. Therefore it is necessary to visually inspect the results. Since this inspection is mandatory but is cumbersome, we made efforts to provide the best interface possible to quickly check the results.
 
@@ -127,10 +127,10 @@ The first approach used in this demo script consists of defining two threshold t
 
 Examples of figures are shown below.
 
-<img src="/hastaLaVista/assets/greenX_37" alt="drawing" width="800px"/>
-<img src="/hastaLaVista/assets/greenX_38" alt="drawing" width="800px"/>
-<img src="/hastaLaVista/assets/orangeX_40" alt="drawing" width="800px"/>
-<img src="/hastaLaVista/assets/orangeX_44" alt="drawing" width="800px"/>
+<img src="/hastaLaVista/assets/greenX_37.png" alt="drawing" width="800px"/>
+<img src="/hastaLaVista/assets/greenX_38.png" alt="drawing" width="800px"/>
+<img src="/hastaLaVista/assets/orangeX_40.png" alt="drawing" width="800px"/>
+<img src="/hastaLaVista/assets/orangeX_44.png" alt="drawing" width="800px"/>
 
 The second option makes use of the [`hastaLaVista`][hlv-link]  <img src="/hastaLaVista/assets/hlvLogo50px.png" alt="drawing" width="50px"/> package to make the visualization interactive, as shown here:
 
