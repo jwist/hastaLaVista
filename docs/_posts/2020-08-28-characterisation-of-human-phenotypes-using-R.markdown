@@ -123,6 +123,8 @@ Results are shown here:
 
 These figures enable the selection of samples with highest correlation. Although cross-correlation is insensitive to shifts, it is sensitive to distortions of the pattern due to overlap for example. Therefore it is necessary to visually inspect the results. Since this inspection is mandatory but is cumbersome, we made efforts to provide the best interface possible to quickly check the results.
 
+In the upper figure (triplet pattern) a threshold may be safely assumed. In the second case (doublet), the decision in less simple. Most of the time we choose to combine several (as much as possible) patterns and compute the combined cross-correlation. The more complete the pattern the sharper the distribution. Signal to noise is another factor that impact the cross-correlation. For large signals, CC is usually sharper that for signals close to the noise.
+
 The first approach used in this demo script consists of defining two threshold that define three areas, green for spectra with CC above all thresholds, orange between the two limits and red below. This semaphore system allows to quickly check the results.
 
 Examples of figures are shown below.
@@ -131,6 +133,8 @@ Examples of figures are shown below.
 <img src="/hastaLaVista/assets/greenX_38.png" alt="drawing" width="800px"/>
 <img src="/hastaLaVista/assets/orangeX_40.png" alt="drawing" width="800px"/>
 <img src="/hastaLaVista/assets/orangeX_44.png" alt="drawing" width="800px"/>
+
+As just mentioned, signal to noise affect the results. Close to the noise, CC becomes less a sharp statistics, while with larger signal, it works nicely. This means that this approach has its own limit of detection, below which it is assumed that the feature is not found.
 
 The second option makes use of the [`hastaLaVista`][hlv-link]  <img src="/hastaLaVista/assets/hlvLogo50px.png" alt="drawing" width="50px"/> package to make the visualization interactive, as shown here:
 
