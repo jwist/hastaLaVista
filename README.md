@@ -4,6 +4,7 @@
 
 If you find it useful, please cite this work [![DOI](https://zenodo.org/badge/DOI/10.1186/s13321-019-0399-7.svg)](https://doi.org/10.1186/s13321-019-0399-7)
 
+A blog with a more detailed tutorial can be found here: https://jwist.github.io/hastaLaVista/
 
 # hastaLaVista
 R package that provide interactive graphical interface for metabolic profiling
@@ -203,3 +204,6 @@ We just remove the `push()` command to avoid overwriting the data json file.
 ## acknowledgements
 
 The author of this package wishes to thank Luc Patiny and Elaine Holmes for their invaluable inputs during years of collaborations, Jia Li and Hutan Ashrafian for provision of the urine spectra, Norman Pellet for his great contribution to our research group as an original contributor to the visualizer project (https://github.com/npellet/visualizer), Michael Zasso and Daniel Kostro as current contributors to the visualizer, Torben Kimhoffer for his advice on multivariate analysis, Andrés Mauricio Castillo and Alejandro Bolaños for their help with my first steps using javaScript.
+<!--stackedit_data:
+eyJoaXN0b3J5IjpbMTI1NjA1OTAxNF19
+-->
