@@ -5,9 +5,9 @@ date:   2020-08-28 23:31:34 -0500
 categories: R, metabolic profiling, phenotyping
 ---
 
-Characterising and understanding how human phenotypes relates to populations requires being able to count the occurrence of certain traits in individuals from different populations. Using NMR and MS based metabolic profiles, this means being able to estimate the presence of a **feature**, aka a signal, across the whole dataset aggregate the results by population and estimate if the occurrence vary significantly from one population to another. 
+Characterising and understanding how human phenotypes relates to populations requires being able to count the occurrence of certain traits in individuals from different populations. Using NMR and MS based metabolic profiles, this means being able to estimate the presence of a **feature**, aka a signal, across the whole dataset, aggregate the results by population and estimate if the occurrence vary significantly from one population to another. 
 
-Because NMR is known to be quantitative, the ideal solution would be to extract the concentration of as many metabolites as possible and stratify these latter. However, this step is not always as trivial as it sounds. Instead of a proper quantification we could estimate the presence or absence of a signal, aka a trait, by the computing cross-correlation between a **feature of reference**, i.e., an arbitrarily chosen portion of the spectra with a well formed pattern (signal), and the same portion from other individuals.
+Because NMR is known to be quantitative, the ideal solution would be to extract the concentrations of as many metabolites as possible and stratify these latter. However, this step is not always as trivial as it sounds. Instead of a proper quantification we could estimate the presence or absence of a signal, aka a trait, by computing cross-correlation between a **feature of reference**, i.e., an arbitrarily chosen portion of the spectra with a well formed pattern (signal), and the same portion from other individuals.
 
 A complete description of the process can be found [here][paper-link]
 
@@ -54,7 +54,7 @@ This **view** (vista in Spanish) allows one to explore the dataset and identify 
 
 ## feature identification and selection
 
-A nice feature of the view allows to select spectra from the score plot and the use these data to compute [STOCSY](http://dx.doi.org/10.1021/ac048630x). The driver peak to compute STOCSY is simple set by Alt-click on the selected spectra. A STOCSY trace will appear in the middle gray area that allows to identify features that belongs to the same molecules. 
+A nice feature of the view allows to select spectra from the score plot and the use these data to compute [STOCSY](http://dx.doi.org/10.1021/ac048630x). The driver peak to compute STOCSY is simply set by Alt-click on the selected spectra, on the corresponding variable. A STOCSY trace will appear in the middle gray area that allows to identify features that belongs to the same molecule. 
 
 <img src="/hastaLaVista/assets/stocsy.gif" alt="drawing" width="800px"/>
 
@@ -79,7 +79,7 @@ The reference features are shown here:
 <img src="/hastaLaVista/assets/patternX_4117.png" alt="drawing" width="800px"/>
 <img src="/hastaLaVista/assets/patternX_4910.png" alt="drawing" width="800px"/>
 
-And finally we can compute and display the cross-correlation with as shown in the following chunk.
+And finally we can compute and display the cross-correlation using the following code chunk.
 
 {% highlight r %}
 # define here what information should be used as a category or a group
