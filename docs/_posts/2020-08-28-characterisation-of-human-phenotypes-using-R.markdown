@@ -1,23 +1,23 @@
 ---
 layout: post
-title:  "Characterisation of human metabolic phenotypes using R"
+title:  "Strategy for improved the characterisation of human metabolic phenotyping using COmbined Multiblock Principal components Analysis with Statistical Spectroscopy (COMPASS)"
 date:   2020-08-28 23:31:34 -0500
 categories: R, metabolic profiling, phenotyping
 ---
 
-Characterising and understanding how human phenotypes relates to populations requires being able to count the occurrence of certain traits in individuals from different populations. Using NMR and MS based metabolic profiles, this means being able to estimate the presence of a **feature**, aka a signal, across the whole dataset, aggregate the results by population and estimate if the occurrence vary significantly from one population to another. 
+We have recently published a strategy for improving human metabolic phenotyping using Combined Multiblock Principal components Analysis with Statistical Spectroscopy (COMPASS). The COMPASS approach is developed within R environment.  The open access manuscript can be found [here][paper-link].  
 
-Because NMR is known to be quantitative, the ideal solution would be to extract the concentrations of as many metabolites as possible and stratify these latter. However, this step is not always as trivial as it sounds. Instead of a proper quantification we could estimate the presence or absence of a signal, aka a trait, by computing cross-correlation between a **feature of reference**, i.e., an arbitrarily chosen portion of the spectra with a well formed pattern (signal), and the same portion from other individuals.
+In this blog, we describe how to get started.
 
-A complete description of the process can be found [here][paper-link]
+Characterising and understanding how human phenotypes relate to population statistics requires the ability to ascertain the occurrence of certain traits in individuals from different populations. For NMR and MS spectroscopic based datasets, this means the ability to estimate the presence of a specific feature, aka a signal, across the whole dataset (population) and aggregate the results by sub-population. In doing so, we can estimate the occurrence that varying between populations. For example, if interested in type-2 diabetes in a population we could observe how the anomeric doublet at 5.23 vary across sub-populations.
+As NMR measurement is quantitative, the ideal solution for estimating the presence of a specific metabolite is to quantify the concentrations of that metabolite. However, this is not always as trivial as it sounds, partially because of peak overlap. To overcome this, COMPASS estimates the presence or absence of a signal, aka a trait, by computing the cross-correlation of a feature and comparing it against a reference. The reference feature ( pattern /signal) is selected from the dataset based on multivariate analysis, as one relevant feature of the mathematical model that best explains the experimental design.
 
-Here we describe how to get started with this approach using the [R code][compass-link] developed for this study. The code itself depends on two R packages, [`MetaboMate`][mm-link] for multivariate analysis and [`hastaLaVista`][hlv-link]  <img src="/hastaLaVista/assets/hlvLogo50px.png" alt="drawing" width="50px"/> for interactive visualization. For installing both packages, please refer to the **README** files provided with both packages.
+To run the COMPASS, it requires two R packages, [`MetaboMate`][mm-link] for multivariate analysis and [`hastaLaVista`][hlv-link]  <img src="/hastaLaVista/assets/hlvLogo50px.png" alt="drawing" width="50px"/> for interactive visualization. Instruction for installing both packages, please refer to the README files provided with both packages.
 
 ## data modeling
 
-In the github.com/cheminfo/COMPASS repository a demo [*multiblocking.R*](https://github.com/cheminfo/COMPASS/blob/master/multiblocking.R) file is provided that works with a demo [dataset][data-paper-link]. Running this file will chunk the dataset in blocks of 0.5 ppm and run a PCA for each of them. 
-
-On line 24 of this demo file, the definition of the blocks can be modified according to the necessity:
+In the github.com/cheminfo/COMPASS repository, a demo [dataset][data-paper-link] and file [*multiblocking.R*](https://github.com/cheminfo/COMPASS/blob/master/multiblocking.R) is provided to illustrate the functionality of COMPASS. 
+This script will run multiple principal component analysis (PCA) models, each with a block of 0.5 ppm. If desired, the user can modify the block size in line 24 of this demo file. 
 
 {% highlight r %}
 # define the blocks (here blocks of 0.5 ppm are preferred)
@@ -36,42 +36,41 @@ rangeList <- list(c(0.5, 1.000),
                   c(9.0005, 9.49))
 {% endhighlight r %}
 
-If you are planning to use very large dataset, the loading of the dataset into the browser for interactive visualization may become impractical. Instead, [`hastaLaVista`][hlv-link]  <img src="/hastaLaVista/assets/hlvLogo50px.png" alt="drawing" width="50px"/> could be configured to retrieve the spectra only when necessary. For this, uncomment lines 45-53 and define a path to store the JSON. Each spectrum will be converted into a single JSON files to make the interaction fast and efficient.
-
-To do that you must locate the folder where hastalavista is stored in your installation. This is achieved using the `.libPathts()` command and then creating the folder `visu/data/json`. Line 46 must point to this json folder.
-
-Running this script will point your default browser on the URL
+For very large datasets (typically file size of > 0.5 GB), loading of the dataset into the interactive visualisation web browser may become impractical. Thus, , [`hastaLaVista`][hlv-link]  <img src="/hastaLaVista/assets/hlvLogo50px.png" alt="drawing" width="50px"/> can be configured to retrieve spectra only when necessary. To do this, uncomment lines 45-53 and define a path to store the JSON. This will convert spectral data into an individual JSON file, thus enabling fast and efficient interaction of the browser.  However, to do this, you must locate the folder where [`hastaLaVista`][hlv-link]  <img src="/hastaLaVista/assets/hlvLogo50px.png" alt="drawing" width="50px"/> is stored in your installation. This is achieved using the `.libPathts()` command and then creating the folder `visu/data/json`. Line 46 of the demo file must point to this json folder.
+Running the following script will point to your default browser on the URL.
 
 ```
 http://127.0.0.1:5474/?viewURL=http://127.0.0.1:5474/view/modelExplorer_1_1.view.json&dataURL=http://127.0.0.1:5474/data/multiblocking.data.json
 ```
 
-and you should see the following page where you can explore the scores and loadings for all the blocks, the results for the whole PCA and super scores and superloadings that are reconstructions based on all blocks. Using Alt-click it is possible to select scores and then select spectra that are to be displayed. 
+and you should see the following page where you can explore the scores and loadings for each of the block PCA models, the results for the whole PCA, together with the super scores and superloadings that are reconstructed based on combining all the scores and loadings for all the blocks. Using Alt-click it is possible to select scores and then select spectra that the user wants to display.
 
-This **view** (vista in Spanish) allows one to explore the dataset and identify with a high level of granularity the features of interest.
+This visualisation tool allows the user to explore the dataset with a high level of granularity to define the features of interest.
 
 <img src="/hastaLaVista/assets/model-explorer.gif" alt="drawing" width="800px"/>
 
-## feature identification and selection
+## Feature identification and selection
 
-A nice feature of the view allows to select spectra from the score plot and the use these data to compute [STOCSY](http://dx.doi.org/10.1021/ac048630x). The driver peak to compute STOCSY is simply set by Alt-click on the selected spectra, on the corresponding variable. A STOCSY trace will appear in the middle gray area that allows to identify features that belongs to the same molecule. 
+A useful feature of the vista is to allow the user to select spectra from the scores plot and the use these data to compute a Statistical TOtal Correlation  SpectroscopY ([STOCSY](http://dx.doi.org/10.1021/ac048630x)) model which finds all the correlated peaks relating to the feature of interest. The driver peak used to compute STOCSY is simply set by Alt-click on the selected spectra, on the corresponding variable (see video below). A STOCSY trace will appear in the middle gray area that allows the user to identify features that belong to the same molecule. 
 
 <img src="/hastaLaVista/assets/stocsy.gif" alt="drawing" width="800px"/>
 
-## computing cross-correlation
+## Computing cross-correlation
 
-In the github.com/cheminfo/COMPASS repository a demo [*MBCC-metaboliteX.Rmd*](https://github.com/cheminfo/COMPASS/blob/master/MBCC-metaboliteX.Rmd) file is provided that works with a demo [dataset][data-paper-link].
+In the github.com/cheminfo/COMPASS repository, a demo [*MBCC-metaboliteX.Rmd*](https://github.com/cheminfo/COMPASS/blob/master/MBCC-metaboliteX.Rmd) file is provided to work with the provided demo [dataset][data-paper-link].
 
-The following code chunk from the demo file allows to select the feature that will be used as a reference. For this example we selected two feature, a triplet and a doublet that are well resolved in the first sample (ID = 1). 
+The following code chunk from the demo file (line 49 – 57) allows the user to select the feature that will be used as a reference. In this example we selected two features, a triplet between 2.42 ppm to 2.47 ppm; and a doublet between 1.47 ppm to 1.50 ppm. Both features are well resolved in the first sample (ID = 1). i.e. they are used as reference features to compute cross-correlation.
 
 {% highlight r %}
 patternID <- 1
 identifier = ID
 L = length(ID)
+
 # several ranges may be defined and combined to create a pattern
 # define here the range that should be used
 F <- which(x_axis > 2.42 & x_axis < 2.47)
-rangeList <- list(F)
+F2 <- which(x_axis > 1.47 & x_axis < 1.5)
+rangeList <- list(F, F2)
 {% endhighlight r %}
 
 The reference features are shown here:
@@ -79,7 +78,7 @@ The reference features are shown here:
 <img src="/hastaLaVista/assets/patternX_4117.png" alt="drawing" width="800px"/>
 <img src="/hastaLaVista/assets/patternX_4910.png" alt="drawing" width="800px"/>
 
-And finally we can compute and display the cross-correlation using the following code chunk.
+And finally we can compute and display the cross-correlation using the following code chunk (line 89 – 125 in the demo file).
 
 {% highlight r %}
 # define here what information should be used as a category or a group
@@ -116,31 +115,42 @@ for (i in seq_along(rangeList)) {
 }
 {% endhighlight r %}
 
-Results are shown here:
+The results of the cross-correlation for the triplet at 2.445 and doublet at 1.484 are plotted in figures below:
 
 <img src="/hastaLaVista/assets/ccX_1.png" alt="drawing" width="800px"/>
 <img src="/hastaLaVista/assets/ccX_2.png" alt="drawing" width="800px"/>
 
-These figures enable the selection of samples with highest correlation. Although cross-correlation is insensitive to shifts, it is sensitive to distortions of the pattern due to overlap for example. Therefore it is necessary to visually inspect the results. Since this inspection is mandatory but is cumbersome, we made efforts to provide the best interface possible to quickly check the results.
+These figures enable the user to define the level of cross-correlation. Although cross-correlation is insensitive to chemical shifts, it is however sensitive to distortions of the pattern due to overlap. Therefore it is necessary to visually inspect the results. Since this inspection is mandatory and cumbersome, we have made efforts to provide the best interface to quickly visually check the results.
 
-In the upper figure (triplet pattern) a threshold may be safely assumed. In the second case (doublet), the decision in less simple. Most of the time we choose to combine several (as much as possible) patterns and compute the combined cross-correlation. The more complete the pattern the sharper the distribution. Signal to noise is another factor that impact the cross-correlation. For large signals, CC is usually sharper that for signals close to the noise.
+The 2 thresholds are defined on line 137 and 139 of the script:
 
-The first approach used in this demo script consists of defining two threshold that define three areas, green for spectra with CC above all thresholds, orange between the two limits and red below. This semaphore system allows to quickly check the results.
+{% highlight r %}
+# define here the threshold for selection
+selectThreshold <- 0.8
+# define a threshold for coloring. The samples with cross-correlation below this level (lower confidence) will be displayed with red color later.
+colorThreshold <- 0.9
+{% endhighlight r %}
 
-Examples of figures are shown below.
+In the upper figure (triplet pattern) a cross-correlation threshold may be easily defined at > 0.8. In the second case (doublet), the cross-correlation threshold is somewhat ambiguous.  It is recommended that we choose to combine several (as many as possible) patterns and compute the combined cross-correlation, since the more complete the pattern, the better-defined the distribution of cross correlation will be. However, the noise may be another factor that impacts the cross-correlation level. For high-intensity signals, the cross-correlation values are usually higher than those signals close to the noise.
+
+To visualise the results, the user has two options, printing the results using the script (lines 145 to 181), or use [`hastaLaVista`][hlv-link]  <img src="/hastaLaVista/assets/hlvLogo50px.png" alt="drawing" width="50px"/> (lines 213 to 240). In the first approach, the cross correlation (CC) thresholds are defined in the demo script (line 137 and 139). The feature region will thus be highlighted with green dots for spectra with CC above the hightest threshold, orange where the CC is between the two limits and red below (line XX – YY). This **traffic light** system allows the user to quickly check the results.
+
+Examples of figures generated using the first approach are shown below for the triplet at 2.445 ppm.
 
 <img src="/hastaLaVista/assets/greenX_37.png" alt="drawing" width="800px"/>
 <img src="/hastaLaVista/assets/greenX_38.png" alt="drawing" width="800px"/>
 <img src="/hastaLaVista/assets/orangeX_40.png" alt="drawing" width="800px"/>
 <img src="/hastaLaVista/assets/orangeX_44.png" alt="drawing" width="800px"/>
 
-As just mentioned, signal to noise affect the results. Close to the noise, CC becomes less a sharp statistics, while with larger signal, it works nicely. This means that this approach has its own limit of detection, below which it is assumed that the feature is not found.
+As expected the cross-correlation is not sensitive to the shift (second trace) of the triplet but is sensitive to overlap (top trace). Last two traces show CC for cases where no signal is present.
+
+A drawback of this approach is that the script has to be run each time a different threshold is defined. Since the threshold has to be accurately set and results thoroughly checked afterwards in order to produce faithful results, we provide a more interactive tool that enable interactive exploration of the results.
 
 The second option makes use of the [`hastaLaVista`][hlv-link]  <img src="/hastaLaVista/assets/hlvLogo50px.png" alt="drawing" width="50px"/> package to make the visualization interactive, as shown here:
 
 <img src="/hastaLaVista/assets/cross-corr_explorer0.1.gif" alt="drawing" width="800px"/>
 
-
+This visualisation tools enable the user to easily observe the effect of threshold selection on the statistics, by moving a slider, and then to rapidly review the selected features over the whole dataset by simply choosing from the table.
 
 [hlv-link]: https://github.com/jwist/hastaLaVista
 [mm-link]: https://github.com/kimsche/MetaboMate
