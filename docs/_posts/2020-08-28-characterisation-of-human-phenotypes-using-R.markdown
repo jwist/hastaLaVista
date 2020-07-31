@@ -120,6 +120,8 @@ The results of the cross-correlation for the triplet at 2.445 and doublet at 1.4
 <img src="/hastaLaVista/assets/ccX_1.png" alt="drawing" width="800px"/>
 <img src="/hastaLaVista/assets/ccX_2.png" alt="drawing" width="800px"/>
 
+## Definition of the CC limits to select features
+
 These figures enable the user to define the level of cross-correlation. Although cross-correlation is insensitive to chemical shifts, it is however sensitive to distortions of the pattern due to overlap. Therefore it is necessary to visually inspect the results. Since this inspection is mandatory and cumbersome, we have made efforts to provide the best interface to quickly visually check the results.
 
 The 2 thresholds are defined on line 137 and 139 of the script:
@@ -133,7 +135,13 @@ colorThreshold <- 0.9
 
 In the upper figure (triplet pattern) a cross-correlation threshold may be easily defined at > 0.8. In the second case (doublet), the cross-correlation threshold is somewhat ambiguous.  It is recommended that we choose to combine several (as many as possible) patterns and compute the combined cross-correlation, since the more complete the pattern, the better-defined the distribution of cross correlation will be. However, the noise may be another factor that impacts the cross-correlation level. For high-intensity signals, the cross-correlation values are usually higher than those signals close to the noise.
 
-To visualise the results, the user has two options, printing the results using the script (lines 145 to 181), or use [`hastaLaVista`][hlv-link]  <img src="/hastaLaVista/assets/hlvLogo50px.png" alt="drawing" width="50px"/> (lines 213 to 240). In the first approach, the cross correlation (CC) thresholds are defined in the demo script (line 137 and 139). The feature region will thus be highlighted with green dots for spectra with CC above the hightest threshold, orange where the CC is between the two limits and red below (line XX – YY). This **traffic light** system allows the user to quickly check the results.
+## Visual inspection of the results
+
+** The visual inspection is a mandatory step in the proposed method that is not intended to be fully automated!**
+
+To visualise the results, the user has two options, printing the results using the script (lines 145 to 181), or use [`hastaLaVista`][hlv-link]  <img src="/hastaLaVista/assets/hlvLogo50px.png" alt="drawing" width="50px"/> (lines 213 to 240). In the first approach, the cross correlation (CC) thresholds are defined in the demo script (line 137 and 139). The feature region will thus be highlighted with green dots for spectra with CC above the hightest threshold, orange where the CC is between the two limits and red below. This **traffic light** system allows the user to quickly check the results.
+
+### Inspection using static images
 
 Examples of figures generated using the first approach are shown below for the triplet at 2.445 ppm.
 
@@ -143,6 +151,8 @@ Examples of figures generated using the first approach are shown below for the t
 <img src="/hastaLaVista/assets/orangeX_44.png" alt="drawing" width="800px"/>
 
 As expected the cross-correlation is not sensitive to the shift (second trace) of the triplet but is sensitive to overlap (top trace). Last two traces show CC for cases where no signal is present.
+
+### Interactive inspection of the results
 
 A drawback of this approach is that the script has to be run each time a different threshold is defined. Since the threshold has to be accurately set and results thoroughly checked afterwards in order to produce faithful results, we provide a more interactive tool that enable interactive exploration of the results.
 
