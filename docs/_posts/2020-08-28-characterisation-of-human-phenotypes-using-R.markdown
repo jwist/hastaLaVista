@@ -162,6 +162,8 @@ The second option makes use of the [`hastaLaVista`][hlv-link]  <img src="/hastaL
 
 This visualisation tools enable the user to easily observe the effect of threshold selection on the statistics, by moving a slider, and then to rapidly review the selected features over the whole dataset by simply choosing from the table.
 
+For this example, by choosing a threshold at 0.8 the triplet feature is found in all 19 samples pre operation, while only found in 71% (10 out of 14) of the samples after 2 weeks, 46% (6 out of 13) after 6 weeks and 62% (8 out of 13) after 8 weeks.
+
 [hlv-link]: https://github.com/jwist/hastaLaVista
 [mm-link]: https://github.com/kimsche/MetaboMate
 [hlv-blog]: https://jwist.github.io/hastaLaVista/r/2019/11/28/interactive-visualization-with-R.html
