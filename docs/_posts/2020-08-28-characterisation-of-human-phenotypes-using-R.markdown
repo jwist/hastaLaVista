@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Strategy for improved the characterisation of human metabolic phenotyping using COmbined Multiblock Principal components Analysis with Statistical Spectroscopy (COMPASS)"
-date:   2020-08-28 23:31:34 -0500
+date:   2020-07-28 23:31:34 -0500
 categories: R, metabolic profiling, phenotyping
 ---
 
@@ -9,12 +9,12 @@ We have recently published a strategy for improving human metabolic phenotyping 
 
 In this blog, we describe how to get started.
 
-Characterising and understanding how human phenotypes relate to population statistics requires the ability to ascertain the occurrence of certain traits in individuals from different populations. For NMR and MS spectroscopic based datasets, this means the ability to estimate the presence of a specific feature, aka a signal, across the whole dataset (population) and aggregate the results by sub-population. In doing so, we can estimate the occurrence that varying between populations. For example, if interested in type-2 diabetes in a population we could observe how the anomeric doublet at 5.23 vary across sub-populations.
-As NMR measurement is quantitative, the ideal solution for estimating the presence of a specific metabolite is to quantify the concentrations of that metabolite. However, this is not always as trivial as it sounds, partially because of peak overlap. To overcome this, COMPASS estimates the presence or absence of a signal, aka a trait, by computing the cross-correlation of a feature and comparing it against a reference. The reference feature ( pattern /signal) is selected from the dataset based on multivariate analysis, as one relevant feature of the mathematical model that best explains the experimental design.
+Characterising and understanding how human phenotypes relate to population statistics requires the ability to ascertain the occurrence of certain traits in individuals from different populations. For NMR and MS spectroscopic based datasets, this means the ability to estimate the presence of a specific feature, aka a signal, across the whole dataset (population) and aggregate the results by sub-population. In doing so, we can estimate the occurrence that varying between populations. For example, if interested in type-2 diabetes in a population we could observe how the anomeric doublet at 5.23 ppm vary across sub-populations.
+As NMR measurement is quantitative, the ideal solution for estimating the presence of a specific metabolite is to quantify the concentrations of that metabolite. However, this is not always as trivial as it sounds, partially because of peak overlap. To overcome this, COMPASS estimates the presence or absence of a signal, aka a trait, by computing the cross-correlation of a feature and comparing it against a "reference". The "reference feature" (pattern /signal) is a feature of interest and this can be selected from the multivariate data analysis modelling pipeline.   We will show you how to do this.
 
 To run the COMPASS, it requires two R packages, [`MetaboMate`][mm-link] for multivariate analysis and [`hastaLaVista`][hlv-link]  <img src="/hastaLaVista/assets/hlvLogo50px.png" alt="drawing" width="50px"/> for interactive visualization. Instruction for installing both packages, please refer to the README files provided with both packages.
 
-## data modeling
+## Data modeling
 
 In the github.com/cheminfo/COMPASS repository, a demo [dataset][data-paper-link] and file [*multiblocking.R*](https://github.com/cheminfo/COMPASS/blob/master/multiblocking.R) is provided to illustrate the functionality of COMPASS. 
 This script will run multiple principal component analysis (PCA) models, each with a block of 0.5 ppm. If desired, the user can modify the block size in line 24 of this demo file. 
@@ -37,7 +37,7 @@ rangeList <- list(c(0.5, 1.000),
 {% endhighlight r %}
 
 For very large datasets (typically file size of > 0.5 GB), loading of the dataset into the interactive visualisation web browser may become impractical. Thus, , [`hastaLaVista`][hlv-link]  <img src="/hastaLaVista/assets/hlvLogo50px.png" alt="drawing" width="50px"/> can be configured to retrieve spectra only when necessary. To do this, uncomment lines 45-53 and define a path to store the JSON. This will convert spectral data into an individual JSON file, thus enabling fast and efficient interaction of the browser.  However, to do this, you must locate the folder where [`hastaLaVista`][hlv-link]  <img src="/hastaLaVista/assets/hlvLogo50px.png" alt="drawing" width="50px"/> is stored in your installation. This is achieved using the `.libPathts()` command and then creating the folder `visu/data/json`. Line 46 of the demo file must point to this json folder.
-Running the following script will point to your default browser on the URL.
+Running the script will point your default browser on the URL.
 
 ```
 http://127.0.0.1:5474/?viewURL=http://127.0.0.1:5474/view/modelExplorer_1_1.view.json&dataURL=http://127.0.0.1:5474/data/multiblocking.data.json
@@ -115,12 +115,12 @@ for (i in seq_along(rangeList)) {
 }
 {% endhighlight r %}
 
-The results of the cross-correlation for the triplet at 2.445 and doublet at 1.484 are plotted in figures below:
+The results of the cross-correlation for the triplet at 2.445 and doublet at 1.484 are plotted in figures below and color coded according to class:
 
 <img src="/hastaLaVista/assets/ccX_1.png" alt="drawing" width="800px"/>
 <img src="/hastaLaVista/assets/ccX_2.png" alt="drawing" width="800px"/>
 
-## Definition of the CC limits to select features
+## Definition of the cross-correlation limits to select features
 
 These figures enable the user to define the level of cross-correlation. Although cross-correlation is insensitive to chemical shifts, it is however sensitive to distortions of the pattern due to overlap. Therefore it is necessary to visually inspect the results. Since this inspection is mandatory and cumbersome, we have made efforts to provide the best interface to quickly visually check the results.
 
@@ -160,7 +160,7 @@ The second option makes use of the [`hastaLaVista`][hlv-link]  <img src="/hastaL
 
 <img src="/hastaLaVista/assets/cross-corr_explorer0.1.gif" alt="drawing" width="800px"/>
 
-This visualisation tools enable the user to easily observe the effect of threshold selection on the statistics, by moving a slider, and then to rapidly review the selected features over the whole dataset by simply choosing from the table.
+This visualisation tools enable the user to easily observe the resulting selection of CC threshold by moving a slider, and then to rapidly review the selected features over the whole dataset by simply choosing from the table.
 
 For this example, by choosing a threshold at 0.8 the triplet feature is found in all 19 samples pre operation, while only found in 71% (10 out of 14) of the samples after 2 weeks, 46% (6 out of 13) after 6 weeks and 62% (8 out of 13) after 8 weeks.
 
