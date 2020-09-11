@@ -13,12 +13,12 @@
 #' @export
 
 print.visualization <- function(x, ...){
-  paste0(print(x@visuServer),
+  paste0(print(x@visuServer, ...),
          "?viewURL=",
-         print(x@viewServer),
+         print(x@viewServer, ...),
          x@view,
          "&dataURL=",
-         print(x@dataServer),
+         print(x@dataServer, ...),
          x@data)
 }
 

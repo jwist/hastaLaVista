@@ -12,8 +12,14 @@
 #' print(s)
 #'
 #' @export
+#' @importFrom methods hasArg
 
 print.server <- function(x, ...){
+  if (hasArg(translate)) {
+    if (list(...)$translate == TRUE){
+      x@baseURL <- rstudioapi::translateLocalUrl("localhost", absolute = TRUE) 
+    }
+  }
   if (x@port == 0) {
     paste0(x@protocole, x@baseURL, x@path)
   } else {

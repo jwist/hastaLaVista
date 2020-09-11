@@ -4,10 +4,12 @@
 \alias{visualize}
 \title{S4 method to visualize visualization objects (S4)}
 \usage{
-visualize(v)
+visualize(v, ...)
 }
 \arguments{
 \item{v}{visualization object}
+
+\item{...}{allows to pass translate = TRUE for running into docker instance}
 }
 \value{
 void

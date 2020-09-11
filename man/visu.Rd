@@ -4,8 +4,11 @@
 \alias{visu}
 \title{Trigger the visualization into the browser}
 \usage{
-visu(visuURL = getOption("visuURL"), viewURL = getOption("viewURL"),
-  dataURL = getOption("dataURL"))
+visu(
+  visuURL = getOption("visuURL"),
+  viewURL = getOption("viewURL"),
+  dataURL = getOption("dataURL")
+)
 }
 \arguments{
 \item{visuURL}{url of the visualizer instance}

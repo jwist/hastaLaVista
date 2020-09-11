@@ -4,6 +4,7 @@
 #' function will trigger a local instance of \pkg{servr} server.
 #'
 #' @param v visualization object
+#' @param ... allows to pass translate = TRUE for running into docker instance
 #' @return void
 #' @examples
 #'
@@ -14,20 +15,20 @@
 
 setMethod("visualize",
           c(v = "visualization"),
-          function(v) {
+          function(v, ...) {
 
             if (v@visuServer@init == TRUE) {
               initServer(v@visuServer, force = FALSE)
             }
 
-            if (v@viewServer@init == TRUE) {
-              initServer(v@viewServer, force = FALSE)
-            }
+            # if (v@viewServer@init == TRUE) {
+            #   initServer(v@viewServer, force = FALSE)
+            # }
+            # 
+            # if (v@dataServer@init == TRUE) {
+            #   initServer(v@dataServer, force = FALSE)
+            # }
 
-            if (v@dataServer@init == TRUE) {
-              initServer(v@dataServer, force = FALSE)
-            }
-
-            utils::browseURL( print(v) )
+            utils::browseURL( print(v, ...) )
           }
 )

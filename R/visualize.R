@@ -5,6 +5,7 @@
 #' function will trigger a local instance of \pkg{servr} server.
 #'
 #' @param v visualization object
+#' @param ... allows to pass translate = TRUE for running into docker instance
 #' @return void
 #' @examples
 #'
@@ -13,6 +14,6 @@
 #'
 #' @export
 
-setGeneric("visualize", function(v) {
+setGeneric("visualize", function(v, ...) {
   standardGeneric("visualize")
 })
