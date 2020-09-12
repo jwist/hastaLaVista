@@ -15,15 +15,15 @@
 #' @importFrom methods hasArg
 
 print.server <- function(x, ...){
+  if (x@port == 0) {
+    url <- paste0(x@protocole, x@baseURL, x@path)
+  } else {
+    url <- paste0(x@protocole, x@baseURL, ":", x@port, x@path)
+  }
   if (hasArg(translate)) {
     if (list(...)$translate == TRUE){
-      x@baseURL <- rstudioapi::translateLocalUrl("localhost", absolute = TRUE) 
+      url <- rstudioapi::translateLocalUrl(url, absolute = TRUE) 
     }
   }
-  if (x@port == 0) {
-    paste0(x@protocole, x@baseURL, x@path)
-  } else {
-    paste0(x@protocole, x@baseURL, ":", x@port, x@path)
-  }
-
+  return(url)
 }
