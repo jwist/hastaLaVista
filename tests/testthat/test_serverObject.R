@@ -13,5 +13,5 @@ test_that("check print.server S3 method", {
 test_that("check print.server S3 method: port", {
   s@port <- 0
   expect_equal(length(print(s)), 1)
-  expect_equal(print(s), "http://127.0.0.1/")
+  expect_equal(print(s), "http://localhost/")
 })

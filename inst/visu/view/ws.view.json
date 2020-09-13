@@ -1,0 +1,897 @@
+{
+  "version": "2.116.1",
+  "grid": {
+    "xWidth": 10,
+    "yHeight": 10,
+    "layers": {
+      "Default layer": {
+        "name": "Default layer"
+      }
+    }
+  },
+  "modules": [
+    {
+      "url": "modules/types/science/spectra/spectra_displayer/",
+      "id": 1,
+      "title": "scatter plot (use Alt + Draw to select points with lasso tool)",
+      "configuration": {
+        "sections": {
+          "graph": [
+            {
+              "sections": {},
+              "groups": {
+                "graph": [
+                  {
+                    "url": [
+                      ""
+                    ],
+                    "zoom": [
+                      "xy"
+                    ],
+                    "wheelAction": [
+                      "zoomY"
+                    ],
+                    "wheelbaseline": [
+                      0
+                    ],
+                    "fullOut": [
+                      "both"
+                    ],
+                    "legend": [
+                      "top"
+                    ],
+                    "legendOptions": [
+                      [
+                        "isSerieHideable",
+                        "isSerieSelectable"
+                      ]
+                    ],
+                    "mouseTracking": [
+                      []
+                    ],
+                    "trackingAxis": [
+                      ""
+                    ],
+                    "selectScatter": [
+                      [
+                        "yes"
+                      ]
+                    ],
+                    "independantYZoom": [
+                      [
+                        "yes"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          ],
+          "axis": [
+            {
+              "sections": {},
+              "groups": {
+                "xAxis": [
+                  {
+                    "checkboxes": [
+                      [
+                        "display"
+                      ]
+                    ],
+                    "label": [
+                      ""
+                    ],
+                    "beforeSpacing": [
+                      "0"
+                    ],
+                    "afterSpacing": [
+                      0
+                    ],
+                    "min": [
+                      ""
+                    ],
+                    "max": [
+                      ""
+                    ],
+                    "nbTicksPrimary": [
+                      5
+                    ],
+                    "axismodification": [
+                      "none"
+                    ]
+                  }
+                ],
+                "yAxis": [
+                  {
+                    "checkboxes": [
+                      [
+                        "display"
+                      ]
+                    ],
+                    "label": [
+                      ""
+                    ],
+                    "beforeSpacing": [
+                      "0"
+                    ],
+                    "afterSpacing": [
+                      0
+                    ],
+                    "min": [
+                      ""
+                    ],
+                    "max": [
+                      ""
+                    ],
+                    "nbTicksPrimary": [
+                      5
+                    ],
+                    "fitToAxisOnFromTo": [
+                      []
+                    ]
+                  }
+                ]
+              }
+            }
+          ],
+          "series": [
+            {
+              "sections": {},
+              "groups": {
+                "series": [
+                  {
+                    "overflow": [
+                      []
+                    ],
+                    "stackVerticalSpacing": [
+                      1
+                    ]
+                  }
+                ]
+              }
+            }
+          ],
+          "variables": [
+            {
+              "sections": {},
+              "groups": {
+                "variables": [
+                  [
+                    {
+                      "variable": "",
+                      "axis": "0",
+                      "adaptTo": "none",
+                      "plotcolor": [
+                        1,
+                        1,
+                        255,
+                        1
+                      ],
+                      "strokewidth": "1",
+                      "strokestyle": "1",
+                      "plotcontinuous": "continuous",
+                      "peakpicking": [],
+                      "markers": [],
+                      "markerShape": "1",
+                      "markerSize": 2,
+                      "normalize": "none",
+                      "optimizeSlots": [],
+                      "tracking": []
+                    }
+                  ]
+                ]
+              }
+            }
+          ],
+          "misc": [
+            {
+              "sections": {},
+              "groups": {
+                "misc": [
+                  {
+                    "highlightOptions": [
+                      "{}"
+                    ]
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        "groups": {}
+      },
+      "layers": {
+        "Default layer": {
+          "zIndex": 0,
+          "display": true,
+          "title": "scatter plot (use Alt + Draw to select points with lasso tool)",
+          "wrapper": true,
+          "created": true,
+          "name": "Default layer",
+          "position": {
+            "left": 0,
+            "top": 2
+          },
+          "size": {
+            "width": 79,
+            "height": 70
+          },
+          "bgColor": [
+            255,
+            255,
+            255,
+            0
+          ]
+        }
+      },
+      "vars_in": [
+        {
+          "rel": "chart",
+          "name": "scores"
+        },
+        {
+          "rel": "annotations",
+          "name": "pcaAnnotations"
+        }
+      ],
+      "actions_in": [
+        {}
+      ],
+      "vars_out": [
+        {
+          "event": "onSelectScatter",
+          "rel": "selectedData",
+          "jpath": [],
+          "name": "selectedScores"
+        }
+      ],
+      "actions_out": [
+        {
+          "jpath": []
+        }
+      ],
+      "toolbar": {
+        "custom": [
+          [
+            {
+              "title": "",
+              "icon": "",
+              "action": "",
+              "position": "begin",
+              "color": [
+                100,
+                100,
+                100,
+                1
+              ]
+            }
+          ]
+        ],
+        "common": [
+          {
+            "toolbar": [
+              [
+                "Open Preferences",
+                "Show fullscreen",
+                "Export Data",
+                "Print"
+              ]
+            ]
+          }
+        ]
+      },
+      "css": [
+        {
+          "fontSize": [
+            ""
+          ],
+          "fontFamily": [
+            ""
+          ]
+        }
+      ]
+    },
+    {
+      "url": "modules/types/client_interaction/code_executor/",
+      "id": 2,
+      "title": "",
+      "configuration": {
+        "sections": {},
+        "groups": {
+          "group": [
+            {
+              "display": [
+                [
+                  "editor",
+                  "buttons"
+                ]
+              ],
+              "execOnLoad": [
+                [
+                  "yes"
+                ]
+              ],
+              "asyncAwait": [
+                [
+                  "top"
+                ]
+              ],
+              "script": [
+                "if (this.action) {\n  let message = this.action;\n  console.log(message.name);\n  switch (message.name) {\n    case 'FromR':\n      if (message.value.data === 'r got your message') {\n        console.log(message.value.data);\n      } else {\n        let data = JSON.parse(message.value.data);\n        switch (data.name) {\n          case 'ID':\n            API.cache('ID', data.value);\n            console.log('ID received');\n            break;\n          case 'group':\n            API.cache('group', data.value);\n            console.log('group received');\n            break;\n          case 'color':\n            API.createData('color', data.value);\n            console.log('color received');\n            let redraw =  API.cache('data');\n            let options = {'color': data.value};\n            drawChart(redraw, options);\n            break;\n          case 'scores':\n            API.cache('data', data);\n            drawChart(data);\n            console.log('chart drawn');\n            break;\n          default:\n            break;\n        }\n      }\n      break;\n    case 'updateLabels':\n      break;\n    default:\n      break;\n  }\n} else if (this.variable) {\n  switch (this.variable) {\n    case 'selectedScores':\n        let selectedScores = API.getData('selectedScores').resurrect();\n        let ID = API.cache('ID');\n        let group = API.cache('group');\n        let selectedIDs = [];\n        selectedScores.forEach(x => selectedIDs.push({'ID': ID[x], 'Group': group[x], _highlight: ID[x]}));\n        API.createData('selectedIDs', selectedIDs);\n        let socket = API.cache('socket');\n        socket.send(JSON.stringify(selectedScores.map(x => x+1)));\n        console.log(selectedScores);\n        break;\n    // case 'color':\n    //     let data = API.cache('data');\n    //     let color = API.getData('color');\n    //     let options = {'color': color};\n    //     drawChart(data, options);\n    default:\n      break;\n  }\n} else {\n  let socket = new WebSocket('ws://127.0.0.1:8888/');\n  socket.onopen = function (e) {\n    socket.send(JSON.stringify({ message: 'hlv is connected' }));\n  };\n  socket.onmessage = function (event) {\n    API.doAction('FromR', event);\n  };\n  API.cache('socket', socket);\n  console.log(socket);\n}\n\nfunction drawChart(data, options = {}) {\n  const {\n      color = []\n  } = options\n  \n  if (color.length > 0){\n      let min = ML.Array.min(color);\n      let max = ML.Array.max(color);\n      let scale = Chroma.scale(['blue', 'red']).domain([min, max]).mode('hsl');\n\n      //let color = data.y.map(val => scale(val).hex());\n      var colorScale = data.y.map(val => scale(val).rgba());\n      colorScale = colorScale.map(x => `rgba(${x[0]},${x[1]},${x[2]},${x[3]})`);\n      \n  }\n  console.log(colorScale);\n  let unselected = data.x.map((x, i) => {\n    return {\n      fill: colorScale[i],\n      shape: 'circle',\n      cx: 0,\n      cy: 0,\n      r: 3,\n      height: '5px',\n      width: '5px',\n      stroke: 'transparent',\n    };\n  });\n  \n  let selected = data.x.map((x,i) => {\n    return {\n      fill: colorScale[i],\n      shape: 'circle',\n      cx: 0,\n      cy: 0,\n      r: 4,\n      height: '5px',\n      width: '5px',\n      stroke: 'red',\n    };\n  });\n  let score = {\n    title: 'score plot',\n    axes: {\n      x: {\n        label: data.xLabel,\n      },\n      y: {\n        label: data.yLabel,\n      },\n    },\n    data: [\n      {\n        type: 'scatter',\n        info: data.x.map((x, i) => i),\n        x: data.x,\n        y: data.y,\n        styles: {\n          unselected: unselected,\n          selected: selected,\n        },\n      },\n    ],\n  };\n  \n  console.log(score);\n  API.createData('scores', score);\n  \n  let ID = API.cache('ID');\n  let pcaAnnotations=[];\n    for (let i=0; i<data.x.length; i++) {\n        let currentID=ID[i];\n\n        pcaAnnotations.push({\n            _highlight: ID[i],\n            \"type\": \"ellipse\",\n            \"position\": [\n              {\n                \"x\": data.x[i],\n                \"y\": data.y[i]\n              }\n            ],\n            \"props\": {\n              \"rx\": \"6px\",\n              \"ry\": \"6px\"\n            },\n            \"strokeWidth\": \"0px\",\n            \"fillColor\": \"rgba(0,0,0,0)\",\n            \"info\": ID[i]\n        })\n    }\n    \n    API.createData('pcaAnnotations', pcaAnnotations);\n}\n"
+              ]
+            }
+          ],
+          "libs": [
+            [
+              {
+                "lib": "ML",
+                "alias": "ML"
+              },
+              {
+                "lib": "chroma",
+                "alias": "Chroma"
+              }
+            ]
+          ],
+          "buttons": [
+            [
+              {
+                "name": "button1",
+                "label": "Execute",
+                "hide": [],
+                "disable": []
+              }
+            ]
+          ]
+        }
+      },
+      "layers": {
+        "Default layer": {
+          "zIndex": 0,
+          "display": true,
+          "title": "",
+          "wrapper": true,
+          "created": true,
+          "name": "Default layer",
+          "position": {
+            "left": 79,
+            "top": 77
+          },
+          "size": {
+            "width": 57,
+            "height": 85
+          },
+          "bgColor": [
+            255,
+            255,
+            255,
+            0
+          ]
+        }
+      },
+      "vars_in": [
+        {
+          "rel": "inputValue",
+          "name": "selectedScores"
+        }
+      ],
+      "actions_in": [
+        {
+          "rel": "execute",
+          "name": "FromR"
+        },
+        {
+          "rel": "execute",
+          "name": "updateLabels"
+        }
+      ],
+      "vars_out": [
+        {
+          "jpath": []
+        }
+      ],
+      "actions_out": [
+        {
+          "jpath": []
+        }
+      ],
+      "toolbar": {
+        "custom": [
+          [
+            {
+              "title": "",
+              "icon": "",
+              "action": "",
+              "position": "begin",
+              "color": [
+                100,
+                100,
+                100,
+                1
+              ]
+            }
+          ]
+        ],
+        "common": [
+          {
+            "toolbar": [
+              [
+                "Open Preferences"
+              ]
+            ]
+          }
+        ]
+      },
+      "css": [
+        {
+          "fontSize": [
+            ""
+          ],
+          "fontFamily": [
+            ""
+          ]
+        }
+      ]
+    },
+    {
+      "url": "modules/types/client_interaction/code_executor/",
+      "configuration": {
+        "sections": {},
+        "groups": {
+          "group": [
+            {
+              "display": [
+                [
+                  "editor",
+                  "buttons"
+                ]
+              ],
+              "execOnLoad": [
+                []
+              ],
+              "asyncAwait": [
+                [
+                  "top"
+                ]
+              ],
+              "script": [
+                "\nlet a = API.cache('data');\nconsole.log(a)"
+              ]
+            }
+          ],
+          "libs": [
+            [
+              {}
+            ]
+          ],
+          "buttons": [
+            [
+              {
+                "name": "button1",
+                "label": "Execute",
+                "hide": [],
+                "disable": []
+              }
+            ]
+          ]
+        }
+      },
+      "layers": {
+        "Default layer": {
+          "position": {
+            "left": 33,
+            "top": 82
+          },
+          "size": {
+            "width": 41,
+            "height": 62
+          },
+          "zIndex": 0,
+          "display": true,
+          "title": "",
+          "bgColor": [
+            255,
+            255,
+            255,
+            0
+          ],
+          "wrapper": true,
+          "created": true,
+          "name": "Default layer"
+        }
+      },
+      "id": 3,
+      "vars_in": [
+        {}
+      ],
+      "actions_in": [
+        {}
+      ],
+      "vars_out": [
+        {
+          "jpath": []
+        }
+      ],
+      "actions_out": [
+        {
+          "jpath": []
+        }
+      ],
+      "toolbar": {
+        "custom": [
+          [
+            {
+              "title": "",
+              "icon": "",
+              "action": "",
+              "position": "begin",
+              "color": [
+                100,
+                100,
+                100,
+                1
+              ]
+            }
+          ]
+        ],
+        "common": [
+          {
+            "toolbar": [
+              [
+                "Open Preferences"
+              ]
+            ]
+          }
+        ]
+      },
+      "css": [
+        {
+          "fontSize": [
+            ""
+          ],
+          "fontFamily": [
+            ""
+          ]
+        }
+      ],
+      "title": ""
+    },
+    {
+      "url": "modules/types/edition/slick_grid/",
+      "configuration": {
+        "sections": {},
+        "groups": {
+          "group": [
+            {
+              "slickCheck": [
+                [
+                  "enableCellNavigation",
+                  "rowNumbering",
+                  "forceFitColumns",
+                  "highlightScroll",
+                  "forgetLastActive"
+                ]
+              ],
+              "copyPaste": [
+                []
+              ],
+              "copyPasteOptions": [
+                [
+                  "newRows"
+                ]
+              ],
+              "autoColumns": [
+                []
+              ],
+              "toolbar": [
+                []
+              ],
+              "colorjpath": [
+                []
+              ],
+              "slick.defaultColumnWidth": [
+                null
+              ],
+              "slick.rowHeight": [
+                null
+              ],
+              "slick.headerRowHeight": [
+                30
+              ],
+              "slick.selectionModel": [
+                "row"
+              ],
+              "idProperty": [
+                ""
+              ],
+              "filterType": [
+                "pref"
+              ],
+              "filterRow": [
+                "// Documentation: https://github.com/NPellet/visualizer/blob/46b40ca86345f8fa313563bf9c6ecb80ba323101/src/modules/types/edition/slick_grid/view.js#L1695-L1735"
+              ],
+              "customJpaths": [
+                ""
+              ]
+            }
+          ],
+          "cols": [
+            [
+              {
+                "jpath": [],
+                "editor": "none",
+                "forceType": "",
+                "formatter": "typerenderer",
+                "copyFormatter": "default",
+                "visibility": "both",
+                "rendererOptions": "",
+                "editorOptions": "",
+                "hideColumn": []
+              }
+            ]
+          ],
+          "actionCols": [
+            [
+              {
+                "backgroundColor": [
+                  255,
+                  255,
+                  255,
+                  0
+                ],
+                "color": [
+                  0,
+                  0,
+                  0,
+                  1
+                ],
+                "position": "end",
+                "clickMode": "text"
+              }
+            ]
+          ],
+          "groupings": [
+            [
+              {
+                "getter": []
+              }
+            ]
+          ],
+          "actionOutButtons": [
+            [
+              {}
+            ]
+          ],
+          "data": [
+            {
+              "saveInView": [
+                []
+              ],
+              "varname": [
+                ""
+              ],
+              "data": [
+                "[]"
+              ]
+            }
+          ]
+        }
+      },
+      "layers": {
+        "Default layer": {
+          "position": {
+            "left": 80,
+            "top": 2
+          },
+          "size": {
+            "width": 23,
+            "height": 60
+          },
+          "zIndex": 0,
+          "display": true,
+          "title": "Selected IDs",
+          "bgColor": [
+            255,
+            255,
+            255,
+            0
+          ],
+          "wrapper": true,
+          "created": true,
+          "name": "Default layer"
+        }
+      },
+      "id": 4,
+      "vars_in": [
+        {
+          "rel": "list",
+          "name": "selectedIDs"
+        }
+      ],
+      "actions_in": [
+        {}
+      ],
+      "vars_out": [
+        {
+          "jpath": []
+        }
+      ],
+      "actions_out": [
+        {
+          "jpath": []
+        }
+      ],
+      "toolbar": {
+        "custom": [
+          [
+            {
+              "title": "",
+              "icon": "",
+              "action": "",
+              "position": "begin",
+              "color": [
+                100,
+                100,
+                100,
+                1
+              ]
+            }
+          ]
+        ],
+        "common": [
+          {
+            "toolbar": [
+              [
+                "Open Preferences",
+                "Export Data"
+              ]
+            ]
+          }
+        ]
+      },
+      "css": [
+        {
+          "fontSize": [
+            ""
+          ],
+          "fontFamily": [
+            ""
+          ]
+        }
+      ],
+      "title": "Selected IDs"
+    }
+  ],
+  "variables": [
+    {
+      "varname": "chart",
+      "jpath": [
+        "chart"
+      ]
+    },
+    {
+      "varname": "simpleArray",
+      "jpath": [
+        "simpleArray"
+      ]
+    },
+    {
+      "varname": "multiChart",
+      "jpath": [
+        "multiChart"
+      ]
+    },
+    {
+      "varname": "simpleArray2",
+      "jpath": [
+        "simpleArray2"
+      ]
+    }
+  ],
+  "aliases": [
+    {
+      "path": "https://www.lactame.com/lib/ml/5.1.1/ml",
+      "alias": "ML"
+    }
+  ],
+  "configuration": {
+    "title": "hastaLaVista docker - score plot"
+  },
+  "actionscripts": [
+    {
+      "sections": {},
+      "groups": {
+        "action": [
+          {
+            "name": [
+              null
+            ],
+            "script": [
+              null
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "init_script": [
+    {
+      "sections": {},
+      "groups": {
+        "general": [
+          {
+            "script": [
+              null
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "custom_filters": [
+    {
+      "sections": {
+        "modules": [
+          {
+            "sections": {},
+            "groups": {
+              "modules": [
+                [
+                  {}
+                ]
+              ]
+            }
+          }
+        ],
+        "filtersLib": [
+          {
+            "sections": {},
+            "groups": {
+              "filters": [
+                [
+                  {}
+                ]
+              ]
+            }
+          }
+        ],
+        "filters": [
+          {
+            "sections": {},
+            "groups": {
+              "filter": [
+                {
+                  "name": [
+                    null
+                  ],
+                  "script": [
+                    null
+                  ]
+                }
+              ],
+              "libs": [
+                [
+                  {}
+                ]
+              ]
+            }
+          }
+        ]
+      },
+      "groups": {}
+    }
+  ],
+  "actionfiles": [
+    {
+      "sections": {},
+      "groups": {
+        "action": [
+          [
+            {}
+          ]
+        ]
+      }
+    }
+  ]
+}
+

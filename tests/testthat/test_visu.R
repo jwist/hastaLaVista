@@ -12,5 +12,5 @@ test_that("print.visualization.R", {
   v <- new("visualization")
   expect_output(str(print(v)), "http")
   expect_output(str(print(v)), "5474")
-  expect_output(str(print(v)), "127.0.0.1")
+  expect_output(str(print(v)), "localhost")
 })
