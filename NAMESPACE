@@ -3,6 +3,7 @@
 S3method(print,server)
 S3method(print,visualization)
 export(appendData)
+export(checkMetadata)
 export(getColor2)
 export(initServer)
 export(push)

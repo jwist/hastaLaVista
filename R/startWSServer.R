@@ -24,6 +24,10 @@ startWSServer <- function(port){
                                  ws$send('r got your message')
                                  assign("from", fromJSON(message), envir=.GlobalEnv)
                                  assign("conn", ws, envir=.GlobalEnv)
+                                 if (from$message[1] == "hlv is connected"){
+                                   ws$send(toJSON(init))
+                                   cat("init data sent")
+                                 }
                                })
                                ws$onClose(function() {
                                  cat("Connection closed.\n")
@@ -32,5 +36,3 @@ startWSServer <- function(port){
                            )
   )
 }
-
-#stopAllServers()
