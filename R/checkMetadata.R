@@ -1,4 +1,6 @@
 #' @title checkMetadata
+#' @param dataFrame - metadata
+#' @param option - options
 #' @description
 #' This function check and prepare a metadata dataframe to be used within hastaLaVista
 #' framework. It may contain as much column as necessary, but should be of type 

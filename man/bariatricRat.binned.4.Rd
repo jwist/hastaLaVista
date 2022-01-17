@@ -7,8 +7,8 @@
 \format{
 A data frame with 59 rows, X, metadata and ppm scale
 \describe{
-  \item{data}{NMR spectra}
-  \item{binned.ppm}{a ppm scale}
+\item{data}{NMR spectra}
+\item{binned.ppm}{a ppm scale}
 }
 }
 \source{

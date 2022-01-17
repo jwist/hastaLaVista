@@ -7,8 +7,11 @@
 #' @examples
 #' # conn <- startWSServer()
 #' @export
+#' @importFrom jsonlite fromJSON toJSON
+#' @importFrom utils capture.output str
 
 startWSServer <- function(port){
+  from <- init <- NULL
   httpuv::stopAllServers()
   cat("Starting server on port 7356 \n")
   s <- httpuv::startServer("0.0.0.0", 7356,

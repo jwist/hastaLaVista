@@ -21,6 +21,8 @@ An S4 class for server
 
 \item{\code{protocole}}{a protocole}
 
+\item{\code{rootDir}}{root directory where to install the visualizer application}
+
 \item{\code{init}}{if TRUE an instance of \pkg{servr::httw()} will be started to serve the files}
 }}
 

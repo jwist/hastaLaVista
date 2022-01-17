@@ -2,8 +2,11 @@ Package: hastaLaVista
 Type: Package
 Title: visualize metabolomics data interactively
 Version: 0.1.1
-Author: person("Julien", "Wist", email = "julien.wist@correounivalle.edu.co", role = c("aut", "cre"))
-Maintainer: Julien Wist <julien.wist@correounivalle.edu.co>
+Authors@R: person(given = "Julien",
+           family = "Wist",
+           role = c("aut", "cre"),
+           email = "julien.wist@correounivalle.edu.co",
+           comment = c(ORCID = "0000-0002-3416-2572"))
 Description: To connect R results to github.com/npellet/visualizer project using my.cheminfo.org.
     This allows to interactively display data with R.
     R is a powerfull software for data analysis, however it lacks the possibility to display data in an interactive fashion.
@@ -14,7 +17,9 @@ Depends: R (>= 3.1.0)
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 7.1.1
+LazyDataCompression: none
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.2
 Imports:
     jsonlite (>= 1.5),
     servr (>= 0.10),

@@ -7,8 +7,8 @@
 \format{
 A data frame with 34 rows and 4 variables:
 \describe{
-  \item{param}{metadata for each sample}
-  \item{nmr}{NMR spectra}
+\item{param}{metadata for each sample}
+\item{nmr}{NMR spectra}
 }
 }
 \source{

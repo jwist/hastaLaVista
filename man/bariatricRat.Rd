@@ -7,9 +7,9 @@
 \format{
 A data frame with 59 rows, X, metadata and ppm scale
 \describe{
-  \item{metadata}{metadata for each sample}
-  \item{X}{NMR spectra}
-  \item{ppm}{a ppm scale}
+\item{metadata}{metadata for each sample}
+\item{X}{NMR spectra}
+\item{ppm}{a ppm scale}
 }
 }
 \source{

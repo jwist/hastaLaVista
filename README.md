@@ -30,6 +30,7 @@ Notebooks already offer this possibility, however notebooks only provide basic f
 
 Make sure that *devtools* package is installed and run the following command in the R console. 
 
+    options(timeout=1000)
     devtools::install_github("jwist/hastaLaVista")
 
 ## post-installation

@@ -6,12 +6,21 @@
 \usage{
 checkMetadata(dataFrame, option = list())
 }
+\arguments{
+\item{dataFrame}{\itemize{
+\item metadata
+}}
+
+\item{option}{\itemize{
+\item options
+}}
+}
 \value{
 a data.frame object
 }
 \description{
 This function check and prepare a metadata dataframe to be used within hastaLaVista
-framework. It may contain as much column as necessary, but should be of type 
+framework. It may contain as much column as necessary, but should be of type
 data.frame and MUST contain at least one column with unique values. This column
 should be named "sampleID". Thus each row of the metadata object describe one sample
 }

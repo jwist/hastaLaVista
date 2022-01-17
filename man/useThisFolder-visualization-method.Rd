@@ -17,7 +17,7 @@ A method that add the current folder to the server path.
 }
 \details{
 Maybe you are using a folder to store the inputs and outputs of your analysis. In this case, you may prefer to have the data (and the view, if you modify it) stored locally instead of filling the package folder with data.
-The method `useThisFolder()` allows the user to create a symbolic link within the webserver root directory (pathToPackage/visu/) that points to the current folder.
+The method \code{useThisFolder()} allows the user to create a symbolic link within the webserver root directory (pathToPackage/visu/) that points to the current folder.
 }
 \examples{
 
