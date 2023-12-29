@@ -7,7 +7,7 @@
 #' @param yi (optional)Imaginary dependent variable
 #' @param output Object containing other NMRium data
 #' @param observeFrequency Observe frequency in MHz
-#' @param dataTypeData Data type format. Use 'NMR FID' if the spectrum is in the time domain (Default 'NMR SPECTRUM')
+#' @param dataType Data type format. Use 'NMR FID' if the spectrum is in the time domain (Default 'NMR SPECTRUM')
 #' @param solvent String that specify the solvent. (Default 'UNKNOWN') 
 #' @param nucleus Observe nucleus.  (Default '1H') 
 #' @param PHC0 Phase 0 correction value (Optional, Default 0)
@@ -15,16 +15,17 @@
 #' @param col Color for this spectrum(Default black)
 
 #' @return list
-#' @examples
-#'
-#' nmrium <- exportReIm(ppm, Y[1,], NULL, output=NA, observeFrequency=600, dataType='NMR SPECTRUM', solvent='UNKNOWN', nucleus='1H', PHC0=0, PHC1=0, col='#AA0109')
-#' nmrium <- exportReIm(ppm, Y[2,], NULL, output=nmrium, observeFrequency=600, dataType='NMR SPECTRUM', solvent='UNKNOWN', nucleus='1H', PHC0=0, PHC1=0, col='#0000FF')
-#' nmrium <- exportReIm(ppm, Y[3,], NULL, output=nmrium, observeFrequency=600, dataType='NMR SPECTRUM', solvent='UNKNOWN', nucleus='1H', PHC0=0, PHC1=0, col='#FFFF00')
-#' nmrium <- exportReIm(ppm, Y[4,], NULL, output=nmrium, observeFrequency=600, dataType='NMR SPECTRUM', solvent='UNKNOWN', nucleus='1H', PHC0=0, PHC1=0, col='#00AA00')
-#' 
-#' write(toJSON(nmrium, pretty = TRUE, auto_unbox = TRUE, digits = 12), file='export.nmrium')
-#'
 #' @export
+
+
+# nmrium <- exportReIm(ppm, Y[1,], NULL, output=NA, observeFrequency=600, dataType='NMR SPECTRUM', solvent='UNKNOWN', nucleus='1H', PHC0=0, PHC1=0, col='#AA0109')
+# nmrium <- exportReIm(ppm, Y[2,], NULL, output=nmrium, observeFrequency=600, dataType='NMR SPECTRUM', solvent='UNKNOWN', nucleus='1H', PHC0=0, PHC1=0, col='#0000FF')
+# nmrium <- exportReIm(ppm, Y[3,], NULL, output=nmrium, observeFrequency=600, dataType='NMR SPECTRUM', solvent='UNKNOWN', nucleus='1H', PHC0=0, PHC1=0, col='#FFFF00')
+# nmrium <- exportReIm(ppm, Y[4,], NULL, output=nmrium, observeFrequency=600, dataType='NMR SPECTRUM', solvent='UNKNOWN', nucleus='1H', PHC0=0, PHC1=0, col='#00AA00')
+# 
+#write(toJSON(nmrium, pretty = TRUE, auto_unbox = TRUE, digits = 12), file='export.nmrium')
+
+
 exportReIm <- function(x, yr, yi, output=NA, observeFrequency=600, dataType='NMR SPECTRUM', solvent='UNKNOWN', nucleus='1H', PHC0=0, PHC1=0, col='#000000') {
   meta <- list("TITLE"="spectra-data from ReIm",
                "JCAMPDX"="5.00 $$Cheminfo tools 3.4.11",

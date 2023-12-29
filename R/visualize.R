@@ -1,4 +1,3 @@
-
 #' S4 method to visualize visualization objects (S4)
 #'
 #' A visualize method for \emph{visualization} objects. If \emph{object@localServer} is TRUE, then this
@@ -9,8 +8,8 @@
 #' @return void
 #' @examples
 #'
-#' v<- new("visualization")
-#' #visualize(v)
+#' v <- new("visualization")
+#' # visualize(v)
 #'
 #' @export
 
