@@ -7,3 +7,11 @@ vendor.yml
 data-raw
 .gitignore
 inst/visu/lib/flot/Makefile
+^inst/visu/components/.*\.html$
+^inst/visu/components/.*\.md$
+^inst/visu/.*\.png$
+^inst/visu/.*\.mno$
+^inst/visu/.*\.css$
+^inst/visu/components/jsme/.*\.cache.js$
+^docs$
+^bariatricRatsMetadata.csv$

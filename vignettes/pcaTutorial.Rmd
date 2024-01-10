@@ -205,7 +205,7 @@ In order to better illustrate untargetted analysis, artificial spectra of differ
 
 pureElements <- read.csv2('https://gist.githubusercontent.com/jwist/f65ee06ad11186d28dd52e0b66af135a/raw/ad4a0dcf05a0c6c5d8bf569efe8eb0fa0ab99ba5/pureElements.csv', sep = ',', dec = '.', header = FALSE)
 classMatrix <- read.csv2('https://gist.githubusercontent.com/jwist/208b86aec0d130a979fa2ea0b78b9a10/raw/172b76aec0c67c93e3ef7fae6888425de2183261/classMatrix.csv', sep = ',', dec = '.', header = FALSE)
-classVector <- factor(read.csv2('https://gist.githubusercontent.com/jwist/1908d524b9e60657c9a8c4582457b2e5/raw/1efbd11f08673b75879f768a7db3f34b68e247e3/classVector.csv', sep = ',', dec = ',', header = FALSE))
+classVector <- factor(unlist(read.csv2('https://gist.githubusercontent.com/jwist/1908d524b9e60657c9a8c4582457b2e5/raw/1efbd11f08673b75879f768a7db3f34b68e247e3/classVector.csv', sep = ',', dec = ',', header = FALSE)))
 ```                  
 
 We can look at each individual spectra and a mixture of them:

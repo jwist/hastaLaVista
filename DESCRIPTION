@@ -19,13 +19,11 @@ Encoding: UTF-8
 LazyData: true
 LazyDataCompression: none
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.1.2
+RoxygenNote: 7.2.3
 Imports:
     jsonlite (>= 1.5),
     servr (>= 0.10),
-    base64enc,
     methods,
-    car,
     rstudioapi,
     httpuv
 Suggests:
