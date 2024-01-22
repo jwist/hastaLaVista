@@ -27,10 +27,10 @@
 #write(toJSON(nmrium, pretty = TRUE, auto_unbox = TRUE, digits = 12), file='export.nmrium')
 
 exportReIm <- function(x, yr, yi, output=NA, observeFrequency=600, dataType="NMR SPECTRUM", solvent="UNKNOWN", nucleus="1H", PHC0=0, PHC1=0, col="#000000", name="") {
-  newRe <- fillGapsWith(x, yr)
+  newRe <- fillGapsWith(x, yr, 0)
   yr <- newRe[[2]]
   if (length(x) == length(yi)) {
-    yi <-  fillGapsWith(x, yi)[[2]]
+    yi <-  fillGapsWith(x, yi, 0)[[2]]
   }
   x <-  newRe[[1]]
   meta <- list("TITLE"="spectra-data from ReIm",
@@ -43,7 +43,7 @@ exportReIm <- function(x, yr, yi, output=NA, observeFrequency=600, dataType="NMR
                ".SOLVENTNAME"=solvent,
                "XUNITS"="PPM",
                "YUNITS"="Intensity",
-               "NPOINTS"=length(x2),
+               "NPOINTS"=length(x),
                "FIRSTX"=x[[1]],
                "LASTX"=x[[length(x)]],
                "FIRSTY"=yr[[1]],
@@ -93,7 +93,7 @@ exportReIm <- function(x, yr, yi, output=NA, observeFrequency=600, dataType="NMR
                "PHC0"=PHC0,
                "PHC1"=PHC1)
   
-  data <- list("x"=x2, "re"=yr2, "im"=yi2)
+  data <- list("x"=x, "re"=yr, "im"=yi)
   display <- list("color"=col, "isPeaksMarkersVisible"=TRUE, "isRealSpectrumVisible"=TRUE,"isVisible"=TRUE, "isVisibleInDomain"=TRUE)
   
   if(all(is.na(output))) {
@@ -134,34 +134,49 @@ fillGapsWith <- function(x, y, value) {
       y <- rev(y)
     }
     
+    # Look for min deltaX
     deltaX <- x[[2]] - x[[1]]
-    
     for (i in 3:length(x)) {
       if ( x[[i]] - x[[i - 1]] < deltaX) {
         deltaX <- x[[i]] - x[[i - 1]]
       }
     }
-    from <- x[[1]]
-    to <- x[length(x)]
-    nbPoints <- (to - from) / deltaX + 1
-    
-    progX <- from#(0:(nbPoints - 1)) * deltaX + from
-    progY <- y[[1]]#rep(value, nbPoints) 
+
+    progX <-  x[[1]]
     deltaXTol <- deltaX * 0.05
     
-    lastX <- from
-    currentXIndex <- 1
-    for (i in 2:length(x)) {
-      #print(paste0(currentXIndex, "  ", lastX + deltaX * currentXIndex, "  ", x[[i]]))
+    lastX <-  x[[1]]
+    progX <- list()
+    currentXIndex <- 0
+    i <- 1
+    while(i <= length(x)) {
       while (abs((lastX + deltaX * currentXIndex) - x[[i]]) > deltaXTol){
-        progX <- c(progX, lastX + deltaX * currentXIndex)
-        progY <- c(progY, value)
         currentXIndex <- currentXIndex + 1
       }
-      progX <- c(progX, x[[i]])
-      progY <- c(progY, y[[i]])
+      if (currentXIndex > 1)
+        progX <- c(progX, (1:(currentXIndex - 1)) * deltaX + lastX)
+      
+      prevXIndex <- i
       lastX <- x[[i]]
+      currentXIndex <- 0
+      while (((i + currentXIndex) < length(x)) && (abs(x[[i + currentXIndex + 1]] - x[[i + currentXIndex]] - deltaX) <= deltaXTol)){
+        currentXIndex <- currentXIndex + 1
+      }
+     
+      progX <- c(progX, x[prevXIndex: (prevXIndex + currentXIndex)])
+
+      lastX <- x[[prevXIndex + currentXIndex]]
+      i <- prevXIndex + currentXIndex + 1
       currentXIndex <- 1
+    }
+    
+    j <- 1
+    progY <- rep(value, length(progX))
+    for (i in 1:length(progX)) {
+      if (progX[[i]] == x[[j]]) {
+        progY[[i]] <- y[[j]]
+        j <- j + 1
+      }
     }
     
     if(x[[2]] - x[[1]] < 0) {
